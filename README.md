@@ -1,0 +1,2 @@
+# GrafikaKomputeorwaProjekt
+projekt sem6
