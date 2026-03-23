@@ -8,10 +8,10 @@ size = Vector2(112, 10)
 [node name="Node2D" type="Node2D" unique_id=598569862]
 
 [node name="CharacterBody2D" parent="." unique_id=1799342814 instance=ExtResource("1_dywvm")]
-position = Vector2(148, 99)
+position = Vector2(148, 95)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=2093110833]
+position = Vector2(148, 102)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1791398678]
-position = Vector2(143, 109)
 shape = SubResource("RectangleShape2D_dywvm")

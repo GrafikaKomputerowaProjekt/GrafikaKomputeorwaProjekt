@@ -1,10 +1,12 @@
 # 23.03
 ## Added
 - Player sprite draft [KL]
+- Placeholder player sprite with walking animations [PK]
 - Test stage scene [PK]
 - Sprite2D and CollisionShape2D to the Player scene [PK]
-- Player script for handling basic movement [PK]
+- Player script for handling basic movement using a Bresenham algorithm [PK]
 - move_up, move_down, move_left, move_right actions associated with the arrow keys [PK]
+
 
 # 18.03
 ## Added
