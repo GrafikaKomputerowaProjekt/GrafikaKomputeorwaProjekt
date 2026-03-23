@@ -1,3 +1,20 @@
 [gd_scene format=3 uid="uid://dtin2trju1b3u"]
 
-[node name="Player" type="Node2D" unique_id=187482607]
+[ext_resource type="Script" uid="uid://c0ovu44ldxfhp" path="res://entities/player.gd" id="1_b0kkn"]
+[ext_resource type="Texture2D" uid="uid://bmmf7s7d4tlut" path="res://assets/bohater1.png" id="1_merdl"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_merdl"]
+radius = 1.0
+height = 7.9999995
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1799342814]
+script = ExtResource("1_b0kkn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=519762845]
+position = Vector2(2, -8)
+texture = ExtResource("1_merdl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=95252628]
+position = Vector2(0, -1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_merdl")
