@@ -1,0 +1,115 @@
+[gd_scene format=3 uid="uid://cpjfg8lbd034j"]
+
+[ext_resource type="Script" uid="uid://4og7trh8vfa2" path="res://raytracing_sandbox/sound_origin.gd" id="1_q38oi"]
+[ext_resource type="Script" uid="uid://br21cavvk7m6i" path="res://raytracing_sandbox/sound_reflector.gd" id="2_xqab5"]
+[ext_resource type="Script" uid="uid://cos0oyxfh6vvf" path="res://raytracing_sandbox/sound_manager.gd" id="3_no4lt"]
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_xqab5"]
+size = Vector2(5, 5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xqab5"]
+size = Vector2(194, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnyb6"]
+size = Vector2(232.41592, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_no4lt"]
+size = Vector2(20, 113)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7iak5"]
+size = Vector2(20, 92.49999)
+
+[node name="RaytracingTestScene" type="Node2D" unique_id=134877348]
+
+[node name="SoundOrigin" type="Node2D" parent="." unique_id=660220610]
+position = Vector2(134, 40)
+script = ExtResource("1_q38oi")
+
+[node name="Sprite2D" type="Sprite2D" parent="SoundOrigin" unique_id=1323173790]
+z_index = 10
+texture = SubResource("PlaceholderTexture2D_xqab5")
+
+[node name="Wall1" type="StaticBody2D" parent="." unique_id=154382758]
+position = Vector2(118, 19)
+collision_layer = 4
+script = ExtResource("2_xqab5")
+soundManagerPath = NodePath("../SoundManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1" unique_id=1445619332]
+shape = SubResource("RectangleShape2D_xqab5")
+
+[node name="Wall1" type="StaticBody2D" parent="Wall1" unique_id=542948301]
+position = Vector2(141, 92)
+collision_layer = 4
+script = ExtResource("2_xqab5")
+soundManagerPath = NodePath("../../SoundManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall1/Wall1" unique_id=658885673]
+shape = SubResource("RectangleShape2D_xqab5")
+
+[node name="Wall2" type="StaticBody2D" parent="." unique_id=2031434588]
+position = Vector2(-32, 109)
+collision_layer = 4
+script = ExtResource("2_xqab5")
+soundManagerPath = NodePath("../SoundManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=796933373]
+position = Vector2(34.792038, 0)
+shape = SubResource("RectangleShape2D_nnyb6")
+
+[node name="Wall3" type="StaticBody2D" parent="." unique_id=2132745439]
+position = Vector2(203, 60)
+collision_layer = 4
+script = ExtResource("2_xqab5")
+soundManagerPath = NodePath("../SoundManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3" unique_id=905221222]
+shape = SubResource("RectangleShape2D_no4lt")
+
+[node name="Wall3" type="StaticBody2D" parent="Wall3" unique_id=83335497]
+position = Vector2(-107, 98)
+collision_layer = 4
+script = ExtResource("2_xqab5")
+soundManagerPath = NodePath("../../SoundManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3/Wall3" unique_id=760671918]
+shape = SubResource("RectangleShape2D_no4lt")
+
+[node name="Wall3" type="StaticBody2D" parent="Wall3/Wall3" unique_id=1664975220]
+position = Vector2(69, -4)
+collision_layer = 4
+script = ExtResource("2_xqab5")
+soundManagerPath = NodePath("../../../SoundManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3/Wall3/Wall3" unique_id=2108651299]
+shape = SubResource("RectangleShape2D_no4lt")
+
+[node name="Wall4" type="StaticBody2D" parent="." unique_id=1143450727]
+position = Vector2(25, 56)
+collision_layer = 4
+script = ExtResource("2_xqab5")
+soundManagerPath = NodePath("../SoundManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4" unique_id=1889427794]
+shape = SubResource("RectangleShape2D_7iak5")
+
+[node name="Wall4" type="StaticBody2D" parent="Wall4" unique_id=1672981548]
+position = Vector2(35, 77)
+collision_layer = 4
+script = ExtResource("2_xqab5")
+soundManagerPath = NodePath("../../SoundManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall4/Wall4" unique_id=1337959205]
+shape = SubResource("RectangleShape2D_7iak5")
+
+[node name="Wall5" type="StaticBody2D" parent="." unique_id=1692674591]
+position = Vector2(76, 154)
+collision_layer = 4
+script = ExtResource("2_xqab5")
+soundManagerPath = NodePath("../SoundManager")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall5" unique_id=1130364694]
+shape = SubResource("RectangleShape2D_xqab5")
+
+[node name="SoundManager" type="Node2D" parent="." unique_id=2040476990]
+script = ExtResource("3_no4lt")
