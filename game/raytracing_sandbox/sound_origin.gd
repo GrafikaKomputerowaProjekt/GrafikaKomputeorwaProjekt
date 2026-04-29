@@ -1,40 +1,35 @@
 extends Node2D
 
-var collision_points: Array[Dictionary] = []
-const SPEED: float = 120.0
+## Creates sound events and casts sound rays 
 
-func _ready() -> void:
-	collision_points.resize(100)
+## Number of rays to cast per sound event. Higher values improve spatial accuracy.
+@export_range(1, 360, 1) var rays_per_source: int = 72
 
-func get_input() -> Vector2:
-	var x_input = Input.get_axis("move_left", "move_right")
-	var y_input = Input.get_axis("move_up", "move_down")
-	return Vector2(x_input, y_input)
+@export var sound_manager_path : NodePath
+@onready var sound_manager = get_node(sound_manager_path)
 
-func _physics_process(delta):
-	# ---- Character movement -----
-	var direction: Vector2 = get_input()
-	if direction != Vector2.ZERO:
-		direction = direction.normalized()
-		position += direction * SPEED * delta
-	
-	# ---- Sound ray casting ----
-	collision_points.clear()
+## Sound raycasting
+func generate_sound() -> void:
+	var sound: SoundEvent = SoundEvent.new()
 	var space_state = get_world_2d().direct_space_state
-	const ray = Vector2(300, 0)
-	for i in range(180):
-		var query = PhysicsRayQueryParameters2D.create(global_position, global_position + ray.rotated(deg_to_rad(2*i)))
-		var result = space_state.intersect_ray(query)
-		collision_points.push_back(result)
-		if result.is_empty():
-			continue
-		var test_ray = TestRay.new(position, 100)
-		test_ray.update_hit_data(result)
-		if result.get("collider").has_method("reflect_sound"):
-			result.get("collider").call("reflect_sound", test_ray)
-	queue_redraw()
 	
-func _draw() -> void:
-	for point in collision_points:
-		if (point):
-			draw_line(Vector2(0,0), point.get("position") - position, Color.ANTIQUE_WHITE, 2.0)
+	# Calculate the angle step in radians
+	var angle_step = TAU / rays_per_source
+	var sound_range: float = 368.0
+	for i in range(rays_per_source):
+		var ray_direction = Vector2.RIGHT.rotated(angle_step * i)
+		var target_pos = global_position + (ray_direction * sound_range)
+		
+		# Configure the physics query
+		var query = PhysicsRayQueryParameters2D.create(global_position, target_pos)
+		# Execute the raycast
+		var result = space_state.intersect_ray(query)
+		
+		if not result.is_empty():
+			var new_ray = SoundRay.new(global_position, sound)
+			var distance = (global_position - result["position"]).length()
+			new_ray.update_hit_data(result, distance)
+			sound_manager.new_ray(new_ray)
+			var collider = new_ray.hit_collider 
+			if collider.has_method("on_ray_interaction"):
+				collider.on_ray_interaction(new_ray)
