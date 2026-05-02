@@ -227,5 +227,13 @@ offset_right = 332.0
 offset_bottom = 178.0
 texture = ExtResource("4_ycpk5")
 
-[node name="Slime" parent="." unique_id=375529188 instance=ExtResource("6_ao5jw")]
+[node name="Slime" parent="." unique_id=375529188 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("6_ao5jw")]
 position = Vector2(203, 118)
+player = NodePath("../Player")
+patrol_points = [NodePath("../PP1"), NodePath("../PP1/PP2")]
+
+[node name="PP1" type="Marker2D" parent="." unique_id=1866954495]
+position = Vector2(201, 81)
+
+[node name="PP2" type="Marker2D" parent="PP1" unique_id=439770809]
+position = Vector2(2, 64)
