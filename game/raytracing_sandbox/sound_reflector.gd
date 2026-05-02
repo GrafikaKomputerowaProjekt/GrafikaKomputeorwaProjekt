@@ -1,4 +1,4 @@
-extends Area2D
+extends TileMapLayer
 
 ## Recieves and reflects sound rays
 
@@ -11,7 +11,7 @@ func on_ray_interaction(ray: SoundRay) -> void:
 	var current_hit: Vector2 = ray.hit_position
 	 
 	# terminate recursion if bounce limit is met
-	if ray.reflection_count >= 1:
+	if ray.reflection_count >= 2:
 		return
 
 	# Calculate direction vectors for the reflection formula
@@ -32,7 +32,8 @@ func on_ray_interaction(ray: SoundRay) -> void:
 	var target_pos: Vector2 = start_pos + reflect_dir * 368.0
 
 	var query = PhysicsRayQueryParameters2D.create(start_pos, target_pos)
-	query.exclude = [self.get_rid()]
+	query.collision_mask = 1 << 2 | 1 << 3
+	query.collide_with_areas = true
 	
 	var space_state = get_world_2d().direct_space_state
 	var result = space_state.intersect_ray(query)
@@ -46,5 +47,6 @@ func on_ray_interaction(ray: SoundRay) -> void:
 		
 		sound_manager.new_ray(next_ray)
 		var target_node = result["collider"]
+		
 		if target_node.has_method("on_ray_interaction"):
 			target_node.on_ray_interaction(next_ray)

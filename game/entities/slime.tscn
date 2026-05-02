@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://blgnwcow6kaji"]
+
+[ext_resource type="Texture2D" uid="uid://dl0d35tmpv3n3" path="res://assets/enemies/slime..png" id="1_tm2b2"]
+[ext_resource type="Script" uid="uid://bhftc5bjkfsg5" path="res://entities/slime.gd" id="1_twkr4"]
+[ext_resource type="Script" uid="uid://4og7trh8vfa2" path="res://raytracing_sandbox/sound_source.gd" id="2_imykf"]
+[ext_resource type="Script" uid="uid://b4f2fephx2if6" path="res://raytracing_sandbox/sound_listener.gd" id="3_twkr4"]
+[ext_resource type="FontFile" uid="uid://cwni1nwdy4hv1" path="res://assets/fonts/pixy/PIXY.otf" id="5_f28eq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f28eq"]
+radius = 1.0
+height = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_f28eq"]
+radius = 9.055386
+
+[sub_resource type="LabelSettings" id="LabelSettings_hjg4g"]
+line_spacing = -3.0
+font = ExtResource("5_f28eq")
+font_size = 10
+font_color = Color(1, 1, 1, 0.6745098)
+
+[node name="Slime" type="CharacterBody2D" unique_id=375529188]
+z_index = 1
+y_sort_enabled = true
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_twkr4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1318324916]
+position = Vector2(0, -1)
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_f28eq")
+
+[node name="SoundSource" type="Node2D" parent="." unique_id=2060192415]
+script = ExtResource("2_imykf")
+
+[node name="SoundListener" type="Area2D" parent="." unique_id=859130883]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("3_twkr4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoundListener" unique_id=352430859]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_f28eq")
+
+[node name="InfoLabel" type="Label" parent="." unique_id=599982133]
+z_index = 30
+offset_left = -56.0
+offset_top = -56.0
+offset_right = 56.0
+offset_bottom = -16.0
+text = "000"
+label_settings = SubResource("LabelSettings_hjg4g")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=555894582]
+position = Vector2(0, -7)
+texture = ExtResource("1_tm2b2")
+hframes = 4
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=658741945]
+
+[connection signal="sound_heard" from="SoundListener" to="." method="_on_sound_listener_sound_heard"]

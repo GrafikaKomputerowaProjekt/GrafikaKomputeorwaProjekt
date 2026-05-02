@@ -2,6 +2,34 @@
 
 [ext_resource type="Script" uid="uid://c0ovu44ldxfhp" path="res://entities/player.gd" id="1_b0kkn"]
 [ext_resource type="Texture2D" uid="uid://c8ymlot0ekdb" path="res://assets/16x16-character-8D-template.png" id="2_b0kkn"]
+[ext_resource type="AudioStream" uid="uid://be4v2ubelvp4y" path="res://assets/sfx/walk/walk-01.wav" id="2_oprnr"]
+[ext_resource type="AudioStream" uid="uid://dl0nd8hbo1na6" path="res://assets/sfx/walk/walk-02.wav" id="3_8rie4"]
+[ext_resource type="Script" uid="uid://4og7trh8vfa2" path="res://raytracing_sandbox/sound_source.gd" id="3_rfe5m"]
+[ext_resource type="AudioStream" uid="uid://cjg5g4w3rhcj" path="res://assets/sfx/walk/walk-03.wav" id="4_dp3pk"]
+[ext_resource type="Script" uid="uid://b4f2fephx2if6" path="res://raytracing_sandbox/sound_listener.gd" id="4_qly61"]
+[ext_resource type="AudioStream" uid="uid://ccbibha0w5q26" path="res://assets/sfx/walk/walk-04.wav" id="5_cgp7q"]
+[ext_resource type="Script" uid="uid://c608swe0rfar3" path="res://raytracing_sandbox/acoustic_controller.gd" id="5_qly61"]
+[ext_resource type="AudioStream" uid="uid://dxjyokqxmt36" path="res://assets/sfx/walk/walk-05.wav" id="6_1n8aq"]
+[ext_resource type="AudioStream" uid="uid://bmdkey8pouitr" path="res://assets/sfx/walk/walk-06.wav" id="7_28s6d"]
+[ext_resource type="AudioStream" uid="uid://cushfvvqoqbal" path="res://assets/sfx/walk/walk-07.wav" id="8_cicqb"]
+[ext_resource type="AudioStream" uid="uid://bbdmxvh1cn1ub" path="res://assets/sfx/walk/walk-08.wav" id="9_hj0ki"]
+[ext_resource type="AudioStream" uid="uid://bagm27ryt1o7u" path="res://assets/sfx/walk/walk-09.wav" id="10_fruft"]
+[ext_resource type="AudioStream" uid="uid://b6dtc2lw867s1" path="res://assets/sfx/walk/walk-10.wav" id="11_slxql"]
+[ext_resource type="AudioStream" uid="uid://dw78kqcjv3gvd" path="res://assets/sfx/walk/walk-11.wav" id="12_evlff"]
+[ext_resource type="AudioStream" uid="uid://b8jxvedngx4ns" path="res://assets/sfx/run/run-01.wav" id="13_rcwxb"]
+[ext_resource type="AudioStream" uid="uid://bk8njx0d3mmrk" path="res://assets/sfx/run/run-02.wav" id="14_d2i2q"]
+[ext_resource type="AudioStream" uid="uid://d0kytbdw47mel" path="res://assets/sfx/run/run-03.wav" id="15_mdqif"]
+[ext_resource type="AudioStream" uid="uid://d0ba1numgrr6n" path="res://assets/sfx/run/run-04.wav" id="16_egchw"]
+[ext_resource type="AudioStream" uid="uid://bortgkiossft6" path="res://assets/sfx/run/run-05.wav" id="17_ykqge"]
+[ext_resource type="AudioStream" uid="uid://x4fbsyo1eqkf" path="res://assets/sfx/run/run-06.wav" id="18_sn2x3"]
+[ext_resource type="AudioStream" uid="uid://bra74sgg4343" path="res://assets/sfx/run/run-07.wav" id="19_y10x8"]
+[ext_resource type="AudioStream" uid="uid://sl0drh1qlwyi" path="res://assets/sfx/run/run-08.wav" id="20_1sc42"]
+[ext_resource type="AudioStream" uid="uid://bk1io1b142rd5" path="res://assets/sfx/run/run-09.wav" id="21_0t50q"]
+[ext_resource type="AudioStream" uid="uid://bd5xyc1ey32s7" path="res://assets/sfx/run/run-10.wav" id="22_5qcl2"]
+[ext_resource type="AudioStream" uid="uid://crqveudqogrs0" path="res://assets/sfx/run/run-11.wav" id="23_1w6s4"]
+[ext_resource type="AudioStream" uid="uid://b4cik28e1cvr2" path="res://assets/sfx/run/run-12.wav" id="24_yb7tu"]
+[ext_resource type="AudioStream" uid="uid://dn1lm4rx6kqyl" path="res://assets/sfx/run/run-13.wav" id="25_b338v"]
+[ext_resource type="AudioStream" uid="uid://dbxtlbwbwk3wg" path="res://assets/sfx/run/run-14.wav" id="26_i1mej"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_merdl"]
 radius = 1.0
@@ -71,6 +99,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [58, 60, 61, 62]
+}
+
+[sub_resource type="Animation" id="Animation_oprnr"]
+resource_name = "idle"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.3666667, 2, 2.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 0, 3, 0]
 }
 
 [sub_resource type="Animation" id="Animation_qsoyl"]
@@ -164,6 +208,7 @@ _data = {
 &"down": SubResource("Animation_e4p34"),
 &"down_left": SubResource("Animation_rfe5m"),
 &"down_right": SubResource("Animation_qly61"),
+&"idle": SubResource("Animation_oprnr"),
 &"left": SubResource("Animation_qsoyl"),
 &"right": SubResource("Animation_6nm46"),
 &"up": SubResource("Animation_i623q"),
@@ -171,8 +216,16 @@ _data = {
 &"up_right": SubResource("Animation_tjdhl")
 }
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=1799342814]
+[sub_resource type="CircleShape2D" id="CircleShape2D_rfe5m"]
+radius = 9.055386
+
+[node name="Player" type="CharacterBody2D" unique_id=1799342814]
+z_index = 1
+y_sort_enabled = true
 script = ExtResource("1_b0kkn")
+walk_sounds = Array[AudioStream]([ExtResource("2_oprnr"), ExtResource("3_8rie4"), ExtResource("4_dp3pk"), ExtResource("5_cgp7q"), ExtResource("6_1n8aq"), ExtResource("7_28s6d"), ExtResource("8_cicqb"), ExtResource("9_hj0ki"), ExtResource("10_fruft"), ExtResource("11_slxql"), ExtResource("12_evlff")])
+run_sounds = Array[AudioStream]([ExtResource("13_rcwxb"), ExtResource("14_d2i2q"), ExtResource("15_mdqif"), ExtResource("16_egchw"), ExtResource("17_ykqge"), ExtResource("18_sn2x3"), ExtResource("19_y10x8"), ExtResource("20_1sc42"), ExtResource("21_0t50q"), ExtResource("22_5qcl2"), ExtResource("23_1w6s4"), ExtResource("24_yb7tu"), ExtResource("25_b338v"), ExtResource("26_i1mej")])
+walk_loudness = 0.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=95252628]
 position = Vector2(0, -1)
@@ -187,3 +240,24 @@ vframes = 16
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1475567639]
 libraries/ = SubResource("AnimationLibrary_x08pd")
+
+[node name="SoundSource" type="Node2D" parent="." unique_id=1424051162]
+script = ExtResource("3_rfe5m")
+
+[node name="SfxPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1011765929]
+
+[node name="AcousticController" type="Node2D" parent="." unique_id=1271790160]
+script = ExtResource("5_qly61")
+
+[node name="AudioListener" type="AudioListener2D" parent="." unique_id=1594070455]
+
+[node name="SoundListener" type="Area2D" parent="." unique_id=2081861292]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("4_qly61")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SoundListener" unique_id=1523963416]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_rfe5m")
+
+[connection signal="sound_heard" from="SoundListener" to="AcousticController" method="_on_sound_listener_sound_heard"]

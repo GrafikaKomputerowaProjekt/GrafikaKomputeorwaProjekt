@@ -4,13 +4,11 @@ extends Node2D
 
 ## Number of rays to cast per sound event. Higher values improve spatial accuracy.
 @export_range(1, 360, 1) var rays_per_source: int = 72
-
-@export var sound_manager_path : NodePath
-@onready var sound_manager = get_node(sound_manager_path)
+var sound_manager : Node
 
 ## Sound raycasting
-func generate_sound() -> void:
-	var sound: SoundEvent = SoundEvent.new()
+func generate_sound(intensity : float) -> void:
+	var sound: SoundEvent = SoundEvent.new(get_parent(), intensity)
 	var space_state = get_world_2d().direct_space_state
 	
 	# Calculate the angle step in radians
@@ -22,6 +20,8 @@ func generate_sound() -> void:
 		
 		# Configure the physics query
 		var query = PhysicsRayQueryParameters2D.create(global_position, target_pos)
+		query.collision_mask = 1 << 2 | 1 << 3
+		query.collide_with_areas = true
 		# Execute the raycast
 		var result = space_state.intersect_ray(query)
 		
