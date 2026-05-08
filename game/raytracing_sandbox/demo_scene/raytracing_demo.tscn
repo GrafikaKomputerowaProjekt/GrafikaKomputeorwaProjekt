@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://tkn3yk167bhb" path="res://assets/tileset/sheet1.png" id="3_ycpk5"]
 [ext_resource type="Texture2D" uid="uid://nm3xkfve1whf" path="res://assets/dark-background.png" id="4_ycpk5"]
 [ext_resource type="PackedScene" uid="uid://blgnwcow6kaji" path="res://entities/slime.tscn" id="6_ao5jw"]
+[ext_resource type="AudioStream" uid="uid://bds5iwhspcfmg" path="res://assets/sfx/enemy/monster_growl_pcm.wav" id="7_84641"]
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_ycpk5"]
 tile_data = PackedInt32Array(0, 65538, 5, 65536, 196610, 5, 1, 458754, 3, 65537, 2, 0, 2, 458754, 3, 65538, 2, 0, 3, 2, 5, 65539, 131074, 5)
@@ -228,9 +229,11 @@ offset_bottom = 178.0
 texture = ExtResource("4_ycpk5")
 
 [node name="Slime" parent="." unique_id=375529188 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("6_ao5jw")]
-position = Vector2(203, 118)
+position = Vector2(204, 118)
+sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
 patrol_points = [NodePath("../PP1"), NodePath("../PP1/PP2")]
+spotted_sound = ExtResource("7_84641")
 
 [node name="PP1" type="Marker2D" parent="." unique_id=1866954495]
 position = Vector2(201, 81)

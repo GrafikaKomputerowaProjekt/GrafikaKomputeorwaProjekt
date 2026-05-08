@@ -1,5 +1,9 @@
 extends CharacterBody2D
 
+@onready var sounds_source: Node2D = $SoundSource
+@onready var sfx_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+
+@export var sound_manager: NodePath
 @export var movement_speed: float = 40.0
 @export var step_interval: float = 15.0 # Distance between "jumps" or sounds
 
@@ -15,7 +19,10 @@ extends CharacterBody2D
 @export var patrol_wait_time: float = 1.0
 
 @export var forget_player_time: float = 2.0
+@export var spotted_loudness: float = 1.0
 
+@export var spotted_sound: AudioStream
+@export_range(0.0, 1.0) var spotted_volume: float = 1.0
 
 var event_history: Array[String] = []
 const MAX_EVENTS: int = 4
@@ -31,9 +38,16 @@ var patrol_index: int = 0
 var patrol_wait_timer: float = 0.0
 
 var forget_player_timer: float = 0.0
+var has_played_spotted_sound: bool = false 
+
+
 
 func _physics_process(delta: float) -> void:
 	if can_see_player():
+		if not chasing_player:
+			play_spotted_sound()
+			generate_enemy_sound()
+			
 		chasing_player = true
 		forget_player_timer = 0.0
 	else:
@@ -188,9 +202,13 @@ func can_see_player() -> bool:
 		
 		
 func _ready() -> void:
+	sfx_player.bus = "Master"
+	sfx_player.volume_db = 0
 	if patrol_points.size() > 0:
 		set_movement_target(patrol_points[patrol_index].global_position)
 		
+	if sound_manager:
+		sounds_source.sound_manager = get_node(sound_manager)	
 		
 func handle_patrol(delta: float) -> void:
 	if patrol_points.size() == 0:
@@ -221,4 +239,25 @@ func is_hit() -> void:
 #func _input(event):
 #	if event.is_action_pressed("ui_accept"): #funkcja testująca czy hit działa 
 #		is_hit()
+	
+
+
+func generate_enemy_sound() -> void:
+	if has_node("SoundSource"):
+		$SoundSource.generate_sound(spotted_loudness)
+
+func play_spotted_sound() -> void:
+	print("Trying to play spotted sound")
+
+	if spotted_sound == null:
+		print("No spotted sound assigned")
+		return
+
+	sfx_player.stream = spotted_sound
+	sfx_player.bus = "Master"
+	sfx_player.volume_db = 0
+	sfx_player.volume_linear = spotted_volume
+	sfx_player.play()
+
+	print("Playing: ", sfx_player.stream)
 	
