@@ -1,35 +1,35 @@
-[gd_scene format=3 uid="uid://se0mxtmjpw7u"]
+[gd_scene format=3 uid="uid://cd3wrs8fit4bq"]
 
-[ext_resource type="Script" uid="uid://c7t6roiag772x" path="res://entities/slidedown_door_left/door.gd" id="1_v6ngo"]
-[ext_resource type="Texture2D" uid="uid://tkn3yk167bhb" path="res://assets/tileset/sheet1.png" id="2_xdm0t"]
+[ext_resource type="Texture2D" uid="uid://tkn3yk167bhb" path="res://assets/tileset/sheet1.png" id="1_bfofa"]
+[ext_resource type="Script" uid="uid://c7t6roiag772x" path="res://entities/slidedown_door/door.gd" id="1_jaj2u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0ibrm"]
 size = Vector2(7, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfofa"]
-size = Vector2(28, 41)
+size = Vector2(45, 28)
 
 [node name="Door" type="Node2D" unique_id=590026876]
 y_sort_enabled = true
-script = ExtResource("1_v6ngo")
+script = ExtResource("1_jaj2u")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1282765509]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=510573796]
-position = Vector2(9.5, 0)
+position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_0ibrm")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=781794751]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=462300440]
-position = Vector2(5, 0.5)
+position = Vector2(4.5, 0)
 shape = SubResource("RectangleShape2D_bfofa")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1570528404]
 position = Vector2(5, 0)
-texture = ExtResource("2_xdm0t")
+texture = ExtResource("1_bfofa")
 region_enabled = true
-region_rect = Rect2(74, 110, 16, 16)
+region_rect = Rect2(38, 110, 16, 16)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
