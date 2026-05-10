@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://cgvqb31t1nd3r"]
+
+[ext_resource type="Script" uid="uid://c7t6roiag772x" path="res://entities/slidedown_door/door.gd" id="1_mljux"]
+[ext_resource type="Texture2D" uid="uid://tkn3yk167bhb" path="res://assets/tileset/sheet1.png" id="2_k7uik"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ibrm"]
+size = Vector2(16, 47.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bfofa"]
+size = Vector2(28, 31.5)
+
+[node name="Door" type="Node2D" unique_id=590026876 groups=["Doors"]]
+y_sort_enabled = true
+script = ExtResource("1_mljux")
+
+[node name="Door_open_sprites" type="Node2D" parent="." unique_id=740529693]
+z_index = -1
+z_as_relative = false
+
+[node name="Sprite_open" type="Sprite2D" parent="Door_open_sprites" unique_id=1997768894]
+y_sort_enabled = true
+position = Vector2(8, -8)
+texture = ExtResource("2_k7uik")
+region_enabled = true
+region_rect = Rect2(20, 128, 16, 16)
+
+[node name="Sprite_open" type="Sprite2D" parent="Door_open_sprites/Sprite_open" unique_id=602813222]
+y_sort_enabled = true
+position = Vector2(0, -15)
+texture = ExtResource("2_k7uik")
+region_enabled = true
+region_rect = Rect2(20, 128, 16, 16)
+
+[node name="Door_closed_sprites" type="Node2D" parent="." unique_id=1388888519]
+y_sort_enabled = true
+
+[node name="Sprite_closed" type="Sprite2D" parent="Door_closed_sprites" unique_id=749671866]
+y_sort_enabled = true
+position = Vector2(8, -8)
+texture = ExtResource("2_k7uik")
+region_enabled = true
+region_rect = Rect2(56, 128, 16, 16)
+
+[node name="Sprite_closed2" type="Sprite2D" parent="Door_closed_sprites/Sprite_closed" unique_id=1503168990]
+y_sort_enabled = true
+position = Vector2(0, -16)
+texture = ExtResource("2_k7uik")
+region_enabled = true
+region_rect = Rect2(20, 128, 16, 16)
+
+[node name="Sprite_closed2" type="Sprite2D" parent="Door_closed_sprites/Sprite_closed/Sprite_closed2" unique_id=901903797]
+y_sort_enabled = true
+position = Vector2(0, -16)
+texture = ExtResource("2_k7uik")
+region_enabled = true
+region_rect = Rect2(128, 92, 16, 16)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1282765509]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=510573796]
+position = Vector2(8, -23.25)
+shape = SubResource("RectangleShape2D_0ibrm")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=781794751]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=462300440]
+position = Vector2(12, -14.75)
+shape = SubResource("RectangleShape2D_bfofa")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
