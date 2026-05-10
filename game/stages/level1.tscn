@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://tkn3yk167bhb" path="res://assets/tileset/sheet1.png" id="1_dv6pd"]
 [ext_resource type="PackedScene" uid="uid://dixj8nb4rb5u7" path="res://entities/slidedown_door/doubledoor_north.tscn" id="3_2gqwx"]
 [ext_resource type="PackedScene" uid="uid://dtin2trju1b3u" path="res://entities/player.tscn" id="3_8ebg0"]
+[ext_resource type="PackedScene" uid="uid://chfgo3l686ilc" path="res://entities/switch/switch.tscn" id="4_2gqwx"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1r6ce"]
 texture = ExtResource("1_dv6pd")
@@ -142,6 +143,8 @@ position = Vector2(61, 80)
 
 [node name="Door" parent="." unique_id=590026876 instance=ExtResource("3_2gqwx")]
 position = Vector2(272, -16)
+openable_player = false
+door_id = "1"
 
 [node name="Door2" parent="." unique_id=510327191 instance=ExtResource("3_2gqwx")]
 position = Vector2(656, -16)
@@ -157,3 +160,7 @@ position = Vector2(272, -400)
 
 [node name="Door6" parent="." unique_id=1623042151 instance=ExtResource("3_2gqwx")]
 position = Vector2(656, -400)
+
+[node name="Node2D" parent="." unique_id=1510201761 instance=ExtResource("4_2gqwx")]
+position = Vector2(360, -24)
+target_id = "1"

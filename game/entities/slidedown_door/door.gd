@@ -1,5 +1,6 @@
 extends Node2D
 @export var openable_player: bool = true
+@export var door_id: String = ""
 
 @onready var door_closed_sprites = $Door_closed_sprites
 @onready var solid_collision = $StaticBody2D/CollisionShape2D
