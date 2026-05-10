@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://bvd86ov6earsu"]
 
 [ext_resource type="Texture2D" uid="uid://tkn3yk167bhb" path="res://assets/tileset/sheet1.png" id="1_dv6pd"]
+[ext_resource type="PackedScene" uid="uid://cd3wrs8fit4bq" path="res://entities/slidedown_door_left/door_right.tscn" id="2_1r6ce"]
+[ext_resource type="PackedScene" uid="uid://dtin2trju1b3u" path="res://entities/player.tscn" id="3_8ebg0"]
+[ext_resource type="PackedScene" uid="uid://se0mxtmjpw7u" path="res://entities/slidedown_door_left/door_north.tscn" id="4_2gqwx"]
+[ext_resource type="PackedScene" uid="uid://cmmagqxpfr4qr" path="res://entities/slidedown_door_left/door_south.tscn" id="5_ebn2c"]
+[ext_resource type="PackedScene" uid="uid://pj5yo8fccf62" path="res://entities/slidedown_door_left/door_left.tscn" id="6_4sho4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1r6ce"]
 texture = ExtResource("1_dv6pd")
@@ -97,3 +102,19 @@ y_sort_enabled = true
 tile_set = SubResource("TileSet_8ebg0")
 format = 2
 layer_0/y_sort_enabled = true
+layer_0/tile_data = PackedInt32Array(589830, 1, 0, 524294, 1, 0, 458758, 1, 0, 393222, 1, 0, 393221, 1, 0, 327685, 1, 0, 262149, 1, 0, 196613, 1, 0, 131077, 1, 0, 65541, 1, 0, 65542, 1, 0, 131078, 1, 0, 196614, 1, 0, 262150, 1, 0, 327686, 1, 0, 524293, 1, 0, 458757, 1, 0, 589829, 1, 0, 589828, 1, 0, 524292, 1, 0, 458756, 1, 0, 393220, 1, 0, 327684, 1, 0, 262148, 1, 0, 196612, 1, 0, 131076, 1, 0, 65540, 1, 0, 262147, 1, 0, 327683, 1, 0, 524291, 1, 0, 589827, 1, 0, 458755, 1, 0, 393219, 1, 0, 196611, 1, 0, 131075, 1, 0, 65539, 1, 0, 196615, 131073, 4, 262152, 131073, 1, 262153, 131073, 1, 262154, 131073, 1, 327688, 65537, 3, 327689, 65537, 3, 327690, 65537, 3, 327687, 1, 7, 196616, 458753, 3, 196617, 458753, 3, 196618, 458753, 3, 196619, 458753, 3, 327691, 65537, 3, 262155, 131073, 1, 131079, 131073, 5, 65543, 131073, 5, 393223, 131073, 5, 458759, 131073, 5)
+
+[node name="Door" parent="." unique_id=590026876 instance=ExtResource("2_1r6ce")]
+position = Vector2(115, 71)
+
+[node name="Player" parent="." unique_id=1799342814 groups=["Player"] instance=ExtResource("3_8ebg0")]
+position = Vector2(61, 80)
+
+[node name="Door2" parent="." unique_id=4650587 instance=ExtResource("4_2gqwx")]
+position = Vector2(67, 8)
+
+[node name="Door3" parent="." unique_id=575168503 instance=ExtResource("5_ebn2c")]
+position = Vector2(67, 168)
+
+[node name="Door4" parent="." unique_id=1350109793 instance=ExtResource("6_4sho4")]
+position = Vector2(35, 72)
