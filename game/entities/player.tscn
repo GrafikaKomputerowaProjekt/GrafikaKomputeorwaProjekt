@@ -220,7 +220,6 @@ _data = {
 radius = 9.055386
 
 [node name="Player" type="CharacterBody2D" unique_id=1799342814 groups=["Player"]]
-z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_b0kkn")
 walk_sounds = Array[AudioStream]([ExtResource("2_oprnr"), ExtResource("3_8rie4"), ExtResource("4_dp3pk"), ExtResource("5_cgp7q"), ExtResource("6_1n8aq"), ExtResource("7_28s6d"), ExtResource("8_cicqb"), ExtResource("9_hj0ki"), ExtResource("10_fruft"), ExtResource("11_slxql"), ExtResource("12_evlff")])
@@ -228,11 +227,13 @@ run_sounds = Array[AudioStream]([ExtResource("13_rcwxb"), ExtResource("14_d2i2q"
 walk_loudness = 0.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=95252628]
+y_sort_enabled = true
 position = Vector2(0, -1)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_merdl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=519762845]
+y_sort_enabled = true
 position = Vector2(0, -8)
 texture = ExtResource("2_b0kkn")
 hframes = 8
