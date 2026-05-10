@@ -9,7 +9,7 @@ size = Vector2(30, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfofa"]
 size = Vector2(31, 52)
 
-[node name="Door" type="Node2D" unique_id=590026876]
+[node name="Door" type="Node2D" unique_id=590026876 groups=["Doors"]]
 y_sort_enabled = true
 script = ExtResource("1_mi7cj")
 

@@ -9,7 +9,7 @@ size = Vector2(20, 32)
 [node name="Node2D" type="Node2D" unique_id=1510201761]
 script = ExtResource("1_ce26a")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1082929649]
+[node name="Sprite_off" type="Sprite2D" parent="." unique_id=1082929649]
 texture = ExtResource("1_gwv2u")
 region_enabled = true
 region_rect = Rect2(128, 128, 16, 16)
@@ -19,6 +19,12 @@ region_rect = Rect2(128, 128, 16, 16)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=448588419]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_gwv2u")
+
+[node name="Sprite_on" type="Sprite2D" parent="." unique_id=880984440]
+visible = false
+texture = ExtResource("1_gwv2u")
+region_enabled = true
+region_rect = Rect2(92, 56, 16, 16)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
