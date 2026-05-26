@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bcrfev5u0sgvh" path="res://entities/slidedown_door/doubledoor_right.tscn" id="6_ebn2c"]
 [ext_resource type="PackedScene" uid="uid://cgvqb31t1nd3r" path="res://entities/slidedown_door/doubledoor_left.tscn" id="7_1xtfs"]
 [ext_resource type="PackedScene" uid="uid://cj8nokj2hovw0" path="res://in_game/text_zone.tscn" id="8_1xtfs"]
+[ext_resource type="PackedScene" uid="uid://c4camr4jb8i1n" path="res://in_game/elevator.tscn" id="10_th0rt"]
 [ext_resource type="Script" uid="uid://cos0oyxfh6vvf" path="res://raytracing_sandbox/sound_ray_manager.gd" id="11_rij3v"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1r6ce"]
@@ -214,3 +215,10 @@ z_index = 20
 position = Vector2(33, 42)
 script = ExtResource("11_rij3v")
 ray_lifetime = 0.1
+
+[node name="Elevator" parent="." unique_id=1392859592 instance=ExtResource("10_th0rt")]
+position = Vector2(288, -304)
+
+[node name="TextZone3" parent="." unique_id=1429149756 instance=ExtResource("8_1xtfs")]
+position = Vector2(261, -334)
+custom_message = "Press E to escape"

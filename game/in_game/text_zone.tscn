@@ -14,10 +14,10 @@ shape = SubResource("RectangleShape2D_y742h")
 
 [node name="PromptText" type="Label" parent="." unique_id=768929781]
 visible = false
-offset_left = -52.0
-offset_top = -25.0
-offset_right = 102.0
-offset_bottom = -2.0
+offset_left = -43.0
+offset_top = -24.0
+offset_right = 116.0
+offset_bottom = -1.0
 text = "Press \"e\" to interact."
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
