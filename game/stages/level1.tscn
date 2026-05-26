@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://bvd86ov6earsu"]
+[gd_scene format=4 uid="uid://da33j2yfwmlqj"]
 
 [ext_resource type="PackedScene" uid="uid://dixj8nb4rb5u7" path="res://entities/slidedown_door/doubledoor_north.tscn" id="3_2gqwx"]
 [ext_resource type="PackedScene" uid="uid://dtin2trju1b3u" path="res://entities/player.tscn" id="3_8ebg0"]
@@ -169,7 +169,6 @@ sources/1 = SubResource("TileSetAtlasSource_1r6ce")
 
 [node name="Node2D" type="Node2D" unique_id=1658377574]
 y_sort_enabled = true
-position = Vector2(1, 0)
 
 [node name="SoundRayManager" type="Node2D" parent="." unique_id=583952063]
 z_index = 20
@@ -177,8 +176,7 @@ script = ExtResource("11_rij3v")
 ray_lifetime = 0.1
 
 [node name="Player" parent="." unique_id=1799342814 instance=ExtResource("3_8ebg0")]
-z_index = 1
-position = Vector2(60, 79)
+position = Vector2(288, 3)
 collision_mask = 2
 sound_manager = NodePath("../SoundRayManager")
 

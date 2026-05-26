@@ -9,6 +9,7 @@ var error := Vector2.ZERO  # accumulator
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sounds_source: Node2D = $SoundSource
 @onready var sfx_player: AudioStreamPlayer2D = $SfxPlayer
+@onready var attack_hitbox: Area2D = $AttackHitbox
 
 @export var sound_manager: NodePath
 @export var walk_sounds: Array[AudioStream] = []
@@ -21,6 +22,22 @@ var distance_walked: float = 0.0
 
 # Audio bus assigned to the player
 var my_bus_name : String
+
+# Player state-machine states
+enum PlayerState {
+	MOVE,
+	CHARGE_ATTACK,
+	ATTACKING
+}
+
+var state: PlayerState = PlayerState.MOVE
+
+var facing_direction := Vector2.DOWN
+var attack_direction := Vector2.DOWN
+
+@export var attack_charge_time := 0.2
+@export var attack_duration := 0.15
+@export var attack_windup_movement_speed_multiplier := 0.3
 
 func _ready():
 	if sound_manager:
@@ -58,16 +75,87 @@ func update_animation(input_dir: Vector2) -> void:
 func get_input() -> Vector2:
 	var x_input = Input.get_axis("move_left", "move_right")
 	var y_input = Input.get_axis("move_up", "move_down")
-	return Vector2(x_input, y_input)
+	var input_dir = Vector2(x_input, y_input)
 
+	if input_dir != Vector2.ZERO:
+		facing_direction = input_dir.normalized()
+
+	return input_dir
+
+
+func get_direction_name(dir: Vector2) -> String:
+	var grid_dir = Vector2i(
+		roundi(dir.normalized().x),
+		roundi(dir.normalized().y)
+	)
+
+	return direction_map.get(grid_dir, "down")
+
+func start_attack() -> void:
+	state = PlayerState.CHARGE_ATTACK
+
+	attack_direction = facing_direction
+	var dir_name = get_direction_name(facing_direction)
+
+	# TBD
+	# animation_player.play("attack_charge_" + dir_name)
+
+	await get_tree().create_timer(attack_charge_time).timeout
+
+	if state != PlayerState.CHARGE_ATTACK:
+		return
+
+	perform_attack()
+	
+func perform_attack() -> void:
+	state = PlayerState.ATTACKING
+	attack_hitbox.monitoring = true
+	attack_hitbox.position = attack_direction * 16
+	
+	var dir_name = get_direction_name(facing_direction)
+
+	# TBD
+	# animation_player.play("attack_" + dir_name)
+
+	await get_tree().create_timer(attack_duration).timeout
+
+	state = PlayerState.MOVE
+	attack_hitbox.monitoring = false
+	
+	return
+
+func _on_attack_hitbox_body_entered(body):
+	if body == get_parent():
+		return
+	print("hit")
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("attack"):
+
+		if state == PlayerState.MOVE:
+			start_attack()
+	
 	if Input.is_action_pressed("run"):
 		speed = run_speed
 	else:
 		speed = walk_speed
-	var vel: Vector2 = get_input().normalized() * speed
-	update_animation(get_input()) # Aktualizacja animacji
+		
+	var current_speed := speed
+
+	# its not called switch for some reason :/
+	match state:
+		PlayerState.CHARGE_ATTACK:
+			current_speed *= attack_windup_movement_speed_multiplier
+
+		PlayerState.ATTACKING:
+			current_speed = 0.0
+
+	var input_dir = get_input()
+	if state == PlayerState.MOVE:
+		update_animation(input_dir) # Aktualizacja animacji
+	
+	var vel: Vector2 = input_dir.normalized() * current_speed
+	
 	# Convert velocity (px/sec) into movement this frame
 	var motion: Vector2 = vel * delta
 
@@ -83,7 +171,7 @@ func _physics_process(delta: float) -> void:
 	# Remove used movement, keep remainder
 	error -= step
 
-	# Move in discrete pixel steps (important for collisions)
+	# Move in discrete pixel step/s (important for collisions)
 	_move_pixelwise(step)
 	if step.length() > 0.1:
 		distance_walked += step.length() * delta
