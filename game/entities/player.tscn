@@ -219,6 +219,11 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_rfe5m"]
 radius = 9.055386
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rcwxb"]
+size = Vector2(20.08403, 20.084034)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rcwxb"]
+
 [node name="Player" type="CharacterBody2D" unique_id=1799342814]
 z_index = 1
 y_sort_enabled = true
@@ -260,4 +265,20 @@ script = ExtResource("4_qly61")
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_rfe5m")
 
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=727359145]
+position = Vector2(0, 9)
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1811708508]
+position = Vector2(-0.025000572, 0.025000513)
+scale = Vector2(0.595, 0.595)
+shape = SubResource("RectangleShape2D_rcwxb")
+debug_color = Color(0.98109084, 0, 0.37812212, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="AttackHitbox" unique_id=2091178498]
+position = Vector2(-6, -6)
+scale = Vector2(12, 12)
+texture = SubResource("PlaceholderTexture2D_rcwxb")
+
 [connection signal="sound_heard" from="SoundListener" to="AcousticController" method="_on_sound_listener_sound_heard"]
+[connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]
