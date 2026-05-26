@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y742h"]
 size = Vector2(52, 57)
 
-[node name="TextZone" type="Area2D" unique_id=1485575894]
+[node name="TextZone" type="Area2D" unique_id=1485575894 groups=["TextZones"]]
 script = ExtResource("1_4q8pr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=719853201]

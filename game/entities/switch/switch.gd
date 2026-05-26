@@ -35,6 +35,12 @@ func trigger_doors():
 		if door.door_id == target_id:
 			door.toggle_door()
 	
+	var all_text_zones = get_tree().get_nodes_in_group("TextZones")
+	for zone in all_text_zones:
+		if zone.zone_id == target_id:
+			zone.disable_zone()
+	
+	
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):
 		player_in_range = true

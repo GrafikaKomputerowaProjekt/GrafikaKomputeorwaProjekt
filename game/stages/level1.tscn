@@ -207,6 +207,7 @@ custom_message = "Press \"e\" to interact"
 [node name="TextZone2" parent="." unique_id=1605833147 instance=ExtResource("8_1xtfs")]
 position = Vector2(262, -40)
 custom_message = "Seems to be locked."
+zone_id = "1"
 
 [node name="SoundRayManager" type="Node2D" parent="." unique_id=583952063]
 z_index = 20

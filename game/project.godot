@@ -30,6 +30,7 @@ window/stretch/scale_mode="integer"
 
 Player=""
 Doors=""
+TextZones=""
 
 [input]
 
