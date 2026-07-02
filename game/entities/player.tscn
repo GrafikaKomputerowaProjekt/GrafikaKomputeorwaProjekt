@@ -221,6 +221,7 @@ radius = 9.055386
 
 [node name="Player" type="CharacterBody2D" unique_id=1799342814 groups=["Player"]]
 y_sort_enabled = true
+collision_layer = 2
 script = ExtResource("1_b0kkn")
 walk_sounds = Array[AudioStream]([ExtResource("2_oprnr"), ExtResource("3_8rie4"), ExtResource("4_dp3pk"), ExtResource("5_cgp7q"), ExtResource("6_1n8aq"), ExtResource("7_28s6d"), ExtResource("8_cicqb"), ExtResource("9_hj0ki"), ExtResource("10_fruft"), ExtResource("11_slxql"), ExtResource("12_evlff")])
 run_sounds = Array[AudioStream]([ExtResource("13_rcwxb"), ExtResource("14_d2i2q"), ExtResource("15_mdqif"), ExtResource("16_egchw"), ExtResource("17_ykqge"), ExtResource("18_sn2x3"), ExtResource("19_y10x8"), ExtResource("20_1sc42"), ExtResource("21_0t50q"), ExtResource("22_5qcl2"), ExtResource("23_1w6s4"), ExtResource("24_yb7tu"), ExtResource("25_b338v"), ExtResource("26_i1mej")])

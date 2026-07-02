@@ -206,7 +206,7 @@ y_sort_enabled = true
 
 [node name="Player" parent="." unique_id=1799342814 instance=ExtResource("1_4kino")]
 position = Vector2(73, 86)
-collision_mask = 2
+collision_layer = 2
 sound_manager = NodePath("../SoundRayManager")
 
 [node name="SoundRayManager" type="Node2D" parent="." unique_id=2078709288]
