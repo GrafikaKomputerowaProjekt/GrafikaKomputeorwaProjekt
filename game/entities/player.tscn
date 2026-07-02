@@ -30,9 +30,13 @@
 [ext_resource type="AudioStream" uid="uid://dn1lm4rx6kqyl" path="res://assets/sfx/run/run-13.wav" id="25_b338v"]
 [ext_resource type="AudioStream" uid="uid://dbxtlbwbwk3wg" path="res://assets/sfx/run/run-14.wav" id="26_i1mej"]
 [ext_resource type="Texture2D" uid="uid://biu4ijtr52b3n" path="res://assets/player/walk_front.png" id="27_rcwxb"]
+[ext_resource type="Texture2D" uid="uid://cwj2h1qrfse38" path="res://assets/player/atak_t-Sheet.png" id="28_1sc42"]
 [ext_resource type="Texture2D" uid="uid://bpfwnx5ku1gax" path="res://assets/player/walk_left.png" id="28_d2i2q"]
+[ext_resource type="Texture2D" uid="uid://bl7r6ivox7yol" path="res://assets/player/atak_p2-Sheet-Sheet-Sheet.png" id="28_ykqge"]
 [ext_resource type="Texture2D" uid="uid://b4r7xk81k7w8x" path="res://assets/player/walk_right.png" id="29_mdqif"]
+[ext_resource type="Texture2D" uid="uid://ccwesjht7hcgx" path="res://assets/player/atak_l-Sheet-Sheet.png" id="29_sn2x3"]
 [ext_resource type="Texture2D" uid="uid://dx13boqe5yxkq" path="res://assets/player/walk_back.png" id="30_egchw"]
+[ext_resource type="Texture2D" uid="uid://b282iquetii1y" path="res://assets/player/atak_r-Sheet-Sheet.png" id="30_y10x8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_merdl"]
 radius = 1.0
@@ -75,6 +79,167 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(3, -6)]
+}
+
+[sub_resource type="Animation" id="Animation_0t50q"]
+resource_name = "atak_back"
+step = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_1sc42")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5, 0.6666667, 0.8333334),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_sn2x3"]
+resource_name = "atak_front"
+length = 1.1666666
+step = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("28_ykqge")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, -5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 0]
+}
+
+[sub_resource type="Animation" id="Animation_y10x8"]
+resource_name = "atak_left"
+step = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("29_sn2x3")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-7, -5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16666667, 0.33333334, 0.5, 0.6666667, 0.8333333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_1sc42"]
+resource_name = "atak_right"
+step = 0.16666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(6, -6)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.16666667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("30_y10x8")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.16666667, 0.33333334, 0.5, 0.6666667, 0.8333334, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 2, 1]
 }
 
 [sub_resource type="Animation" id="Animation_e4p34"]
@@ -319,6 +484,10 @@ tracks/0/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x08pd"]
 _data = {
 &"RESET": SubResource("Animation_b0kkn"),
+&"atak_back": SubResource("Animation_0t50q"),
+&"atak_front": SubResource("Animation_sn2x3"),
+&"atak_left": SubResource("Animation_y10x8"),
+&"atak_right": SubResource("Animation_1sc42"),
 &"down": SubResource("Animation_e4p34"),
 &"down_left": SubResource("Animation_rfe5m"),
 &"down_right": SubResource("Animation_qly61"),
@@ -351,7 +520,7 @@ shape = SubResource("CapsuleShape2D_merdl")
 y_sort_enabled = true
 position = Vector2(3, -6)
 texture = ExtResource("27_rcwxb")
-hframes = 4
+hframes = 5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1475567639]
 libraries/ = SubResource("AnimationLibrary_x08pd")
