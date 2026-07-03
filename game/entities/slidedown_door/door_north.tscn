@@ -10,6 +10,7 @@ size = Vector2(16, 8)
 size = Vector2(28, 41)
 
 [node name="Door" type="Node2D" unique_id=590026876]
+z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_v6ngo")
 

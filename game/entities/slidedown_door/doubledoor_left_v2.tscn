@@ -49,6 +49,7 @@ region_enabled = true
 region_rect = Rect2(20, 128, 16, 16)
 
 [node name="Sprite_closed2" type="Sprite2D" parent="Door_closed_sprites/Sprite_closed/Sprite_closed2" unique_id=1341427839]
+z_index = 1
 y_sort_enabled = true
 position = Vector2(0, -16)
 texture = ExtResource("2_m5vp3")
