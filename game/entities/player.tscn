@@ -78,7 +78,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(3, -6)]
+"values": [Vector2(1, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_0t50q"]
@@ -204,6 +204,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_1sc42"]
 resource_name = "atak_right"
+length = 1.1666666
 step = 0.16666667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -212,7 +213,7 @@ tracks/0/path = NodePath("Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.16666667),
+"times": PackedFloat32Array(0.001),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(6, -6)]
@@ -244,6 +245,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_e4p34"]
 resource_name = "down"
+length = 0.8
 loop_mode = 1
 step = 0.2
 tracks/0/type = "value"
@@ -253,7 +255,7 @@ tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.25, 0.5, 0.75),
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3]
@@ -269,6 +271,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("27_rcwxb")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, -8)]
 }
 
 [sub_resource type="Animation" id="Animation_rfe5m"]
@@ -407,7 +421,6 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_i623q"]
 resource_name = "up"
-length = 0.8
 loop_mode = 1
 step = 0.2
 tracks/0/type = "value"
@@ -518,9 +531,9 @@ shape = SubResource("CapsuleShape2D_merdl")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=519762845]
 y_sort_enabled = true
-position = Vector2(3, -6)
+position = Vector2(1, -8)
 texture = ExtResource("27_rcwxb")
-hframes = 5
+hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1475567639]
 libraries/ = SubResource("AnimationLibrary_x08pd")

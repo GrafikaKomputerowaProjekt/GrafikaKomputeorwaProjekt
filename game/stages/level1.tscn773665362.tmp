@@ -147,7 +147,6 @@ layer_1/tile_data = PackedInt32Array(262148, 1, 0, 262147, 1, 0, 262146, 1, 0, 3
 [node name="Player" parent="." unique_id=1799342814 instance=ExtResource("3_8ebg0")]
 position = Vector2(61, 80)
 collision_layer = 1
-sound_manager = NodePath("../SoundRayManager")
 
 [node name="Door" parent="." unique_id=590026876 instance=ExtResource("3_2gqwx")]
 position = Vector2(272, -16)
