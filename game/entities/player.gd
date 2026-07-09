@@ -92,37 +92,28 @@ func get_direction_name(dir: Vector2) -> String:
 	return direction_map.get(grid_dir, "down")
 
 func start_attack() -> void:
-	state = PlayerState.CHARGE_ATTACK
-
-	attack_direction = facing_direction
-	var dir_name = get_direction_name(facing_direction)
-
-	# TBD
-	# animation_player.play("attack_charge_" + dir_name)
-
-	await get_tree().create_timer(attack_charge_time).timeout
-
-	if state != PlayerState.CHARGE_ATTACK:
-		return
-
 	perform_attack()
-	
+
 func perform_attack() -> void:
 	state = PlayerState.ATTACKING
 	attack_hitbox.monitoring = true
-	attack_hitbox.position = attack_direction * 16
 	
 	var dir_name = get_direction_name(facing_direction)
+	
+	var anim_name = "atak_"
+	match dir_name:
+		"up": anim_name += "back"
+		"down": anim_name += "front"
+		_: anim_name += dir_name
 
-	# TBD
-	# animation_player.play("attack_" + dir_name)
+	animation_player.play(anim_name)
 
-	await get_tree().create_timer(attack_duration).timeout
+	await animation_player.animation_finished
 
 	state = PlayerState.MOVE
 	attack_hitbox.monitoring = false
 	
-	return
+	update_animation(facing_direction)
 
 func _on_attack_hitbox_body_entered(body):
 	if body == get_parent():
