@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var sounds_source: Node2D = $SoundSource
 @onready var sfx_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
-
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
 @export var sound_manager: NodePath
 @export var movement_speed: float = 40.0
 @export var step_interval: float = 15.0 # Distance between "jumps" or sounds
@@ -47,6 +47,7 @@ func _physics_process(delta: float) -> void:
 		if not chasing_player:
 			play_spotted_sound()
 			generate_enemy_sound()
+			play_sound_animation()
 			
 		chasing_player = true
 		forget_player_timer = 0.0
@@ -99,6 +100,7 @@ func _physics_process(delta: float) -> void:
 		distance_walked += step.length()
 		if distance_walked > step_interval:
 			play_slime_jump_sound()
+			play_sound_animation()
 			distance_walked = 0.0
 
 func _move_pixelwise(step: Vector2) -> void:
@@ -260,4 +262,27 @@ func play_spotted_sound() -> void:
 	sfx_player.play()
 
 	print("Playing: ", sfx_player.stream)
-	
+
+func play_sound_animation() -> void:
+	var anim_name := get_sound_animation_name(last_look_dir)
+
+	if animation_player.has_animation(anim_name):
+		animation_player.play(anim_name)
+	else:
+		print("Brak animacji: ", anim_name)
+
+
+func get_sound_animation_name(dir: Vector2) -> String:
+	if dir == Vector2.ZERO:
+		dir = Vector2.DOWN
+
+	if abs(dir.x) > abs(dir.y):
+		if dir.x > 0:
+			return "rawr_right"
+		else:
+			return "rawr_left"
+	else:
+		if dir.y > 0:
+			return "rawr_brack"
+		else:
+			return "rawr_frint"
