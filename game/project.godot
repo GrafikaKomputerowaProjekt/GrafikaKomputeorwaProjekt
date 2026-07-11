@@ -26,14 +26,15 @@ window/size/viewport_height=180
 window/stretch/mode="viewport"
 window/stretch/scale_mode="integer"
 
+[dotnet]
+
+project/assembly_name="gkprojekt"
+
 [global_group]
 
 Player=""
 Doors=""
 TextZones=""
-[dotnet]
-
-project/assembly_name="gkprojekt"
 
 [input]
 
