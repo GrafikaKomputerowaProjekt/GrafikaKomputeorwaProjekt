@@ -7,6 +7,7 @@
 size = Vector2(20, 32)
 
 [node name="Node2D" type="Node2D" unique_id=1510201761]
+z_index = 1
 script = ExtResource("1_ce26a")
 
 [node name="Sprite_off" type="Sprite2D" parent="." unique_id=1082929649]
