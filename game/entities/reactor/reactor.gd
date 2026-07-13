@@ -18,6 +18,8 @@ func _ready():
 
 func toggle_reactor():
 	is_on = !is_on
+	GameManager.is_power_on = is_on  # Syncs the global power to the reactor's state
+	
 	if is_on:
 		sprite.texture = texture_on
 		light.enabled = true

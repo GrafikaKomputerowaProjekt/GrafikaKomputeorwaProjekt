@@ -12,10 +12,13 @@ extends PointLight2D
 var time_passed: float = 0.0
 
 func _process(delta: float) -> void:
+	if not GameManager.is_power_on:
+		energy = 0.0
+		return
+		
 	time_passed += delta
 	var current_speed = normal_pulse_speed
 	
-
 	if GameManager.is_alarm_active:
 		color = alarm_color
 		current_speed = alarm_pulse_speed
@@ -24,6 +27,4 @@ func _process(delta: float) -> void:
 		current_speed = normal_pulse_speed
 		
 	var wave = (sin(time_passed * current_speed) + 1.0) / 2.0
-	
-	
 	energy = lerpf(min_energy, max_energy, wave)
