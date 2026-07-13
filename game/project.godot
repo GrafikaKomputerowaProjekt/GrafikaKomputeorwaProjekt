@@ -35,6 +35,7 @@ project/assembly_name="gkprojekt"
 Player=""
 Doors=""
 TextZones=""
+Reactor="everything reactor"
 
 [input]
 
