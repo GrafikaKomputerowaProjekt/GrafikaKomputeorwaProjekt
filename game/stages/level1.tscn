@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cgvqb31t1nd3r" path="res://entities/slidedown_door/doubledoor_left.tscn" id="7_1xtfs"]
 [ext_resource type="PackedScene" uid="uid://cj8nokj2hovw0" path="res://in_game/text_zone.tscn" id="8_1xtfs"]
 [ext_resource type="PackedScene" uid="uid://c4camr4jb8i1n" path="res://in_game/elevator.tscn" id="10_th0rt"]
+[ext_resource type="PackedScene" uid="uid://bp3x3tnrgc0gd" path="res://entities/reactor/reactor.tscn" id="11_6mivw"]
 [ext_resource type="Script" uid="uid://cos0oyxfh6vvf" path="res://raytracing_sandbox/sound_ray_manager.gd" id="11_rij3v"]
 [ext_resource type="Script" uid="uid://c60vtafgva7wc" path="res://in_game/minimap_control.gd" id="11_yw345"]
 
@@ -177,8 +178,8 @@ script = ExtResource("11_rij3v")
 ray_lifetime = 0.1
 
 [node name="Player" parent="." unique_id=1799342814 instance=ExtResource("3_8ebg0")]
-position = Vector2(288, 3)
-collision_mask = 2
+position = Vector2(292, 4)
+collision_mask = 3
 sound_manager = NodePath("../SoundRayManager")
 
 [node name="Door" parent="." unique_id=590026876 instance=ExtResource("3_2gqwx")]
@@ -291,3 +292,7 @@ layout_mode = 0
 offset_right = 1.0
 offset_bottom = 1.0
 color = Color(1, 0, 0, 1)
+
+[node name="StaticBody2D" parent="." unique_id=1872575374 instance=ExtResource("11_6mivw")]
+position = Vector2(643, 111)
+reactor_id = "1"

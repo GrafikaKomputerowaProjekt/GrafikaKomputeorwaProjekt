@@ -1,11 +1,28 @@
 extends StaticBody2D
 
+@export var reactor_id: String = ""
+@export var texture_off: Texture2D
+@export var texture_on: Texture2D
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+@onready var sprite = $Sprite2D
+@onready var light = $PointLight2D
+@onready var anim_player = $AnimationPlayer
 
+var is_on = false
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _ready():
+	# Ensure it starts in the off state
+	sprite.texture = texture_off
+	light.enabled = false
+	anim_player.stop()
+
+func toggle_reactor():
+	is_on = !is_on
+	if is_on:
+		sprite.texture = texture_on
+		light.enabled = true
+		anim_player.play("pulse")
+	else:
+		sprite.texture = texture_off
+		light.enabled = false
+		anim_player.stop()

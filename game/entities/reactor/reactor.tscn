@@ -1,3 +1,81 @@
 [gd_scene format=3 uid="uid://bp3x3tnrgc0gd"]
 
-[node name="Node2D" type="Node2D" unique_id=574776622]
+[ext_resource type="Texture2D" uid="uid://c1kv7fve0rtop" path="res://assets/reactor/reactor_off.png" id="1_rsmam"]
+[ext_resource type="Script" uid="uid://db13edgugamfd" path="res://entities/reactor/reactor.gd" id="1_veel0"]
+[ext_resource type="Texture2D" uid="uid://c2rc0pgbm34h5" path="res://assets/reactor/reactor_on.png" id="3_8xc88"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_veel0"]
+size = Vector2(64, 54)
+
+[sub_resource type="Gradient" id="Gradient_8xc88"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7fbmp"]
+gradient = SubResource("Gradient_8xc88")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.47058824)
+fill_to = Vector2(0.15882353, 0.18235295)
+
+[sub_resource type="Animation" id="Animation_8xc88"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.59]
+}
+
+[sub_resource type="Animation" id="Animation_7fbmp"]
+resource_name = "pulse"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.5, 0.25, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v1y3i"]
+_data = {
+&"RESET": SubResource("Animation_8xc88"),
+&"pulse": SubResource("Animation_7fbmp")
+}
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=1872575374 groups=["Reactor"]]
+z_index = 1
+y_sort_enabled = true
+script = ExtResource("1_veel0")
+texture_off = ExtResource("1_rsmam")
+texture_on = ExtResource("3_8xc88")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1794306705]
+position = Vector2(32, -42)
+texture = ExtResource("1_rsmam")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=381078080]
+position = Vector2(32, -27)
+shape = SubResource("RectangleShape2D_veel0")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=122495774]
+position = Vector2(32, -27)
+color = Color(0, 0.6784314, 0.6745098, 1)
+energy = 0.59
+texture = SubResource("GradientTexture2D_7fbmp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1647819115]
+libraries/ = SubResource("AnimationLibrary_v1y3i")
