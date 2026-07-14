@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://dyfxehxf8oa87"]
+
+[ext_resource type="Texture2D" uid="uid://dimtt16sveih6" path="res://assets/main_menu/menu_background.png" id="1_32a5h"]
+[ext_resource type="Script" uid="uid://dnt0viw4gvkod" path="res://stages/main_menu.gd" id="1_eldpe"]
+[ext_resource type="FontFile" uid="uid://cbtqssxswgc84" path="res://assets/fonts/pixy/PIXY.ttf" id="3_kn1cy"]
+
+[node name="MainMenu" type="Control" unique_id=1614696773]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_eldpe")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1024242449]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_32a5h")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=925509848]
+layout_mode = 0
+offset_left = 110.0
+offset_top = 55.0
+offset_right = 210.0
+offset_bottom = 155.0
+
+[node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1114427530]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kn1cy")
+theme_override_font_sizes/font_size = 28
+text = "START"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=1406334364]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_kn1cy")
+text = "EXIT"
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

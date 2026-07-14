@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="gkprojekt"
-run/main_scene="uid://da33j2yfwmlqj"
+run/main_scene="uid://dyfxehxf8oa87"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="res://icon.svg"
 
