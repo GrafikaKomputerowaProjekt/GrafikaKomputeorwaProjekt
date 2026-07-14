@@ -160,10 +160,7 @@ func perform_melee_attack():
 			anim_name += dir_name
 
 
-	# TBD
-	# animation_player.play("attack_" + dir_name)
-
-	await get_tree().create_timer(attack_duration).timeout
+	animation_player.play(anim_name)
 	await animation_player.animation_finished
 
 	attack_burst_particles.global_position = attack_hitbox.global_position
@@ -189,9 +186,9 @@ func perform_ranged_attack():
 
 	get_tree().current_scene.add_child(projectile)
 
-	animation_player.play("fire") # ???
+	#animation_player.play("fire") # ???
 
-	await animation_player.animation_finished
+	#await animation_player.animation_finished
 
 	state = PlayerState.MOVE
 
