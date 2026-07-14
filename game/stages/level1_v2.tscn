@@ -509,12 +509,6 @@ color = Color(1, 0, 0, 1)
 position = Vector2(640, 112)
 reactor_id = "1"
 
-[node name="Slime" parent="." unique_id=375529188 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("12_pkphe")]
-position = Vector2(721, 27)
-sound_manager = NodePath("../SoundRayManager")
-player = NodePath("../Player")
-patrol_points = [NodePath("../PP1"), NodePath("../PP1/PP2"), NodePath("../PP1/PP2/PP3"), NodePath("../PP1/PP2/PP3/PP4")]
-
 [node name="PP5" type="Marker2D" parent="." unique_id=817572146]
 position = Vector2(416, -256)
 
@@ -643,3 +637,9 @@ position = Vector2(477, -45)
 
 [node name="SmartLight6" parent="." unique_id=371197830 instance=ExtResource("13_qw501")]
 position = Vector2(477, -345)
+
+[node name="Slime" parent="." unique_id=375529188 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("12_pkphe")]
+position = Vector2(801, -77)
+sound_manager = NodePath("../SoundRayManager")
+player = NodePath("../Player")
+patrol_points = [NodePath("../PP1"), NodePath("../PP1/PP2"), NodePath("../PP1/PP2/PP3"), NodePath("../PP1/PP2/PP3/PP4")]

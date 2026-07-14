@@ -41,6 +41,8 @@ var attack_direction := Vector2.DOWN
 @export var attack_duration := 0.15
 @export var attack_windup_movement_speed_multiplier := 0.3
 
+@onready var attack_burst_particles: GPUParticles2D = $AttackBurstParticles
+
 func _ready():
 	if sound_manager:
 		sounds_source.sound_manager = get_node(sound_manager)
@@ -111,6 +113,9 @@ func perform_attack() -> void:
 	animation_player.play(anim_name)
 
 	await animation_player.animation_finished
+
+	attack_burst_particles.global_position = attack_hitbox.global_position
+	attack_burst_particles.restart()
 
 	state = PlayerState.MOVE
 	attack_hitbox.monitoring = false
