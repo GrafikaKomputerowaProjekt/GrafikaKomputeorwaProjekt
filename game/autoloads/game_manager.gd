@@ -38,3 +38,11 @@ func _process(delta: float):
 			get_tree().change_scene_to_file("res://stages/main_menu.tscn")
 		else:
 			countdown_label.text = "! " + str(snapped(alarm_time_left, 0.1)) + "s !"
+			
+func reset_state():
+	is_alarm_active = false
+	is_power_on = false
+	alarm_time_left = 10.0
+	
+	if countdown_label:
+		countdown_label.visible = false
