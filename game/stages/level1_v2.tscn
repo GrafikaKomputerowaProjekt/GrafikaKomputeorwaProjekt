@@ -642,7 +642,7 @@ position = Vector2(477, -45)
 position = Vector2(477, -345)
 
 [node name="Slime" parent="." unique_id=375529188 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("12_pkphe")]
-position = Vector2(801, -77)
+position = Vector2(728, 27)
 sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
 patrol_points = [NodePath("../PP1"), NodePath("../PP1/PP2"), NodePath("../PP1/PP2/PP3"), NodePath("../PP1/PP2/PP3/PP4")]
