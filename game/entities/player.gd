@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-
 @export var walk_speed: float = 86.0
 @export var run_speed: float = 116.0
 var speed: float = walk_speed
@@ -61,16 +60,32 @@ var already_hit := []
 
 @onready var attack_burst_particles: GPUParticles2D = $AttackBurstParticles
 
+# ==========================================
+# EMERGENCY HEALTH SYSTEM VARIABLES
+# ==========================================
+var has_shield: bool = true
+var is_dead: bool = false
+var ui_label: Label
+
 func _ready():
+	# Rejestracja gracza w grupie do łatwej identyfikacji dla przeciwników
+	add_to_group("Player")
+	print("[PLAYER SYSTEM] Player initialized and registered in 'Player' group.")
+	
+	_setup_emergency_ui()
+
 	if sound_manager:
 		sounds_source.sound_manager = get_node(sound_manager)
+		print("[PLAYER AUDIO] Sound manager connected via NodePath: ", sound_manager)
+		
 	var unique_id = str(get_instance_id())
 	my_bus_name = AudioManager.create_bus(unique_id)
-	
 	sfx_player.bus = my_bus_name
+	print("[PLAYER AUDIO] Dynamic audio bus created: ", my_bus_name)
 	
 func _exit_tree() -> void:
 	AudioManager.remove_bus(my_bus_name)
+	print("[PLAYER AUDIO] Cleaned up audio bus: ", my_bus_name)
 
 var direction_map := {
 	Vector2i.ZERO: "idle",
@@ -81,9 +96,6 @@ var direction_map := {
 }
 
 func update_animation(input_dir: Vector2) -> void:
-	#if input_dir == Vector2.ZERO:
-		#return # idle state
-
 	var grid_dir = Vector2i(
 		roundi(input_dir.normalized().x),
 		roundi(input_dir.normalized().y)
@@ -115,22 +127,25 @@ func get_direction_name(dir: Vector2) -> String:
 
 func start_attack() -> void:
 	if !can_attack:
+		print("[PLAYER WEAPON] Attack requested, but weapon is on cooldown!")
 		return
 
 	can_attack = false
-
 	state = PlayerState.CHARGE_ATTACK
 	attack_direction = facing_direction
+	
+	var weapon_name = "HAMMER" if current_weapon == WeaponType.HAMMER else "GUN"
+	print("[PLAYER WEAPON] Starting attack windup with: ", weapon_name, " | Dir: ", attack_direction)
 
 	await get_tree().create_timer(attack_charge_time).timeout
 
 	if state != PlayerState.CHARGE_ATTACK:
+		print("[PLAYER WEAPON] Attack cancelled during windup (state changed).")
 		return
 
 	match current_weapon:
 		WeaponType.HAMMER:
 			await perform_melee_attack()
-
 		WeaponType.GUN:
 			await perform_ranged_attack()
 
@@ -138,6 +153,7 @@ func start_attack() -> void:
 	await get_tree().create_timer(cooldown).timeout
 
 	can_attack = true
+	print("[PLAYER WEAPON] Cooldown finished. Ready to attack again.")
 	
 func update_attack_hitbox():
 	attack_hitbox.position = facing_direction * 12
@@ -151,7 +167,6 @@ func perform_melee_attack():
 	attack_hitbox.monitoring = true
 
 	var dir_name = get_direction_name(facing_direction)
-
 	var anim_name = "atak_"
 	match dir_name:
 		"up":
@@ -161,9 +176,10 @@ func perform_melee_attack():
 		_:
 			anim_name += dir_name
 
-
+	print("[PLAYER MELEE] Triggering hammer swing. Animation: ", anim_name, " | Hitbox active.")
 	animation_player.play(anim_name)
 	await animation_player.animation_finished
+	
 	play_hammer()
 	sounds_source.generate_sound(hammer_loudness)
 	attack_burst_particles.global_position = attack_hitbox.global_position
@@ -171,43 +187,53 @@ func perform_melee_attack():
 
 	state = PlayerState.MOVE
 	attack_hitbox.monitoring = false
+	print("[PLAYER MELEE] Hammer strike complete. Hitbox inactive. State reverted to MOVE.")
 	
-	return
-	
-	state = PlayerState.MOVE
-
 	update_animation(facing_direction)
 	
-func perform_ranged_attack():
+func perform_ranged_attack() -> void:
 	already_hit.clear()
 	state = PlayerState.ATTACKING
 
-	var projectile = projectile_scene.instantiate()
+	if projectile_scene == null:
+		print("[PLAYER RANGED] CRITICAL ERROR: projectile_scene is not assigned!")
+		state = PlayerState.MOVE
+		return
 
+	var projectile = projectile_scene.instantiate()
 	projectile.global_position = projectile_spawn.global_position
 	projectile.direction = facing_direction
 
 	get_tree().current_scene.add_child(projectile)
-
-	#animation_player.play("fire") # ???
-
-	#await animation_player.animation_finished
+	print("[PLAYER RANGED] Gun fired. Projectile spawned at: ", projectile.global_position, " | Dir: ", facing_direction)
 
 	state = PlayerState.MOVE
 
-func _on_attack_hitbox_body_entered(body):
-	
+func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	if body in already_hit:
 		return
 		
 	already_hit.append(body)
+	print("[PLAYER MELEE] Collision detected on swing! Hit: ", body.name, " (Type: ", body.get_class(), ")")
 	
-	if body.has_method("is_hit"):
-		body.is_hit(1)
+	if body.has_method(&"hit_by_projectile"):
+		print("[PLAYER MELEE] Executing 'hit_by_projectile(2)' on target: ", body.name)
+		body.hit_by_projectile(2)
+	elif body.has_method(&"is_hit"):
+		print("[PLAYER MELEE] Target has no health logic, executing fallback 'is_hit()' on: ", body.name)
+		body.is_hit()
+	else:
+		print("[PLAYER MELEE] Target has no damage-receiving methods. Ignoring.")
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("attack"):
+	if is_dead:
+		if Input.is_key_pressed(KEY_R):
+			print("[PLAYER SYSTEM] Restart key pressed. Reloading scene...")
+			get_tree().paused = false
+			get_tree().reload_current_scene()
+		return
 
+	if Input.is_action_just_pressed("attack"):
 		if state == PlayerState.MOVE:
 			start_attack()
 	
@@ -216,17 +242,17 @@ func _physics_process(delta: float) -> void:
 	else:
 		speed = walk_speed
 		
-	
 	if Input.is_action_just_pressed("swap_weapon"):
 		current_weapon = (
-		WeaponType.GUN 
-		if current_weapon == WeaponType.HAMMER
-		else WeaponType.HAMMER
-	)	
+			WeaponType.GUN 
+			if current_weapon == WeaponType.HAMMER
+			else WeaponType.HAMMER
+		)    
+		var weapon_name = "GUN" if current_weapon == WeaponType.GUN else "HAMMER"
+		print("[PLAYER WEAPON] Swapped weapon! Current equipped: ", weapon_name)
 		
 	var current_speed := speed
 
-	# its not called switch for some reason :/
 	match state:
 		PlayerState.CHARGE_ATTACK:
 			current_speed *= attack_windup_movement_speed_multiplier
@@ -242,26 +268,20 @@ func _physics_process(delta: float) -> void:
 		walk_particles.emitting = false
 	
 	if state == PlayerState.MOVE:
-		update_animation(input_dir) # Aktualizacja animacji
+		update_animation(input_dir)
 	
 	var vel: Vector2 = input_dir.normalized() * current_speed
-	
-	# Convert velocity (px/sec) into movement this frame
 	var motion: Vector2 = vel * delta
 
-	# Accumulate fractional movement
 	error += motion
 
-	# Extract integer steps (this is the Bresenham-like part)
 	var step := Vector2(
 		int(error.x),
 		int(error.y)
 	)
 
-	# Remove used movement, keep remainder
 	error -= step
 
-	# Move in discrete pixel step/s (important for collisions)
 	_move_pixelwise(step)
 	if step.length() > 0.1:
 		distance_walked += step.length() * delta
@@ -288,7 +308,6 @@ func _move_pixelwise(step: Vector2) -> void:
 
 	var remaining := step.abs()
 
-	# Distribute steps evenly (Bresenham-style)
 	var err := 0.0
 	var dx := remaining.x
 	var dy := remaining.y
@@ -311,15 +330,16 @@ func _move_pixelwise(step: Vector2) -> void:
 				err -= 1.0
 
 
-func _move_and_collide_safe(delta: Vector2) -> void:
-	if delta == Vector2.ZERO:
+func _move_and_collide_safe(delta_vec: Vector2) -> void:
+	if delta_vec == Vector2.ZERO:
 		return
 	
-	var collision = move_and_collide(delta)
+	var collision = move_and_collide(delta_vec)
 	if collision:
-		# Stop movement along that axis if collision occurs
-		# (simple behavior; can be expanded)
-		pass
+		var collider = collision.get_collider()
+		if is_instance_valid(collider) and collider.name.begins_with("Slime"):
+			print("[PLAYER DETECTOR] Physical collision with enemy: ", collider.name)
+			take_damage()
 
 func play_random_walk():
 	if walk_sounds.size() > 0:
@@ -339,3 +359,61 @@ func play_hammer():
 	sfx_player.stream = hammer_sound
 	sfx_player.volume_linear = hammer_loudness
 	sfx_player.play()
+
+# ==========================================
+# EMERGENCY HEALTH & DAMAGE SYSTEM
+# ==========================================
+
+func _setup_emergency_ui() -> void:
+	var canvas := CanvasLayer.new()
+	add_child(canvas)
+	
+	ui_label = Label.new()
+	ui_label.position = Vector2(8, 8)
+	ui_label.scale = Vector2(0.6, 0.6)
+	canvas.add_child(ui_label)
+	_update_ui_text()
+
+func _update_ui_text() -> void:
+	if is_dead:
+		ui_label.text = "HP: DEAD"
+	elif has_shield:
+		ui_label.text = "SHIELD: ACTIVE"
+	else:
+		ui_label.text = "SHIELD: BROKEN"
+
+func take_damage() -> void:
+	if is_dead:
+		return
+		
+	if has_shield:
+		has_shield = false
+		print("[PLAYER HEALTH] Shield broken! HP remaining: 1.")
+		_update_ui_text()
+		_trigger_shield_break_visuals()
+		play_random_run() 
+	else:
+		trigger_death()
+
+func _trigger_shield_break_visuals() -> void:
+	modulate = Color(10, 0, 0, 1)
+	await get_tree().create_timer(0.15).timeout
+	modulate = Color(1, 1, 1, 1)
+
+func trigger_death() -> void:
+	is_dead = true
+	print("[PLAYER HEALTH] Player is dead. Game over triggered.")
+	_update_ui_text()
+	
+	scale = Vector2(1.5, 0.1)
+	modulate = Color(0.2, 0.2, 0.2, 1)
+	
+	get_tree().paused = true
+	
+	var canvas = ui_label.get_parent()
+	var go_label := Label.new()
+	go_label.text = "GAME OVER\nPress R to Restart"
+	go_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	go_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+	go_label.position = Vector2(80, 60)
+	canvas.add_child(go_label)

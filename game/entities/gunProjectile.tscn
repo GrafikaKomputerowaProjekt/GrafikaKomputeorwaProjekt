@@ -6,6 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1pbt7"]
 
 [node name="gunProjectile" type="Area2D" unique_id=1509781640]
+collision_layer = 8
+collision_mask = 15
 script = ExtResource("1_pkk6j")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2082255659]

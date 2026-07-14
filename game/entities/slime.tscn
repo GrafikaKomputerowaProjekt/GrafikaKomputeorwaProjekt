@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://c1naisieuq8xl" path="res://assets/enemies/rawr_l-Sheet.png" id="7_6pidl"]
 [ext_resource type="Texture2D" uid="uid://c7xdtlsjetyue" path="res://assets/enemies/rawr_t-Sheet.png" id="7_jwo4a"]
 [ext_resource type="Texture2D" uid="uid://dcp4dbr4qhd1a" path="res://assets/enemies/rawr_r-Sheet.png" id="8_o7h1u"]
+[ext_resource type="Script" uid="uid://263dsb0fm3im" path="res://entities/hurtbox.gd" id="11_dybpp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f28eq"]
 radius = 1.0
@@ -295,7 +296,7 @@ _data = {
 [node name="Slime" type="CharacterBody2D" unique_id=375529188]
 z_index = 1
 y_sort_enabled = true
-collision_layer = 0
+collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_twkr4")
 spotted_sound = ExtResource("2_cauem")
@@ -339,5 +340,14 @@ hframes = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=147688134]
 libraries/ = SubResource("AnimationLibrary_jwo4a")
+
+[node name="Hurtbox" type="Area2D" parent="." unique_id=929907751]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("11_dybpp")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Hurtbox" unique_id=146415949]
+position = Vector2(0, -7)
+shape = SubResource("CircleShape2D_f28eq")
 
 [connection signal="sound_heard" from="SoundListener" to="." method="_on_sound_listener_sound_heard"]

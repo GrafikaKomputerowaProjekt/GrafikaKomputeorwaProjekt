@@ -797,7 +797,8 @@ shape = SubResource("CircleShape2D_rfe5m")
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=727359145]
 position = Vector2(0, 9)
-collision_mask = 8
+collision_layer = 0
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=1811708508]
 position = Vector2(-0.025000572, 0.025000513)

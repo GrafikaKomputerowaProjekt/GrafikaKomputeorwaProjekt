@@ -24,6 +24,23 @@ extends CharacterBody2D
 @export var spotted_sound: AudioStream
 @export_range(0.0, 1.0) var spotted_volume: float = 1.0
 
+# ==========================================
+# EMERGENCY HEALTH CONFIGURATION
+# ==========================================
+@export var max_hp: int = 3
+@onready var current_hp: int = max_hp
+
+# ==========================================
+# PROXIMITY ATTACK & COOLDOWN VARIABLES
+# ==========================================
+var attack_cooldown_timer: float = 0.0
+const ATTACK_COOLDOWN: float = 1.2 # Czas ochrony gracza przed seryjnymi hitami (w sekundach)
+
+# Nowe zmienne opóźnienia ataku (Wind-up)
+@export var attack_delay_time: float = 1 # Czas na reakcję gracza po zbliżeniu się Slime'a
+var is_charging_attack: bool = false
+var charge_timer: float = 0.0
+
 var event_history: Array[String] = []
 const MAX_EVENTS: int = 4
 
@@ -44,8 +61,45 @@ var grace_timer: float = 0.0
 var is_counting_grace: bool = false
 
 func _physics_process(delta: float) -> void:
+	# --- MODYFIKOWANA DETEKCJA BLISKOŚCI Z OPÓŹNIENIEM ---
+	if attack_cooldown_timer > 0.0:
+		attack_cooldown_timer -= delta
+
+	if player != null and is_instance_valid(player) and not player.is_dead:
+		var distance_to_player = global_position.distance_to(player.global_position)
+		
+		# Jeśli przeciwnik nałoży się na gracza (odległość < 14px)
+		if distance_to_player < 14.0:
+			if attack_cooldown_timer <= 0.0:
+				if not is_charging_attack:
+					# Inicjujemy ładowanie ciosu
+					is_charging_attack = true
+					charge_timer = attack_delay_time
+					print("[SLIME ATTACK] Player in proximity. Charging strike for: ", attack_delay_time, "s")
+					modulate = Color(2, 2, 0, 1) # Ostrzegawczy żółty flash
+				else:
+					# Odliczanie czasu ładowania
+					charge_timer -= delta
+					if charge_timer <= 0.0:
+						is_charging_attack = false
+						modulate = Color(1, 1, 1, 1) # Powrót do standardowego wyglądu
+						
+						print("[SLIME PROXIMITY] Delay finished! Distance: ", distance_to_player)
+						if player.has_method("take_damage"):
+							print("[SLIME PROXIMITY] Contact confirmed. Dispatching take_damage().")
+							player.take_damage()
+							attack_cooldown_timer = ATTACK_COOLDOWN
+		else:
+			# Gracz uciekł z zasięgu -> przerywamy ładowanie ataku
+			if is_charging_attack:
+				is_charging_attack = false
+				modulate = Color(1, 1, 1, 1)
+				print("[SLIME ATTACK] Player escaped range. Attack cancelled.")
+	# ---------------------------------------------------------------------
+
 	if can_see_player():
 		if not chasing_player:
+			print("[SLIME AI] ", name, " spotted player! Initiating chase sequence.")
 			play_spotted_sound()
 			generate_enemy_sound()
 			play_sound_animation()
@@ -60,6 +114,7 @@ func _physics_process(delta: float) -> void:
 			forget_player_timer += delta
 
 			if forget_player_timer >= forget_player_time:
+				print("[SLIME AI] ", name, " lost player line-of-sight. Reverting to patrol.")
 				chasing_player = false
 				forget_player_timer = 0.0
 				
@@ -149,21 +204,36 @@ func _move_pixelwise(step: Vector2) -> void:
 				err -= 1.0
 
 
-func _move_and_collide_safe(delta: Vector2) -> void:
-	if delta == Vector2.ZERO:
+func _move_and_collide_safe(delta_vec: Vector2) -> void:
+	if delta_vec == Vector2.ZERO:
 		return
 	
-	var collision = move_and_collide(delta)
+	var collision = move_and_collide(delta_vec)
 	if collision:
-		# Stop movement along that axis if collision occurs
-		# (simple behavior; can be expanded)
-		pass
+		var collider = collision.get_collider()
+		if is_instance_valid(collider):
+			# Rezerwowa kolizja fizyczna
+			if collider.is_in_group("Player") and collider.has_method("take_damage") and attack_cooldown_timer <= 0.0 and not is_charging_attack:
+				print("[SLIME PHYS] Physical collision with player! Charging strike.")
+				is_charging_attack = true
+				charge_timer = attack_delay_time
+				modulate = Color(2, 2, 0, 1)
+				return
+			
+			# Zapobieganie spamowaniu logów o kolizji ze ścianami
+			if Engine.get_physics_frames() % 60 == 0 and not collider.is_in_group("Player"):
+				print("[SLIME PHYS] Clinging to: ", collider.name)
+			
+			# --- ALGORYTM ZEŚLIZGIWANIA SIĘ ZE ŚCIAN ---
+			var normal = collision.get_normal()
+			var slide_velocity = delta_vec.slide(normal)
+			if slide_velocity.length() > 0.01:
+				move_and_collide(slide_velocity)
 
 func set_movement_target(target_point: Vector2):
 	navigation_agent.target_position = target_point
 
 func play_slime_jump_sound():
-	# Sound logic here
 	pass
 
 func _on_sound_listener_sound_heard(ray: SoundRay) -> void:
@@ -220,7 +290,7 @@ func _ready() -> void:
 		set_movement_target(patrol_points[patrol_index].global_position)
 		
 	if sound_manager:
-		sounds_source.sound_manager = get_node(sound_manager)	
+		sounds_source.sound_manager = get_node(sound_manager)   
 		
 func handle_patrol(delta: float) -> void:
 	if patrol_points.size() == 0:
@@ -237,9 +307,32 @@ func handle_patrol(delta: float) -> void:
 				patrol_index = 0
 
 			set_movement_target(patrol_points[patrol_index].global_position)
+
+## Uniwersalna funkcja obsługująca obrażenia o zmiennej sile (duck-typing friendly)
+func hit_by_projectile(damage_amount: int = 1) -> void:
+	if current_hp <= 0:
+		return
 		
+	current_hp -= damage_amount
+	print("[ENEMY] Hit! HP remaining: ", current_hp, "/", max_hp)
+	
+	# Przerwanie ładowania ataku, jeśli przeciwnik zostanie uderzony
+	if is_charging_attack:
+		is_charging_attack = false
+		modulate = Color(1, 1, 1, 1)
+		print("[SLIME ATTACK] Interrupted by damage!")
+	
+	# Wizualny feedback - mignięcie na czerwono
+	modulate = Color(10, 0, 0, 1)
+	await get_tree().create_timer(0.1).timeout
+	modulate = Color(1, 1, 1, 1)
+	
+	if current_hp <= 0:
+		is_hit()
+
+## Kompatybilność wsteczna z prostym wywołaniem is_hit()
 func is_hit() -> void:
-	print ("HIT")
+	print ("ENEMY DEAD")
 	
 	is_counting_grace = false
 	grace_timer = 0.0
@@ -250,12 +343,6 @@ func is_hit() -> void:
 	if has_node("Sprite2D"):
 		$Sprite2D.visible =false
 	queue_free()
-	
-#func _input(event):
-#	if event.is_action_pressed("ui_accept"): #funkcja testująca czy hit działa 
-#		is_hit()
-	
-
 
 func generate_enemy_sound() -> void:
 	if has_node("SoundSource"):
