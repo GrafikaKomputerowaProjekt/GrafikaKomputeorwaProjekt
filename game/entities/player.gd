@@ -161,8 +161,9 @@ func perform_melee_attack():
 		_:
 			anim_name += dir_name
 
-
 	animation_player.play(anim_name)
+
+	await get_tree().create_timer(attack_duration).timeout
 	await animation_player.animation_finished
 	play_hammer()
 	sounds_source.generate_sound(hammer_loudness)
@@ -172,10 +173,6 @@ func perform_melee_attack():
 	state = PlayerState.MOVE
 	attack_hitbox.monitoring = false
 	
-	return
-	
-	state = PlayerState.MOVE
-
 	update_animation(facing_direction)
 	
 func perform_ranged_attack():
