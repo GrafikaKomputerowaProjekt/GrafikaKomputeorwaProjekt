@@ -32,6 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://dbxtlbwbwk3wg" path="res://assets/sfx/run/run-14.wav" id="26_i1mej"]
 [ext_resource type="Texture2D" uid="uid://biu4ijtr52b3n" path="res://assets/player/walk_front.png" id="27_rcwxb"]
 [ext_resource type="Texture2D" uid="uid://cq3ouwb3a0dwl" path="res://assets/player/attack_animations/atak_t-Sheet.png" id="28_1sc42"]
+[ext_resource type="AudioStream" uid="uid://2byhret6d3ix" path="res://assets/sfx/melee/hammer.wav" id="28_5qcl2"]
 [ext_resource type="Texture2D" uid="uid://bpfwnx5ku1gax" path="res://assets/player/walk_left.png" id="28_d2i2q"]
 [ext_resource type="Texture2D" uid="uid://des2su3bp6fbx" path="res://assets/player/attack_animations/atak_p2-Sheet.png" id="29_0t50q"]
 [ext_resource type="Texture2D" uid="uid://b4r7xk81k7w8x" path="res://assets/player/walk_right.png" id="29_mdqif"]
@@ -753,6 +754,7 @@ script = ExtResource("1_b0kkn")
 projectile_scene = ExtResource("2_0t50q")
 walk_sounds = Array[AudioStream]([ExtResource("2_oprnr"), ExtResource("3_8rie4"), ExtResource("4_dp3pk"), ExtResource("5_cgp7q"), ExtResource("6_1n8aq"), ExtResource("7_28s6d"), ExtResource("8_cicqb"), ExtResource("9_hj0ki"), ExtResource("10_fruft"), ExtResource("11_slxql"), ExtResource("12_evlff")])
 run_sounds = Array[AudioStream]([ExtResource("13_rcwxb"), ExtResource("14_d2i2q"), ExtResource("15_mdqif"), ExtResource("16_egchw"), ExtResource("17_ykqge"), ExtResource("18_sn2x3"), ExtResource("19_y10x8"), ExtResource("20_1sc42"), ExtResource("21_0t50q"), ExtResource("22_5qcl2"), ExtResource("23_1w6s4"), ExtResource("24_yb7tu"), ExtResource("25_b338v"), ExtResource("26_i1mej")])
+hammer_sound = ExtResource("28_5qcl2")
 walk_loudness = 0.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=95252628]

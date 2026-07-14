@@ -16,8 +16,10 @@ var error := Vector2.ZERO  # accumulator
 @export var sound_manager: NodePath
 @export var walk_sounds: Array[AudioStream] = []
 @export var run_sounds: Array[AudioStream] = []
+@export var hammer_sound: AudioStream
 @export_range(0.0, 1.0) var walk_loudness: float = 0.5
 @export_range(0.0, 1.0) var run_loudness: float = 0.5
+@export_range(0.0, 1.0) var hammer_loudness: float = 0.5
 
 @export var step_interval: float = 0.4
 var distance_walked: float = 0.0
@@ -162,7 +164,8 @@ func perform_melee_attack():
 
 	animation_player.play(anim_name)
 	await animation_player.animation_finished
-
+	play_hammer()
+	sounds_source.generate_sound(hammer_loudness)
 	attack_burst_particles.global_position = attack_hitbox.global_position
 	attack_burst_particles.restart()
 
@@ -331,3 +334,8 @@ func play_random_run():
 		sfx_player.stream = run_sounds[random_index]
 		sfx_player.volume_linear = run_loudness
 		sfx_player.play()
+
+func play_hammer():
+	sfx_player.stream = hammer_sound
+	sfx_player.volume_linear = hammer_loudness
+	sfx_player.play()
