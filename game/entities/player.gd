@@ -16,9 +16,11 @@ var error := Vector2.ZERO  # accumulator
 @export var walk_sounds: Array[AudioStream] = []
 @export var run_sounds: Array[AudioStream] = []
 @export var hammer_sound: AudioStream
+@export var gun_sound: AudioStream
 @export_range(0.0, 1.0) var walk_loudness: float = 0.5
 @export_range(0.0, 1.0) var run_loudness: float = 0.5
 @export_range(0.0, 1.0) var hammer_loudness: float = 0.5
+@export_range(0.0, 1.0) var gun_loudness: float = 0.7
 
 @export var step_interval: float = 0.4
 var distance_walked: float = 0.0
@@ -203,6 +205,7 @@ func perform_ranged_attack() -> void:
 		state = PlayerState.MOVE
 		return
 
+	play_gun()
 	var projectile = projectile_scene.instantiate()
 	projectile.global_position = projectile_spawn.global_position
 	projectile.direction = facing_direction
@@ -361,6 +364,11 @@ func play_random_run():
 func play_hammer():
 	sfx_player.stream = hammer_sound
 	sfx_player.volume_linear = hammer_loudness
+	sfx_player.play()
+
+func play_gun():
+	sfx_player.stream = gun_sound
+	sfx_player.volume_linear = gun_loudness
 	sfx_player.play()
 
 # ==========================================
