@@ -283,6 +283,6 @@ func get_sound_animation_name(dir: Vector2) -> String:
 			return "rawr_left"
 	else:
 		if dir.y > 0:
-			return "rawr_brack"
+			return "rawr_back"
 		else:
-			return "rawr_frint"
+			return "rawr_front"

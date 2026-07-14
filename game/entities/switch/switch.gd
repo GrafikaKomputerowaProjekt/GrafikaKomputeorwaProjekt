@@ -40,6 +40,11 @@ func trigger_doors():
 		if zone.zone_id == target_id:
 			zone.disable_zone()
 	
+	var all_reactors = get_tree().get_nodes_in_group("Reactor")
+	for reactor in all_reactors:
+		if reactor.reactor_id == target_id:
+			reactor.toggle_reactor()
+	
 	
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):

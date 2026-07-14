@@ -710,6 +710,15 @@ size = Vector2(20.08403, 20.084034)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rcwxb"]
 
+[sub_resource type="Gradient" id="Gradient_1sc42"]
+offsets = PackedFloat32Array(0, 0.8137931)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0t50q"]
+gradient = SubResource("Gradient_1sc42")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Player" type="CharacterBody2D" unique_id=1799342814 groups=["Player"]]
 z_index = 1
 y_sort_enabled = true
@@ -768,6 +777,10 @@ debug_color = Color(0.98109084, 0, 0.37812212, 0.41960785)
 position = Vector2(-6, -6)
 scale = Vector2(12, 12)
 texture = SubResource("PlaceholderTexture2D_rcwxb")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1046907704]
+texture = SubResource("GradientTexture2D_0t50q")
+texture_scale = 1.5
 
 [connection signal="sound_heard" from="SoundListener" to="AcousticController" method="_on_sound_listener_sound_heard"]
 [connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]
