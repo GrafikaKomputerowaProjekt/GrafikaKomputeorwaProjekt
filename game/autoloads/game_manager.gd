@@ -12,10 +12,10 @@ func _ready():
 	add_child(canvas_layer)
 	
 	countdown_label = Label.new()
-	countdown_label.set_anchors_preset(Control.PRESET_CENTER_TOP) # Top middle
+	countdown_label.set_anchors_preset(Control.PRESET_TOP_WIDE) 
 	countdown_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	countdown_label.add_theme_color_override("font_color", Color.RED)
-	countdown_label.add_theme_font_size_override("font_size", 40)
+	countdown_label.add_theme_font_size_override("font_size", 12)
 	countdown_label.visible = false
 	canvas_layer.add_child(countdown_label)
 
@@ -34,6 +34,7 @@ func _process(delta: float):
 		if alarm_time_left <= 0.0:
 			is_alarm_active = false
 			countdown_label.visible = false
-			get_tree().reload_current_scene() 
+			# TODO back to main menu
+			get_tree().quit() 
 		else:
-			countdown_label.text = "ALARM: " + str(snapped(alarm_time_left, 0.1))
+			countdown_label.text = "! " + str(snapped(alarm_time_left, 0.1)) + "s !"
