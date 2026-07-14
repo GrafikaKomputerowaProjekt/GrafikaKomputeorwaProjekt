@@ -20,6 +20,8 @@ var error := Vector2.ZERO  # accumulator
 @export var step_interval: float = 0.4
 var distance_walked: float = 0.0
 
+@onready var walk_particles: GPUParticles2D = $WalkParticles
+
 # Audio bus assigned to the player
 var my_bus_name : String
 
@@ -142,6 +144,12 @@ func _physics_process(delta: float) -> void:
 			current_speed = 0.0
 
 	var input_dir = get_input()
+	
+	if input_dir != Vector2.ZERO and state == PlayerState.MOVE:
+		walk_particles.emitting = true
+	else:
+		walk_particles.emitting = false
+	
 	if state == PlayerState.MOVE:
 		update_animation(input_dir) # Aktualizacja animacji
 	
