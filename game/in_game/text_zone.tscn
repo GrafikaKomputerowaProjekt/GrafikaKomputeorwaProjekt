@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cj8nokj2hovw0"]
+
+[ext_resource type="Script" uid="uid://baib30hh305aw" path="res://in_game/text_zone.gd" id="1_4q8pr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_y742h"]
+size = Vector2(52, 57)
+
+[node name="TextZone" type="Area2D" unique_id=1485575894 groups=["TextZones"]]
+script = ExtResource("1_4q8pr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=719853201]
+position = Vector2(27, 29)
+shape = SubResource("RectangleShape2D_y742h")
+
+[node name="PromptText" type="Label" parent="." unique_id=768929781]
+visible = false
+offset_left = -43.0
+offset_top = -24.0
+offset_right = 116.0
+offset_bottom = -1.0
+text = "Press \"e\" to interact."
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -4,7 +4,8 @@ extends Node2D
 
 ## Number of rays to cast per sound event. Higher values improve spatial accuracy.
 @export_range(1, 360, 1) var rays_per_source: int = 72
-var sound_manager : Node
+@export var sound_manager : Node
+
 
 ## Sound raycasting
 func generate_sound(intensity : float) -> void:

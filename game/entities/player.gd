@@ -72,10 +72,6 @@ var direction_map := {
 	Vector2i.LEFT: "left",
 	Vector2i.UP: "up",
 	Vector2i.DOWN: "down",
-	Vector2i(1, 1): "down_right",
-	Vector2i(-1, 1): "down_left",
-	Vector2i(1, -1): "up_right",
-	Vector2i(-1, -1): "up_left",
 }
 
 func update_animation(input_dir: Vector2) -> void:

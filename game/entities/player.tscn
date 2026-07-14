@@ -30,14 +30,14 @@
 [ext_resource type="AudioStream" uid="uid://b4cik28e1cvr2" path="res://assets/sfx/run/run-12.wav" id="24_yb7tu"]
 [ext_resource type="AudioStream" uid="uid://dn1lm4rx6kqyl" path="res://assets/sfx/run/run-13.wav" id="25_b338v"]
 [ext_resource type="AudioStream" uid="uid://dbxtlbwbwk3wg" path="res://assets/sfx/run/run-14.wav" id="26_i1mej"]
-[ext_resource type="Texture2D" path="res://assets/player/walk_front.png" id="27_rcwxb"]
-[ext_resource type="Texture2D" path="res://assets/player/attack_animations/atak_t-Sheet.png" id="28_1sc42"]
-[ext_resource type="Texture2D" path="res://assets/player/walk_left.png" id="28_d2i2q"]
-[ext_resource type="Texture2D" path="res://assets/player/attack_animations/atak_p2-Sheet.png" id="29_0t50q"]
-[ext_resource type="Texture2D" path="res://assets/player/walk_right.png" id="29_mdqif"]
-[ext_resource type="Texture2D" path="res://assets/player/attack_animations/atak_l-Sheet.png" id="30_5qcl2"]
-[ext_resource type="Texture2D" path="res://assets/player/walk_back.png" id="30_egchw"]
-[ext_resource type="Texture2D" path="res://assets/player/atak_r-Sheet-Sheet.png" id="30_y10x8"]
+[ext_resource type="Texture2D" uid="uid://biu4ijtr52b3n" path="res://assets/player/walk_front.png" id="27_rcwxb"]
+[ext_resource type="Texture2D" uid="uid://cq3ouwb3a0dwl" path="res://assets/player/attack_animations/atak_t-Sheet.png" id="28_1sc42"]
+[ext_resource type="Texture2D" uid="uid://bpfwnx5ku1gax" path="res://assets/player/walk_left.png" id="28_d2i2q"]
+[ext_resource type="Texture2D" uid="uid://des2su3bp6fbx" path="res://assets/player/attack_animations/atak_p2-Sheet.png" id="29_0t50q"]
+[ext_resource type="Texture2D" uid="uid://b4r7xk81k7w8x" path="res://assets/player/walk_right.png" id="29_mdqif"]
+[ext_resource type="Texture2D" uid="uid://7r8tc8qpw5el" path="res://assets/player/attack_animations/atak_l-Sheet.png" id="30_5qcl2"]
+[ext_resource type="Texture2D" uid="uid://dx13boqe5yxkq" path="res://assets/player/walk_back.png" id="30_egchw"]
+[ext_resource type="Texture2D" uid="uid://b282iquetii1y" path="res://assets/player/atak_r-Sheet-Sheet.png" id="30_y10x8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_merdl"]
 radius = 1.0
@@ -711,6 +711,15 @@ size = Vector2(20.08403, 20.084034)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rcwxb"]
 
+[sub_resource type="Gradient" id="Gradient_1sc42"]
+offsets = PackedFloat32Array(0, 0.8137931)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0t50q"]
+gradient = SubResource("Gradient_1sc42")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Player" type="CharacterBody2D" unique_id=1799342814 groups=["Player"]]
 z_index = 1
 y_sort_enabled = true
@@ -772,6 +781,10 @@ debug_color = Color(0.98109084, 0, 0.37812212, 0.41960785)
 position = Vector2(-6, -6)
 scale = Vector2(12, 12)
 texture = SubResource("PlaceholderTexture2D_rcwxb")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1046907704]
+texture = SubResource("GradientTexture2D_0t50q")
+texture_scale = 1.5
 
 [connection signal="sound_heard" from="SoundListener" to="AcousticController" method="_on_sound_listener_sound_heard"]
 [connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]

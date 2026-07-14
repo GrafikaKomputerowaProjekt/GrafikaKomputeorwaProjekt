@@ -1,11 +1,28 @@
 extends CharacterBody2D
 
+@onready var sounds_source: Node2D = $SoundSource
+@onready var sfx_player: AudioStreamPlayer2D = $AudioStreamPlayer2D
+@onready var animation_player: AnimationPlayer = $AnimationPlayer
+@export var sound_manager: NodePath
 @export var movement_speed: float = 40.0
 @export var step_interval: float = 15.0 # Distance between "jumps" or sounds
 
 @onready var info_label : Label = $InfoLabel
 @onready var sound_listener: Area2D = $SoundListener
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
+
+@export var player: Node2D
+@export var view_distance: float = 100.0
+@export var view_angle: float = 60.0
+
+@export var patrol_points: Array[Node2D] = []
+@export var patrol_wait_time: float = 1.0
+
+@export var forget_player_time: float = 2.0
+@export var spotted_loudness: float = 1.0
+
+@export var spotted_sound: AudioStream
+@export_range(0.0, 1.0) var spotted_volume: float = 1.0
 
 var event_history: Array[String] = []
 const MAX_EVENTS: int = 4
@@ -14,14 +31,55 @@ const MAX_EVENTS: int = 4
 var error: Vector2 = Vector2.ZERO
 var distance_walked: float = 0.0
 
+var last_look_dir: Vector2 = Vector2.DOWN
+var chasing_player: bool = false
+
+var patrol_index: int = 0
+var patrol_wait_timer: float = 0.0
+
+var forget_player_timer: float = 0.0
+var has_played_spotted_sound: bool = false 
+
+var grace_timer: float = 0.0
+var is_counting_grace: bool = false
+
 func _physics_process(delta: float) -> void:
+	if can_see_player():
+		if not chasing_player:
+			play_spotted_sound()
+			generate_enemy_sound()
+			play_sound_animation()
+			
+			is_counting_grace = true
+			grace_timer = 0.0
+			
+		chasing_player = true
+		forget_player_timer = 0.0
+	else:
+		if chasing_player:
+			forget_player_timer += delta
+
+			if forget_player_timer >= forget_player_time:
+				chasing_player = false
+				forget_player_timer = 0.0
+				
+				if patrol_points.size() > 0:
+					set_movement_target(patrol_points[patrol_index].global_position)
+
+	if chasing_player and player != null:
+		set_movement_target(player.global_position)
+	else:
+		handle_patrol(delta)
+		
 	if navigation_agent.is_navigation_finished():
 		return
-
+	
 	# 1. Get direction from NavigationAgent
 	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
 	var dir: Vector2 = global_position.direction_to(next_path_position)
 	
+	if dir != Vector2.ZERO:
+		last_look_dir = dir.normalized()
 	# 2. Calculate desired velocity
 	var vel: Vector2 = dir * movement_speed
 	var motion: Vector2 = vel * delta
@@ -46,7 +104,14 @@ func _physics_process(delta: float) -> void:
 		distance_walked += step.length()
 		if distance_walked > step_interval:
 			play_slime_jump_sound()
+			play_sound_animation()
 			distance_walked = 0.0
+	
+	if is_counting_grace:
+		grace_timer += delta
+		if grace_timer >= 5.0:
+			is_counting_grace = false
+			GameManager.start_alarm() 
 
 func _move_pixelwise(step: Vector2) -> void:
 	var steps := int(max(abs(step.x), abs(step.y)))
@@ -173,9 +238,12 @@ func handle_patrol(delta: float) -> void:
 
 			set_movement_target(patrol_points[patrol_index].global_position)
 		
-func is_hit(dmg) -> void:
-	
+func is_hit() -> void:
 	print ("HIT")
+	
+	is_counting_grace = false
+	grace_timer = 0.0
+	
 	set_physics_process(false)
 	set_process(false)
 	
@@ -228,6 +296,6 @@ func get_sound_animation_name(dir: Vector2) -> String:
 			return "rawr_left"
 	else:
 		if dir.y > 0:
-			return "rawr_brack"
+			return "rawr_back"
 		else:
-			return "rawr_frint"
+			return "rawr_front"
