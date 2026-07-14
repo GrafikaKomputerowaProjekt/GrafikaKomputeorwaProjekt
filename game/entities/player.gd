@@ -22,6 +22,8 @@ var error := Vector2.ZERO  # accumulator
 @export var step_interval: float = 0.4
 var distance_walked: float = 0.0
 
+@onready var walk_particles: GPUParticles2D = $WalkParticles
+
 # Audio bus assigned to the player
 var my_bus_name : String
 
@@ -54,6 +56,8 @@ var attack_direction := Vector2.DOWN
 var can_attack := true
 
 var already_hit := []
+
+@onready var attack_burst_particles: GPUParticles2D = $AttackBurstParticles
 
 func _ready():
 	if sound_manager:
@@ -160,6 +164,10 @@ func perform_melee_attack():
 	# animation_player.play("attack_" + dir_name)
 
 	await get_tree().create_timer(attack_duration).timeout
+	await animation_player.animation_finished
+
+	attack_burst_particles.global_position = attack_hitbox.global_position
+	attack_burst_particles.restart()
 
 	state = PlayerState.MOVE
 	attack_hitbox.monitoring = false
@@ -227,6 +235,12 @@ func _physics_process(delta: float) -> void:
 			current_speed = 0.0
 
 	var input_dir = get_input()
+	
+	if input_dir != Vector2.ZERO and state == PlayerState.MOVE:
+		walk_particles.emitting = true
+	else:
+		walk_particles.emitting = false
+	
 	if state == PlayerState.MOVE:
 		update_animation(input_dir) # Aktualizacja animacji
 	

@@ -720,6 +720,28 @@ gradient = SubResource("Gradient_1sc42")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1sc42"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 5.0
+gravity = Vector3(0, -20, 0)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0t50q"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(6, 6, 4)
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 1.0
+emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
+spread = 180.0
+initial_velocity_min = 20.0
+initial_velocity_max = 80.0
+gravity = Vector3(0, 2, 0)
+damping_min = 20.0
+damping_max = 100.00001
+
 [node name="Player" type="CharacterBody2D" unique_id=1799342814 groups=["Player"]]
 z_index = 1
 y_sort_enabled = true
@@ -778,6 +800,7 @@ shape = SubResource("RectangleShape2D_rcwxb")
 debug_color = Color(0.98109084, 0, 0.37812212, 0.41960785)
 
 [node name="Sprite2D" type="Sprite2D" parent="AttackHitbox" unique_id=2091178498]
+visible = false
 position = Vector2(-6, -6)
 scale = Vector2(12, 12)
 texture = SubResource("PlaceholderTexture2D_rcwxb")
@@ -785,6 +808,23 @@ texture = SubResource("PlaceholderTexture2D_rcwxb")
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=1046907704]
 texture = SubResource("GradientTexture2D_0t50q")
 texture_scale = 1.5
+
+[node name="WalkParticles" type="GPUParticles2D" parent="." unique_id=1854320392]
+emitting = false
+amount = 2
+lifetime = 0.25
+trail_lifetime = 0.2
+process_material = SubResource("ParticleProcessMaterial_1sc42")
+
+[node name="AttackBurstParticles" type="GPUParticles2D" parent="." unique_id=914076215]
+position = Vector2(0, 9)
+emitting = false
+amount = 40
+lifetime = 0.2
+one_shot = true
+explosiveness = 1.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_0t50q")
 
 [connection signal="sound_heard" from="SoundListener" to="AcousticController" method="_on_sound_listener_sound_heard"]
 [connection signal="body_entered" from="AttackHitbox" to="." method="_on_attack_hitbox_body_entered"]
