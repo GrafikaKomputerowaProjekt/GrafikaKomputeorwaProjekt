@@ -9,8 +9,10 @@ var error := Vector2.ZERO  # accumulator
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 @onready var sounds_source: Node2D = $SoundSource
 @onready var sfx_player: AudioStreamPlayer2D = $SfxPlayer
+@onready var projectile_spawn = $ProjectileSpawn
 @onready var attack_hitbox: Area2D = $AttackHitbox
 
+@export var projectile_scene : PackedScene
 @export var sound_manager: NodePath
 @export var walk_sounds: Array[AudioStream] = []
 @export var run_sounds: Array[AudioStream] = []
@@ -32,12 +34,26 @@ enum PlayerState {
 
 var state: PlayerState = PlayerState.MOVE
 
+enum WeaponType {
+	HAMMER,
+	GUN
+}
+
+@export var current_weapon := WeaponType.HAMMER
+
 var facing_direction := Vector2.DOWN
 var attack_direction := Vector2.DOWN
 
 @export var attack_charge_time := 0.2
 @export var attack_duration := 0.15
 @export var attack_windup_movement_speed_multiplier := 0.3
+
+@export var hammer_cooldown := 0.25
+@export var gun_cooldown := 0.6
+
+var can_attack := true
+
+var already_hit := []
 
 func _ready():
 	if sound_manager:
@@ -96,27 +112,53 @@ func get_direction_name(dir: Vector2) -> String:
 	return direction_map.get(grid_dir, "down")
 
 func start_attack() -> void:
+	if !can_attack:
+		return
+
+	can_attack = false
+
 	state = PlayerState.CHARGE_ATTACK
-
 	attack_direction = facing_direction
-	var dir_name = get_direction_name(facing_direction)
-
-	# TBD
-	# animation_player.play("attack_charge_" + dir_name)
 
 	await get_tree().create_timer(attack_charge_time).timeout
 
 	if state != PlayerState.CHARGE_ATTACK:
 		return
 
-	perform_attack()
+	match current_weapon:
+		WeaponType.HAMMER:
+			await perform_melee_attack()
+
+		WeaponType.GUN:
+			await perform_ranged_attack()
+
+	var cooldown := hammer_cooldown if current_weapon == WeaponType.HAMMER else gun_cooldown
+	await get_tree().create_timer(cooldown).timeout
+
+	can_attack = true
 	
-func perform_attack() -> void:
+func update_attack_hitbox():
+	attack_hitbox.position = facing_direction * 12
+	attack_hitbox.rotation = facing_direction.angle()
+
+func perform_melee_attack():
+	already_hit.clear()
+	update_attack_hitbox()
+	
 	state = PlayerState.ATTACKING
 	attack_hitbox.monitoring = true
-	attack_hitbox.position = attack_direction * 16
-	
+
 	var dir_name = get_direction_name(facing_direction)
+
+	var anim_name = "atak_"
+	match dir_name:
+		"up":
+			anim_name += "back"
+		"down":
+			anim_name += "front"
+		_:
+			anim_name += dir_name
+
 
 	# TBD
 	# animation_player.play("attack_" + dir_name)
@@ -127,11 +169,37 @@ func perform_attack() -> void:
 	attack_hitbox.monitoring = false
 	
 	return
+	
+	state = PlayerState.MOVE
+
+	update_animation(facing_direction)
+	
+func perform_ranged_attack():
+	already_hit.clear()
+	state = PlayerState.ATTACKING
+
+	var projectile = projectile_scene.instantiate()
+
+	projectile.global_position = projectile_spawn.global_position
+	projectile.direction = facing_direction
+
+	get_tree().current_scene.add_child(projectile)
+
+	animation_player.play("fire") # ???
+
+	await animation_player.animation_finished
+
+	state = PlayerState.MOVE
 
 func _on_attack_hitbox_body_entered(body):
-	if body == get_parent():
+	
+	if body in already_hit:
 		return
-	print("hit")
+		
+	already_hit.append(body)
+	
+	if body.has_method("is_hit"):
+		body.is_hit(1)
 
 func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("attack"):
@@ -143,6 +211,14 @@ func _physics_process(delta: float) -> void:
 		speed = run_speed
 	else:
 		speed = walk_speed
+		
+	
+	if Input.is_action_just_pressed("swap_weapon"):
+		current_weapon = (
+		WeaponType.GUN 
+		if current_weapon == WeaponType.HAMMER
+		else WeaponType.HAMMER
+	)	
 		
 	var current_speed := speed
 

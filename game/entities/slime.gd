@@ -115,3 +115,119 @@ func _on_sound_listener_sound_heard(ray: SoundRay) -> void:
 		event_history.pop_back()
 	
 	info_label.text = "\n".join(event_history)
+
+
+func can_see_player() -> bool:
+	if player == null: 
+		return false
+	var to_player: Vector2 =player.global_position -global_position
+	var distance:= to_player.length()
+		
+	if distance > view_distance:
+		return false
+		
+	var direction_to_player := to_player.normalized()
+	var angle_to_player := rad_to_deg(last_look_dir.angle_to(direction_to_player))
+
+	if abs(angle_to_player) > view_angle / 2.0:
+		return false
+		
+	var space_state := get_world_2d().direct_space_state
+	
+	var query :=PhysicsRayQueryParameters2D.create(
+		global_position,
+		player.global_position
+	)
+	query.exclude = [self]
+
+	var result :=space_state.intersect_ray(query)
+	
+	if result.is_empty():
+		return true
+	
+	return result.collider == player
+		
+		
+func _ready() -> void:
+	sfx_player.bus = "Master"
+	sfx_player.volume_db = 0
+	if patrol_points.size() > 0:
+		set_movement_target(patrol_points[patrol_index].global_position)
+		
+	if sound_manager:
+		sounds_source.sound_manager = get_node(sound_manager)	
+		
+func handle_patrol(delta: float) -> void:
+	if patrol_points.size() == 0:
+		return
+
+	if navigation_agent.is_navigation_finished():
+		patrol_wait_timer += delta
+
+		if patrol_wait_timer >= patrol_wait_time:
+			patrol_wait_timer = 0.0
+			patrol_index += 1
+
+			if patrol_index >= patrol_points.size():
+				patrol_index = 0
+
+			set_movement_target(patrol_points[patrol_index].global_position)
+		
+func is_hit(dmg) -> void:
+	
+	print ("HIT")
+	set_physics_process(false)
+	set_process(false)
+	
+	if has_node("Sprite2D"):
+		$Sprite2D.visible =false
+	queue_free()
+	
+#func _input(event):
+#	if event.is_action_pressed("ui_accept"): #funkcja testująca czy hit działa 
+#		is_hit()
+	
+
+
+func generate_enemy_sound() -> void:
+	if has_node("SoundSource"):
+		$SoundSource.generate_sound(spotted_loudness)
+
+func play_spotted_sound() -> void:
+	print("Trying to play spotted sound")
+
+	if spotted_sound == null:
+		print("No spotted sound assigned")
+		return
+
+	sfx_player.stream = spotted_sound
+	sfx_player.bus = "Master"
+	sfx_player.volume_db = 0
+	sfx_player.volume_linear = spotted_volume
+	sfx_player.play()
+
+	print("Playing: ", sfx_player.stream)
+
+func play_sound_animation() -> void:
+	var anim_name := get_sound_animation_name(last_look_dir)
+
+	if animation_player.has_animation(anim_name):
+		animation_player.play(anim_name)
+	else:
+		print("Brak animacji: ", anim_name)
+
+
+func get_sound_animation_name(dir: Vector2) -> String:
+	if dir == Vector2.ZERO:
+		dir = Vector2.DOWN
+
+	if abs(dir.x) > abs(dir.y):
+		if dir.x > 0:
+			return "rawr_right"
+		else:
+			return "rawr_left"
+	else:
+		if dir.y > 0:
+			return "rawr_brack"
+		else:
+			return "rawr_frint"
