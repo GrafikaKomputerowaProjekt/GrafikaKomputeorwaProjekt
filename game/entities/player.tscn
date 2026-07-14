@@ -108,6 +108,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_0t50q"]
 resource_name = "atak_back"
+length = 1.0000167
 step = 0.16666667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -140,7 +141,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.33333334, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
@@ -164,7 +165,7 @@ tracks/4/path = NodePath("AttackHitbox:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.33333334),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, -18)]
@@ -192,7 +193,7 @@ tracks/1/path = NodePath("Sprite2D:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.4),
+"times": PackedFloat32Array(0, 0.33333334),
 "transitions": PackedFloat32Array(0, 0),
 "update": 0,
 "values": [Vector2(2, -5), Vector2(2, -3)]
@@ -204,7 +205,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.33333334, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
@@ -228,7 +229,7 @@ tracks/4/path = NodePath("AttackHitbox:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.33333334),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 8)]
@@ -236,6 +237,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_y10x8"]
 resource_name = "atak_left"
+length = 1.0000167
 step = 0.16666667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -268,7 +270,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.33333334, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
@@ -292,7 +294,7 @@ tracks/4/path = NodePath("AttackHitbox:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.4),
+"times": PackedFloat32Array(0.33333334),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(-10, -4)]
@@ -300,6 +302,7 @@ tracks/4/keys = {
 
 [sub_resource type="Animation" id="Animation_1sc42"]
 resource_name = "atak_right"
+length = 1.0000167
 step = 0.16666667
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -332,7 +335,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4),
+"times": PackedFloat32Array(0, 0.33333337, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [1, 2, 3]
@@ -356,7 +359,7 @@ tracks/4/path = NodePath("AttackHitbox:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0.40454683),
+"times": PackedFloat32Array(2),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(10, -4)]
@@ -778,6 +781,7 @@ shape = SubResource("RectangleShape2D_rcwxb")
 debug_color = Color(0.98109084, 0, 0.37812212, 0.41960785)
 
 [node name="Sprite2D" type="Sprite2D" parent="AttackHitbox" unique_id=2091178498]
+visible = false
 position = Vector2(-6, -6)
 scale = Vector2(12, 12)
 texture = SubResource("PlaceholderTexture2D_rcwxb")
