@@ -9,12 +9,10 @@ func _process(delta: float) -> void:
 func trigger_ending():
 	print("Elevator activated. Ending game.")
 	
-	# Option 1: This command instantly closes the entire game window.
-	get_tree().quit()
 	
-	# Option 2: If you build a "You Win" screen later, delete the line above
-	# and uncomment the line below to teleport them to the ending screen instead.
-	# get_tree().change_scene_to_file("res://screens/win_screen.tscn")
+	get_tree().change_scene_to_file("res://stages/main_menu.tscn")
+	
+	
 
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):
