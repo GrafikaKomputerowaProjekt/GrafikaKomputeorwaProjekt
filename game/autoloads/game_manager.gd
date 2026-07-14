@@ -35,6 +35,6 @@ func _process(delta: float):
 			is_alarm_active = false
 			countdown_label.visible = false
 			# TODO back to main menu
-			get_tree().quit() 
+			get_tree().change_scene_to_file("res://stages/main_menu.tscn")
 		else:
 			countdown_label.text = "! " + str(snapped(alarm_time_left, 0.1)) + "s !"
