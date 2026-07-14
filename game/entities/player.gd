@@ -176,8 +176,11 @@ func perform_melee_attack():
 		_:
 			anim_name += dir_name
 
+
 	print("[PLAYER MELEE] Triggering hammer swing. Animation: ", anim_name, " | Hitbox active.")
 	animation_player.play(anim_name)
+
+	await get_tree().create_timer(attack_duration).timeout
 	await animation_player.animation_finished
 	
 	play_hammer()
