@@ -40,7 +40,8 @@ var patrol_wait_timer: float = 0.0
 var forget_player_timer: float = 0.0
 var has_played_spotted_sound: bool = false 
 
-
+var grace_timer: float = 0.0
+var is_counting_grace: bool = false
 
 func _physics_process(delta: float) -> void:
 	if can_see_player():
@@ -48,6 +49,9 @@ func _physics_process(delta: float) -> void:
 			play_spotted_sound()
 			generate_enemy_sound()
 			play_sound_animation()
+			
+			is_counting_grace = true
+			grace_timer = 0.0
 			
 		chasing_player = true
 		forget_player_timer = 0.0
@@ -102,6 +106,12 @@ func _physics_process(delta: float) -> void:
 			play_slime_jump_sound()
 			play_sound_animation()
 			distance_walked = 0.0
+	
+	if is_counting_grace:
+		grace_timer += delta
+		if grace_timer >= 5.0:
+			is_counting_grace = false
+			GameManager.start_alarm() 
 
 func _move_pixelwise(step: Vector2) -> void:
 	var steps := int(max(abs(step.x), abs(step.y)))
@@ -229,8 +239,11 @@ func handle_patrol(delta: float) -> void:
 			set_movement_target(patrol_points[patrol_index].global_position)
 		
 func is_hit() -> void:
-	
 	print ("HIT")
+	
+	is_counting_grace = false
+	grace_timer = 0.0
+	
 	set_physics_process(false)
 	set_process(false)
 	
