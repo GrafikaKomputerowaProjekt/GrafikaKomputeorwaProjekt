@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dtin2trju1b3u"]
 
 [ext_resource type="Script" uid="uid://c0ovu44ldxfhp" path="res://entities/player.gd" id="1_b0kkn"]
+[ext_resource type="PackedScene" uid="uid://df4tpara1qdnj" path="res://entities/gunProjectile.tscn" id="2_0t50q"]
 [ext_resource type="AudioStream" uid="uid://be4v2ubelvp4y" path="res://assets/sfx/walk/walk-01.wav" id="2_oprnr"]
 [ext_resource type="AudioStream" uid="uid://dl0nd8hbo1na6" path="res://assets/sfx/walk/walk-02.wav" id="3_8rie4"]
 [ext_resource type="Script" uid="uid://4og7trh8vfa2" path="res://raytracing_sandbox/sound_source.gd" id="3_rfe5m"]
@@ -745,6 +746,7 @@ damping_max = 100.00001
 z_index = 1
 y_sort_enabled = true
 script = ExtResource("1_b0kkn")
+projectile_scene = ExtResource("2_0t50q")
 walk_sounds = Array[AudioStream]([ExtResource("2_oprnr"), ExtResource("3_8rie4"), ExtResource("4_dp3pk"), ExtResource("5_cgp7q"), ExtResource("6_1n8aq"), ExtResource("7_28s6d"), ExtResource("8_cicqb"), ExtResource("9_hj0ki"), ExtResource("10_fruft"), ExtResource("11_slxql"), ExtResource("12_evlff")])
 run_sounds = Array[AudioStream]([ExtResource("13_rcwxb"), ExtResource("14_d2i2q"), ExtResource("15_mdqif"), ExtResource("16_egchw"), ExtResource("17_ykqge"), ExtResource("18_sn2x3"), ExtResource("19_y10x8"), ExtResource("20_1sc42"), ExtResource("21_0t50q"), ExtResource("22_5qcl2"), ExtResource("23_1w6s4"), ExtResource("24_yb7tu"), ExtResource("25_b338v"), ExtResource("26_i1mej")])
 walk_loudness = 0.3
@@ -784,6 +786,8 @@ position = Vector2(0, -8)
 shape = SubResource("CircleShape2D_rfe5m")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=476592762]
+
+[node name="ProjectileSpawn" type="Marker2D" parent="." unique_id=627688729]
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=727359145]
 position = Vector2(0, 9)

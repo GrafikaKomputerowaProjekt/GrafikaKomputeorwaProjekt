@@ -207,7 +207,14 @@ y_sort_enabled = true
 [node name="Player" parent="." unique_id=1799342814 instance=ExtResource("1_4kino")]
 position = Vector2(73, 86)
 collision_mask = 2
+walk_speed = 86.0
+run_speed = 116.0
 sound_manager = NodePath("../SoundRayManager")
+run_loudness = 0.5
+step_interval = 0.4
+attack_charge_time = 0.2
+attack_duration = 0.15
+attack_windup_movement_speed_multiplier = 0.3
 
 [node name="SoundRayManager" type="Node2D" parent="." unique_id=2078709288]
 z_index = 20
