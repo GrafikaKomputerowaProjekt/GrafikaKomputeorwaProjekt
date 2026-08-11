@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dimtt16sveih6" path="res://assets/main_menu/menu_background.png" id="1_32a5h"]
 [ext_resource type="Script" uid="uid://dnt0viw4gvkod" path="res://stages/main_menu.gd" id="1_eldpe"]
-[ext_resource type="FontFile" uid="uid://cbtqssxswgc84" path="res://assets/fonts/pixy/PIXY.ttf" id="3_kn1cy"]
+[ext_resource type="FontFile" uid="uid://cmgsstvl84q08" path="res://assets/fonts/dedicool/Dedicool.ttf" id="3_2khwm"]
 
 [node name="MainMenu" type="Control" unique_id=1614696773]
 layout_mode = 3
@@ -24,13 +24,13 @@ offset_bottom = 155.0
 
 [node name="StartButton" type="Button" parent="VBoxContainer" unique_id=1114427530]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_kn1cy")
+theme_override_fonts/font = ExtResource("3_2khwm")
 theme_override_font_sizes/font_size = 16
 text = "START"
 
 [node name="ExitButton" type="Button" parent="VBoxContainer" unique_id=1406334364]
 layout_mode = 2
-theme_override_fonts/font = ExtResource("3_kn1cy")
+theme_override_fonts/font = ExtResource("3_2khwm")
 theme_override_font_sizes/font_size = 16
 text = "EXIT"
 

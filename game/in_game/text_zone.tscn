@@ -1,24 +1,31 @@
 [gd_scene format=3 uid="uid://cj8nokj2hovw0"]
 
 [ext_resource type="Script" uid="uid://baib30hh305aw" path="res://in_game/text_zone.gd" id="1_4q8pr"]
+[ext_resource type="FontFile" uid="uid://cmgsstvl84q08" path="res://assets/fonts/dedicool/Dedicool.ttf" id="2_875um"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_y742h"]
-size = Vector2(52, 57)
+size = Vector2(113, 57)
+
+[sub_resource type="LabelSettings" id="LabelSettings_xatc6"]
+font = ExtResource("2_875um")
+font_size = 8
+shadow_size = 0
 
 [node name="TextZone" type="Area2D" unique_id=1485575894 groups=["TextZones"]]
 script = ExtResource("1_4q8pr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=719853201]
-position = Vector2(27, 29)
+position = Vector2(19, 29)
 shape = SubResource("RectangleShape2D_y742h")
 
 [node name="PromptText" type="Label" parent="." unique_id=768929781]
-visible = false
-offset_left = -43.0
-offset_top = -24.0
-offset_right = 116.0
-offset_bottom = -1.0
+offset_left = -71.0
+offset_top = 1.0
+offset_right = 110.0
+offset_bottom = 19.0
 text = "Press \"e\" to interact."
+label_settings = SubResource("LabelSettings_xatc6")
+horizontal_alignment = 1
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -28,7 +28,7 @@ func generate_minimap(target_layer: TileMapLayer) -> ImageTexture:
 	var height: int = max_y - min_y + 1
 	
 	# Store offset to map UI coordinates later
-	map_offset = Vector2i(min_x, min_y)
+	map_offset = Vector2i(min_x, min_y - 2)
 
 	# 2. Initialize buffer (FORMAT_RGBA8 supports alpha channel)
 	var image: Image = Image.create(width, height, false, Image.FORMAT_RGBA8)
@@ -54,11 +54,8 @@ func _process(_delta: float) -> void:
 	update_player_marker()
 
 func update_player_marker() -> void:
-	# 1. Convert player global position to tile coordinates
 	var player_cell: Vector2i = floor_layer.local_to_map(player.global_position)
 	
-	# 2. Apply offset from the map's bounding box
-	var local_map_pos: Vector2i = player_cell - map_offset
+	var local_map_pos: Vector2 = player_cell - map_offset
 	
-	# 3. Update UI marker position (1 tile = 1 pixel)
-	player_marker.position = Vector2(local_map_pos)
+	player_marker.position = local_map_pos

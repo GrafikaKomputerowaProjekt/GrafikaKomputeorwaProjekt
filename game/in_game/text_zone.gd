@@ -11,6 +11,7 @@ var is_permanently_disabled = false
 
 func _ready():
 	prompt_text.text = custom_message
+	prompt_text.hide()
 
 func disable_zone():
 	# The switch runs this to shut the zone down
