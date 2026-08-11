@@ -10,10 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://cj8nokj2hovw0" path="res://in_game/text_zone.tscn" id="8_1xtfs"]
 [ext_resource type="PackedScene" uid="uid://c4camr4jb8i1n" path="res://in_game/elevator.tscn" id="10_th0rt"]
 [ext_resource type="PackedScene" uid="uid://bp3x3tnrgc0gd" path="res://entities/reactor/reactor.tscn" id="11_6mivw"]
+[ext_resource type="Script" uid="uid://122ec1px3nib" path="res://stages/gui.gd" id="11_lbp31"]
 [ext_resource type="Script" uid="uid://cos0oyxfh6vvf" path="res://raytracing_sandbox/sound_ray_manager.gd" id="11_rij3v"]
 [ext_resource type="Script" uid="uid://c60vtafgva7wc" path="res://in_game/minimap_control.gd" id="11_yw345"]
 [ext_resource type="PackedScene" uid="uid://blgnwcow6kaji" path="res://entities/slime.tscn" id="12_pkphe"]
+[ext_resource type="Texture2D" uid="uid://cywnne1ujrdwl" path="res://assets/user_interface/shield.png" id="12_u54pb"]
 [ext_resource type="PackedScene" uid="uid://1gqabooyk6ly" path="res://entities/lights/smart_light.tscn" id="13_qw501"]
+[ext_resource type="Script" uid="uid://w3xqcgrcduj6" path="res://stages/shield_control.gd" id="13_wvac5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pkphe"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -383,6 +386,10 @@ physics_layer_0/collision_mask = 0
 navigation_layer_0/layers = 1
 sources/1 = SubResource("TileSetAtlasSource_1r6ce")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_x8esg"]
+atlas = ExtResource("12_u54pb")
+region = Rect2(0, 0, 8, 9)
+
 [node name="Node2D" type="Node2D" unique_id=1658377574]
 y_sort_enabled = true
 position = Vector2(-5, 0)
@@ -484,9 +491,10 @@ sound_manager = NodePath("../SoundRayManager")
 position = Vector2(808, 56)
 target_id = "1"
 
-[node name="MinimapCanvas" type="CanvasLayer" parent="." unique_id=1485906254]
+[node name="GUI" type="CanvasLayer" parent="." unique_id=1485906254]
+script = ExtResource("11_lbp31")
 
-[node name="MinimapControl" type="Control" parent="MinimapCanvas" unique_id=852208908 node_paths=PackedStringArray("player", "floor_layer", "map_background", "player_marker")]
+[node name="MinimapControl" type="Control" parent="GUI" unique_id=852208908 node_paths=PackedStringArray("player", "floor_layer", "map_background", "player_marker")]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -496,17 +504,39 @@ player = NodePath("../../Player")
 floor_layer = NodePath("../../Floor")
 map_background = NodePath("MinimapTexture")
 player_marker = NodePath("PlayerIndicator")
+metadata/_edit_use_anchors_ = true
 
-[node name="MinimapTexture" type="TextureRect" parent="MinimapCanvas/MinimapControl" unique_id=752891313]
+[node name="MinimapTexture" type="TextureRect" parent="GUI/MinimapControl" unique_id=752891313]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
 
-[node name="PlayerIndicator" type="ColorRect" parent="MinimapCanvas/MinimapControl" unique_id=978624405]
+[node name="PlayerIndicator" type="ColorRect" parent="GUI/MinimapControl" unique_id=978624405]
 layout_mode = 0
 offset_right = 1.0
 offset_bottom = 1.0
 color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ShieldControl" type="Control" parent="GUI" unique_id=1220149327]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_right = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+script = ExtResource("13_wvac5")
+metadata/_edit_use_anchors_ = true
+
+[node name="ShieldTexture" type="TextureRect" parent="GUI/ShieldControl" unique_id=1033176868]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_x8esg")
+stretch_mode = 2
 
 [node name="StaticBody2D" parent="." unique_id=1872575374 instance=ExtResource("11_6mivw")]
 position = Vector2(640, 112)
@@ -646,3 +676,5 @@ position = Vector2(728, 27)
 sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
 patrol_points = [NodePath("../PP1"), NodePath("../PP1/PP2"), NodePath("../PP1/PP2/PP3"), NodePath("../PP1/PP2/PP3/PP4")]
+
+[connection signal="shield_state_changed" from="Player" to="GUI" method="_on_player_shield_state_changed"]

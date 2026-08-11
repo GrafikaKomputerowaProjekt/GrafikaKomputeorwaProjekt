@@ -67,8 +67,15 @@ var already_hit := []
 # ==========================================
 var has_shield: bool = true
 var is_dead: bool = false
-var ui_label: Label
 
+signal shield_state_changed(is_active: bool)
+
+var is_shield_active: bool = true
+
+func toggle_shield() -> void:
+	is_shield_active = !is_shield_active
+	shield_state_changed.emit(is_shield_active)
+	
 func _ready():
 	# Rejestracja gracza w grupie do łatwej identyfikacji dla przeciwników
 	add_to_group("Player")
@@ -117,7 +124,6 @@ func get_input() -> Vector2:
 		facing_direction = input_dir.normalized()
 
 	return input_dir
-
 
 func get_direction_name(dir: Vector2) -> String:
 	var grid_dir = Vector2i(
@@ -178,7 +184,6 @@ func perform_melee_attack():
 		_:
 			anim_name += dir_name
 
-
 	print("[PLAYER MELEE] Triggering hammer swing. Animation: ", anim_name, " | Hitbox active.")
 	animation_player.play(anim_name)
 
@@ -231,12 +236,14 @@ func _on_attack_hitbox_body_entered(body: Node2D) -> void:
 	else:
 		print("[PLAYER MELEE] Target has no damage-receiving methods. Ignoring.")
 
+func _unhandled_input(event: InputEvent) -> void:
+	if is_dead and event.is_action_pressed("restart"):
+		print("[PLAYER SYSTEM] Restart action triggered. Reloading current scene...")
+		get_tree().paused = false
+		get_tree().reload_current_scene()
+
 func _physics_process(delta: float) -> void:
 	if is_dead:
-		if Input.is_key_pressed(KEY_R):
-			print("[PLAYER SYSTEM] Restart key pressed. Reloading scene...")
-			get_tree().paused = false
-			get_tree().reload_current_scene()
 		return
 
 	if Input.is_action_just_pressed("attack"):
@@ -335,7 +342,6 @@ func _move_pixelwise(step: Vector2) -> void:
 				_move_and_collide_safe(Vector2(step_dir.x, 0))
 				err -= 1.0
 
-
 func _move_and_collide_safe(delta_vec: Vector2) -> void:
 	if delta_vec == Vector2.ZERO:
 		return
@@ -375,24 +381,6 @@ func play_gun():
 # EMERGENCY HEALTH & DAMAGE SYSTEM
 # ==========================================
 
-func _setup_emergency_ui() -> void:
-	var canvas := CanvasLayer.new()
-	add_child(canvas)
-	
-	ui_label = Label.new()
-	ui_label.position = Vector2(8, 8)
-	ui_label.scale = Vector2(0.6, 0.6)
-	canvas.add_child(ui_label)
-	_update_ui_text()
-
-func _update_ui_text() -> void:
-	if is_dead:
-		ui_label.text = "HP: DEAD"
-	elif has_shield:
-		ui_label.text = "SHIELD: ACTIVE"
-	else:
-		ui_label.text = "SHIELD: BROKEN"
-
 func take_damage() -> void:
 	if is_dead:
 		return
@@ -400,7 +388,7 @@ func take_damage() -> void:
 	if has_shield:
 		has_shield = false
 		print("[PLAYER HEALTH] Shield broken! HP remaining: 1.")
-		_update_ui_text()
+		toggle_shield()
 		_trigger_shield_break_visuals()
 		play_random_run() 
 	else:
@@ -411,20 +399,34 @@ func _trigger_shield_break_visuals() -> void:
 	await get_tree().create_timer(0.15).timeout
 	modulate = Color(1, 1, 1, 1)
 
+var _ui_layer: CanvasLayer
+
+func _setup_emergency_ui() -> void:
+	_ui_layer = CanvasLayer.new()
+	_ui_layer.name = "EmergencyUI"
+	_ui_layer.process_mode = Node.PROCESS_MODE_ALWAYS
+	add_child(_ui_layer)
+
 func trigger_death() -> void:
 	is_dead = true
+	# Przestawienie węzła gracza na stale aktywny, by nasłuchiwać restartu po włączeniu pauzy
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	print("[PLAYER HEALTH] Player is dead. Game over triggered.")
-	_update_ui_text()
 	
 	scale = Vector2(1.5, 0.1)
 	modulate = Color(0.2, 0.2, 0.2, 1)
 	
-	get_tree().paused = true
-	
-	var canvas = ui_label.get_parent()
 	var go_label := Label.new()
 	go_label.text = "GAME OVER\nPress R to Restart"
 	go_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	go_label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-	go_label.position = Vector2(80, 60)
-	canvas.add_child(go_label)
+	
+	go_label.set_anchors_preset(Control.PRESET_FULL_RECT)
+	go_label.add_theme_font_size_override("font_size", 24)
+	
+	if _ui_layer:
+		_ui_layer.add_child(go_label)
+	else:
+		get_tree().current_scene.add_child(go_label)
+	
+	get_tree().paused = true
