@@ -10,13 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://cj8nokj2hovw0" path="res://in_game/text_zone.tscn" id="8_1xtfs"]
 [ext_resource type="PackedScene" uid="uid://c4camr4jb8i1n" path="res://in_game/elevator.tscn" id="10_th0rt"]
 [ext_resource type="PackedScene" uid="uid://bp3x3tnrgc0gd" path="res://entities/reactor/reactor.tscn" id="11_6mivw"]
-[ext_resource type="Script" uid="uid://122ec1px3nib" path="res://stages/gui.gd" id="11_lbp31"]
+[ext_resource type="Script" uid="uid://dfodple70yr2i" path="res://stages/gui.gd" id="11_lbp31"]
 [ext_resource type="Script" uid="uid://cos0oyxfh6vvf" path="res://raytracing_sandbox/sound_ray_manager.gd" id="11_rij3v"]
 [ext_resource type="Script" uid="uid://c60vtafgva7wc" path="res://in_game/minimap_control.gd" id="11_yw345"]
 [ext_resource type="PackedScene" uid="uid://blgnwcow6kaji" path="res://entities/slime.tscn" id="12_pkphe"]
 [ext_resource type="Texture2D" uid="uid://cywnne1ujrdwl" path="res://assets/user_interface/shield.png" id="12_u54pb"]
 [ext_resource type="PackedScene" uid="uid://1gqabooyk6ly" path="res://entities/lights/smart_light.tscn" id="13_qw501"]
-[ext_resource type="Script" uid="uid://w3xqcgrcduj6" path="res://stages/shield_control.gd" id="13_wvac5"]
+[ext_resource type="Script" uid="uid://n7srcbuwnvev" path="res://stages/shield_control.gd" id="13_wvac5"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pkphe"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -483,7 +483,7 @@ position = Vector2(453, -220)
 custom_message = "Press E to escape"
 
 [node name="Player" parent="." unique_id=1799342814 instance=ExtResource("3_8ebg0")]
-position = Vector2(52, 79)
+position = Vector2(45, 83)
 collision_mask = 3
 sound_manager = NodePath("../SoundRayManager")
 
@@ -656,20 +656,20 @@ position = Vector2(490, -218)
 [node name="SmartLight25" parent="SmartLight" unique_id=1512621463 instance=ExtResource("13_qw501")]
 position = Vector2(381, -219)
 
-[node name="SmartLight2" parent="." unique_id=1066653723 instance=ExtResource("13_qw501")]
-position = Vector2(674, 82)
+[node name="SmartLight27" parent="SmartLight" unique_id=1161384984 instance=ExtResource("13_qw501")]
+position = Vector2(242, -8)
 
-[node name="SmartLight3" parent="." unique_id=1161384984 instance=ExtResource("13_qw501")]
-position = Vector2(284, 73)
+[node name="SmartLight28" parent="SmartLight" unique_id=339669638 instance=ExtResource("13_qw501")]
+position = Vector2(435, -274)
 
-[node name="SmartLight4" parent="." unique_id=339669638 instance=ExtResource("13_qw501")]
-position = Vector2(477, -193)
+[node name="SmartLight29" parent="SmartLight" unique_id=1155095807 instance=ExtResource("13_qw501")]
+position = Vector2(435, -126)
 
-[node name="SmartLight5" parent="." unique_id=1155095807 instance=ExtResource("13_qw501")]
-position = Vector2(477, -45)
+[node name="SmartLight30" parent="SmartLight" unique_id=371197830 instance=ExtResource("13_qw501")]
+position = Vector2(435, -426)
 
-[node name="SmartLight6" parent="." unique_id=371197830 instance=ExtResource("13_qw501")]
-position = Vector2(477, -345)
+[node name="SmartLight26" parent="SmartLight" unique_id=1066653723 instance=ExtResource("13_qw501")]
+position = Vector2(632, 1)
 
 [node name="Slime" parent="." unique_id=375529188 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("12_pkphe")]
 position = Vector2(728, 27)

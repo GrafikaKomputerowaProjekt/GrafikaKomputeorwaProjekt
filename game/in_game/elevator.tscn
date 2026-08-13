@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://c4camr4jb8i1n"]
 
 [ext_resource type="Script" uid="uid://bsjommx8hqedb" path="res://in_game/elevator.gd" id="1_cw6h7"]
-[ext_resource type="Texture2D" uid="uid://bcvhjllgjk658" path="res://assets/elevator.png" id="1_unr1n"]
+[ext_resource type="Texture2D" uid="uid://uu3q0tnxauxv" path="res://assets/elevator/elevator_off.png" id="2_cw6h7"]
+[ext_resource type="Texture2D" uid="uid://b1yhlorkuij7b" path="res://assets/elevator/elevator_on.png" id="3_donv5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cw6h7"]
 size = Vector2(63, 62)
@@ -9,14 +10,17 @@ size = Vector2(63, 62)
 [node name="Elevator" type="Node2D" unique_id=1392859592]
 script = ExtResource("1_cw6h7")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1448821733]
-texture = ExtResource("1_unr1n")
+[node name="Sprite2D_off" type="Sprite2D" parent="." unique_id=1448821733]
+texture = ExtResource("2_cw6h7")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1921024287]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=690657816]
 position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_cw6h7")
+
+[node name="Sprite2D_on" type="Sprite2D" parent="." unique_id=2119401280]
+texture = ExtResource("3_donv5")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]
