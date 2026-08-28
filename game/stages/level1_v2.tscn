@@ -10,13 +10,15 @@
 [ext_resource type="PackedScene" uid="uid://cj8nokj2hovw0" path="res://in_game/text_zone.tscn" id="8_1xtfs"]
 [ext_resource type="PackedScene" uid="uid://c4camr4jb8i1n" path="res://in_game/elevator.tscn" id="10_th0rt"]
 [ext_resource type="PackedScene" uid="uid://bp3x3tnrgc0gd" path="res://entities/reactor/reactor.tscn" id="11_6mivw"]
-[ext_resource type="Script" uid="uid://122ec1px3nib" path="res://stages/gui.gd" id="11_lbp31"]
+[ext_resource type="Script" uid="uid://dfodple70yr2i" path="res://stages/gui.gd" id="11_lbp31"]
 [ext_resource type="Script" uid="uid://cos0oyxfh6vvf" path="res://raytracing_sandbox/sound_ray_manager.gd" id="11_rij3v"]
 [ext_resource type="Script" uid="uid://c60vtafgva7wc" path="res://in_game/minimap_control.gd" id="11_yw345"]
 [ext_resource type="PackedScene" uid="uid://blgnwcow6kaji" path="res://entities/slime.tscn" id="12_pkphe"]
 [ext_resource type="Texture2D" uid="uid://cywnne1ujrdwl" path="res://assets/user_interface/shield.png" id="12_u54pb"]
 [ext_resource type="PackedScene" uid="uid://1gqabooyk6ly" path="res://entities/lights/smart_light.tscn" id="13_qw501"]
-[ext_resource type="Script" uid="uid://w3xqcgrcduj6" path="res://stages/shield_control.gd" id="13_wvac5"]
+[ext_resource type="Script" uid="uid://n7srcbuwnvev" path="res://stages/shield_control.gd" id="13_wvac5"]
+[ext_resource type="Script" uid="uid://b8i822xvvtavt" path="res://stages/ammo_bar_control.gd" id="15_x8esg"]
+[ext_resource type="Texture2D" uid="uid://bhidsasykoi81" path="res://assets/user_interface/ammo.png" id="16_nnkod"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pkphe"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -390,6 +392,10 @@ sources/1 = SubResource("TileSetAtlasSource_1r6ce")
 atlas = ExtResource("12_u54pb")
 region = Rect2(0, 0, 8, 9)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_nnkod"]
+atlas = ExtResource("16_nnkod")
+region = Rect2(0, 0, 10, 17)
+
 [node name="Node2D" type="Node2D" unique_id=1658377574]
 y_sort_enabled = true
 position = Vector2(-5, 0)
@@ -525,8 +531,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -80.0
+offset_top = 5.0
 offset_right = -40.0
-offset_bottom = 40.0
+offset_bottom = 45.0
 grow_horizontal = 0
 script = ExtResource("13_wvac5")
 metadata/_edit_use_anchors_ = true
@@ -536,6 +543,25 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("AtlasTexture_x8esg")
+stretch_mode = 2
+
+[node name="AmmoBarControl" type="Control" parent="GUI" unique_id=121936609]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 1.0
+offset_right = -20.0
+offset_bottom = 41.0
+grow_horizontal = 0
+script = ExtResource("15_x8esg")
+
+[node name="AmmoBarTexture" type="TextureRect" parent="GUI/AmmoBarControl" unique_id=896515961]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_nnkod")
 stretch_mode = 2
 
 [node name="StaticBody2D" parent="." unique_id=1872575374 instance=ExtResource("11_6mivw")]
@@ -677,4 +703,5 @@ sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
 patrol_points = [NodePath("../PP1"), NodePath("../PP1/PP2"), NodePath("../PP1/PP2/PP3"), NodePath("../PP1/PP2/PP3/PP4")]
 
+[connection signal="ammo_bar_state_changed" from="Player" to="GUI" method="_on_player_ammo_bar_state_changed"]
 [connection signal="shield_state_changed" from="Player" to="GUI" method="_on_player_shield_state_changed"]

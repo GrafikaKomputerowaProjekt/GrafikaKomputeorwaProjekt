@@ -22,6 +22,8 @@ var error := Vector2.ZERO  # accumulator
 @export_range(0.0, 1.0) var hammer_loudness: float = 0.5
 @export_range(0.0, 1.0) var gun_loudness: float = 0.7
 
+var ammo: int = 4
+
 @export var step_interval: float = 0.4
 var distance_walked: float = 0.0
 
@@ -69,6 +71,7 @@ var has_shield: bool = true
 var is_dead: bool = false
 
 signal shield_state_changed(is_active: bool)
+signal ammo_bar_state_changed(ammo_count: int)
 
 var is_shield_active: bool = true
 
@@ -210,6 +213,8 @@ func perform_ranged_attack() -> void:
 		state = PlayerState.MOVE
 		return
 
+	ammo = ammo - 1
+	ammo_bar_state_changed.emit(ammo)
 	play_gun()
 	var projectile = projectile_scene.instantiate()
 	projectile.global_position = projectile_spawn.global_position
