@@ -552,21 +552,15 @@ script = ExtResource("15_x8esg")
 
 [node name="AmmoTexture" type="TextureRect" parent="GUI/AmmoControl" unique_id=1747221002]
 layout_mode = 0
-offset_left = 74.0
-offset_top = 2.0
-offset_right = 114.0
-offset_bottom = 42.0
+offset_right = 40.0
+offset_bottom = 40.0
 texture = ExtResource("16_nnkod")
-stretch_mode = 3
 
 [node name="AmmoLabel" type="Label" parent="GUI/AmmoControl" unique_id=455101150]
 layout_mode = 0
-offset_left = 73.0
-offset_top = 10.0
-offset_right = 94.0
-offset_bottom = 33.0
+offset_right = 40.0
+offset_bottom = 23.0
 text = "10"
-vertical_alignment = 1
 
 [node name="StaticBody2D" parent="." unique_id=1872575374 instance=ExtResource("11_6mivw")]
 position = Vector2(640, 112)

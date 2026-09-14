@@ -22,6 +22,7 @@ var error := Vector2.ZERO  # accumulator
 @export_range(0.0, 1.0) var hammer_loudness: float = 0.5
 @export_range(0.0, 1.0) var gun_loudness: float = 0.7
 
+
 @export var step_interval: float = 0.4
 var distance_walked: float = 0.0
 
@@ -55,6 +56,8 @@ var attack_direction := Vector2.DOWN
 
 @export var hammer_cooldown := 0.25
 @export var gun_cooldown := 0.6
+@export var ammo: int = 10
+@export var ammo_control: Control
 
 var can_attack := true
 
@@ -77,11 +80,13 @@ func toggle_shield() -> void:
 	shield_state_changed.emit(is_shield_active)
 	
 func _ready():
-	# Rejestracja gracza w grupie do łatwej identyfikacji dla przeciwników
 	add_to_group("Player")
 	print("[PLAYER SYSTEM] Player initialized and registered in 'Player' group.")
-	
+
 	_setup_emergency_ui()
+
+	if ammo_control:
+		ammo_control.call_deferred("set_ammo", ammo)
 
 	if sound_manager:
 		sounds_source.sound_manager = get_node(sound_manager)
@@ -136,6 +141,10 @@ func get_direction_name(dir: Vector2) -> String:
 func start_attack() -> void:
 	if !can_attack:
 		print("[PLAYER WEAPON] Attack requested, but weapon is on cooldown!")
+		return
+
+	if current_weapon == WeaponType.GUN and ammo <= 0:
+		print("[PLAYER WEAPON] Brak amunicji!")
 		return
 
 	can_attack = false
@@ -202,6 +211,11 @@ func perform_melee_attack():
 	update_animation(facing_direction)
 	
 func perform_ranged_attack() -> void:
+	if ammo <= 0:
+		print("[PLAYER RANGED] Brak amunicji!")
+		state = PlayerState.MOVE
+		return
+
 	already_hit.clear()
 	state = PlayerState.ATTACKING
 
@@ -210,13 +224,20 @@ func perform_ranged_attack() -> void:
 		state = PlayerState.MOVE
 		return
 
+	ammo -= 1
+
+	if ammo_control:
+		ammo_control.call_deferred("set_ammo", ammo)
+
 	play_gun()
+
 	var projectile = projectile_scene.instantiate()
 	projectile.global_position = projectile_spawn.global_position
 	projectile.direction = facing_direction
 
 	get_tree().current_scene.add_child(projectile)
-	print("[PLAYER RANGED] Gun fired. Projectile spawned at: ", projectile.global_position, " | Dir: ", facing_direction)
+
+	print("[PLAYER RANGED] Gun fired. Ammo left: ", ammo)
 
 	state = PlayerState.MOVE
 
