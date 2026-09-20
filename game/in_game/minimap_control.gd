@@ -1,18 +1,23 @@
 extends Control
 
 @export var player: Node2D
-@export var floor_layer: TileMapLayer
+@export var floor_layer: Node2D
 @export var map_background: TextureRect
 @export var player_marker: ColorRect
 
 var map_offset: Vector2i
 
-func generate_minimap(target_layer: TileMapLayer) -> ImageTexture:
-	var cells: Array[Vector2i] = target_layer.get_used_cells()
+func generate_minimap(target_layer: Node2D) -> ImageTexture:
+	var cells: Array[Vector2i] = []
+	
+	if target_layer is TileMapLayer:
+		cells = target_layer.get_used_cells()
+	elif target_layer is TileMap:
+		cells = target_layer.get_used_cells(0)
+
 	if cells.is_empty():
 		return null
 
-	# 1. Calculate map boundaries (Bounding Box)
 	var min_x = cells[0].x
 	var max_x = cells[0].x
 	var min_y = cells[0].y
@@ -27,17 +32,13 @@ func generate_minimap(target_layer: TileMapLayer) -> ImageTexture:
 	var width: int = max_x - min_x + 1
 	var height: int = max_y - min_y + 1
 	
-	# Store offset to map UI coordinates later
 	map_offset = Vector2i(min_x, min_y - 2)
 
-	# 2. Initialize buffer (FORMAT_RGBA8 supports alpha channel)
 	var image: Image = Image.create(width, height, false, Image.FORMAT_RGBA8)
 	image.fill(Color(0, 0, 0, 0)) # Fill with transparency
 
-	# 3. Map tiles to pixels
 	var floor_color := Color(1.0, 1.0, 1.0, 0.325) # Floor outline color
 	for cell in cells:
-		# Normalize coordinates to [0, 0] of the image
 		var img_x: int = cell.x - min_x
 		var img_y: int = cell.y - min_y
 		image.set_pixel(img_x, img_y, floor_color)

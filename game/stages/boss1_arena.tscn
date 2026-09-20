@@ -8,6 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://0josv1jdq0r3" path="res://entities/boss1/boss1.tscn" id="4_jjbxw"]
 [ext_resource type="Script" uid="uid://cos0oyxfh6vvf" path="res://raytracing_sandbox/sound_ray_manager.gd" id="5_dgwor"]
 [ext_resource type="PackedScene" uid="uid://cj8nokj2hovw0" path="res://in_game/text_zone.tscn" id="8_lhprt"]
+[ext_resource type="Script" uid="uid://dfodple70yr2i" path="res://stages/gui.gd" id="9_3w3ej"]
+[ext_resource type="Script" uid="uid://c60vtafgva7wc" path="res://in_game/minimap_control.gd" id="10_tvqi4"]
+[ext_resource type="Script" uid="uid://n7srcbuwnvev" path="res://stages/shield_control.gd" id="11_k64yq"]
+[ext_resource type="Texture2D" uid="uid://cywnne1ujrdwl" path="res://assets/user_interface/shield.png" id="12_isk4c"]
+[ext_resource type="Script" uid="uid://b8i822xvvtavt" path="res://stages/ammo_bar_control.gd" id="13_rs1wp"]
+[ext_resource type="Texture2D" uid="uid://bhidsasykoi81" path="res://assets/user_interface/ammo.png" id="14_vl856"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pkphe"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -377,6 +383,14 @@ physics_layer_0/collision_mask = 0
 navigation_layer_0/layers = 1
 sources/1 = SubResource("TileSetAtlasSource_8ai22")
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_pr0uc"]
+atlas = ExtResource("12_isk4c")
+region = Rect2(0, 0, 8, 9)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wryix"]
+atlas = ExtResource("14_vl856")
+region = Rect2(0, 0, 10, 17)
+
 [node name="BossArena" type="Node2D" unique_id=1613495679]
 y_sort_enabled = true
 
@@ -438,3 +452,73 @@ ray_lifetime = 0.1
 z_index = 4
 position = Vector2(144, 453)
 custom_message = "Press E to escape"
+
+[node name="GUI" type="CanvasLayer" parent="." unique_id=379130833]
+script = ExtResource("9_3w3ej")
+
+[node name="MinimapControl" type="Control" parent="GUI" unique_id=1948143161 node_paths=PackedStringArray("player", "floor_layer", "map_background", "player_marker")]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("10_tvqi4")
+player = NodePath("../../Player")
+floor_layer = NodePath("../../TileMap")
+map_background = NodePath("MinimapTexture")
+player_marker = NodePath("PlayerIndicator")
+metadata/_edit_use_anchors_ = true
+
+[node name="MinimapTexture" type="TextureRect" parent="GUI/MinimapControl" unique_id=1219394762]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayerIndicator" type="ColorRect" parent="GUI/MinimapControl" unique_id=2068179050]
+layout_mode = 0
+offset_right = 1.0
+offset_bottom = 1.0
+color = Color(1, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ShieldControl" type="Control" parent="GUI" unique_id=479311756]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -80.0
+offset_top = 5.0
+offset_right = -40.0
+offset_bottom = 45.0
+grow_horizontal = 0
+script = ExtResource("11_k64yq")
+metadata/_edit_use_anchors_ = true
+
+[node name="ShieldTexture" type="TextureRect" parent="GUI/ShieldControl" unique_id=890639868]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_pr0uc")
+stretch_mode = 2
+
+[node name="AmmoBarControl" type="Control" parent="GUI" unique_id=611359609]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -60.0
+offset_top = 1.0
+offset_right = -20.0
+offset_bottom = 41.0
+grow_horizontal = 0
+script = ExtResource("13_rs1wp")
+
+[node name="AmmoBarTexture" type="TextureRect" parent="GUI/AmmoBarControl" unique_id=1804787574]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("AtlasTexture_wryix")
+stretch_mode = 2
+
+[connection signal="shield_state_changed" from="Player" to="Door12" method="_on_player_shield_state_changed"]
+[connection signal="shield_state_changed" from="Player" to="GUI" method="_on_player_shield_state_changed"]

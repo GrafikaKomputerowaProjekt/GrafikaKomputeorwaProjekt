@@ -39,6 +39,12 @@ func _physics_process(delta):
 		update_animation(true)
 		move_and_slide()
 		
+		for i in get_slide_collision_count():
+			var col = get_slide_collision(i)
+			var col_node = col.get_collider()
+			if col_node and col_node.is_in_group("Player") and col_node.has_method("take_damage"):
+				col_node.take_damage()
+		
 		if dist_to_player <= charge_distance and state_timer <= 0:
 			start_telegraph()
 			
@@ -58,6 +64,9 @@ func _physics_process(delta):
 		var collision = move_and_collide(velocity * delta)
 		
 		if collision:
+			var col_node = collision.get_collider()
+			if col_node and col_node.is_in_group("Player") and col_node.has_method("take_damage"):
+				col_node.take_damage()
 			handle_impact(collision.get_collider())
 		elif state_timer <= 0:
 			state = "chase"

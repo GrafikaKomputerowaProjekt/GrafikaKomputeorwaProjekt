@@ -31,3 +31,7 @@ func _on_area_2d_body_entered(body):
 func _on_area_2d_body_exited(body):
 	if body.is_in_group("Player"):
 		player_in_range = false
+
+
+func _on_player_shield_state_changed(is_active: bool) -> void:
+	pass # Replace with function body.
