@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://wp6ma8h37ftr"]
+
+[ext_resource type="Script" uid="uid://bqwkc2wv3en18" path="res://entities/pillar/pillar.gd" id="1_204qn"]
+[ext_resource type="Texture2D" uid="uid://5dmiwmorfvwj" path="res://assets/pillar/pillar_new.png" id="2_4usq8"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_45uun"]
+radius = 22.0
+height = 44.0
+
+[sub_resource type="Gradient" id="Gradient_204qn"]
+offsets = PackedFloat32Array(0, 0.04901961, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.14767182, 0.14767179, 0.14767179, 1, 0.14406255, 0.14406255, 0.14406255, 1)
+
+[node name="StaticBody2D" type="StaticBody2D" unique_id=1184449016]
+script = ExtResource("1_204qn")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2012542450]
+position = Vector2(32, -42)
+texture = ExtResource("2_4usq8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=311299369]
+position = Vector2(32, -21)
+shape = SubResource("CapsuleShape2D_45uun")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=626450331]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+initial_velocity_max = 150.0
+color_initial_ramp = SubResource("Gradient_204qn")

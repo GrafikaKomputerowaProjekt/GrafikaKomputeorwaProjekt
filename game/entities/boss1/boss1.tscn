@@ -483,6 +483,9 @@ _data = {
 &"walk_right": SubResource("Animation_asuqs")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_03gm1"]
+height = 34.0
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1533610499]
 script = ExtResource("1_03gm1")
 
@@ -494,3 +497,4 @@ hframes = 4
 libraries/ = SubResource("AnimationLibrary_d3xbm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1408052434]
+shape = SubResource("CapsuleShape2D_03gm1")

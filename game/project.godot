@@ -38,6 +38,9 @@ Player=""
 Doors=""
 TextZones=""
 Reactor="everything reactor"
+player=""
+boss_health=""
+camera=""
 
 [input]
 
