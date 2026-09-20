@@ -8,7 +8,7 @@ extends CharacterBody2D
 @export var blood_scene: PackedScene
 
 @onready var anim_player = $AnimationPlayer
-@onready var player = get_tree().get_first_node_in_group("player")
+@onready var player = get_tree().get_first_node_in_group("Player")
 @onready var charge_particles = $CPUParticles2D
 
 var current_health = max_health
@@ -39,12 +39,6 @@ func _physics_process(delta):
 		update_animation(true)
 		move_and_slide()
 		
-		for i in get_slide_collision_count():
-			var col = get_slide_collision(i)
-			var col_node = col.get_collider()
-			if col_node and col_node.is_in_group("Player") and col_node.has_method("take_damage"):
-				col_node.take_damage()
-		
 		if dist_to_player <= charge_distance and state_timer <= 0:
 			start_telegraph()
 			
@@ -67,7 +61,7 @@ func _physics_process(delta):
 			var col_node = collision.get_collider()
 			if col_node and col_node.is_in_group("Player") and col_node.has_method("take_damage"):
 				col_node.take_damage()
-			handle_impact(collision.get_collider())
+			handle_impact(col_node)
 		elif state_timer <= 0:
 			state = "chase"
 			state_timer = 1.0
@@ -99,7 +93,7 @@ func handle_impact(collider):
 	anim_player.speed_scale = 1.0
 	charge_particles.emitting = false
 	
-	if collider.has_method("break_pillar"):
+	if collider and collider.has_method("break_pillar"):
 		if collider.break_pillar():
 			take_damage()
 
