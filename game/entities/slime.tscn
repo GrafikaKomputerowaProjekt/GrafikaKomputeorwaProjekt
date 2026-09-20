@@ -5,7 +5,6 @@
 [ext_resource type="AudioStream" uid="uid://bds5iwhspcfmg" path="res://assets/sfx/enemy/monster_growl_pcm.wav" id="2_cauem"]
 [ext_resource type="Script" uid="uid://4og7trh8vfa2" path="res://raytracing_sandbox/sound_source.gd" id="2_imykf"]
 [ext_resource type="Script" uid="uid://b4f2fephx2if6" path="res://raytracing_sandbox/sound_listener.gd" id="3_twkr4"]
-[ext_resource type="FontFile" uid="uid://cwni1nwdy4hv1" path="res://assets/fonts/pixy/PIXY.otf" id="5_f28eq"]
 [ext_resource type="Texture2D" uid="uid://wq2hlcddqwhe" path="res://assets/enemies/rawr_p-Sheet.png" id="6_hjg4g"]
 [ext_resource type="Texture2D" uid="uid://c1naisieuq8xl" path="res://assets/enemies/rawr_l-Sheet.png" id="7_6pidl"]
 [ext_resource type="Texture2D" uid="uid://c7xdtlsjetyue" path="res://assets/enemies/rawr_t-Sheet.png" id="7_jwo4a"]
@@ -18,12 +17,6 @@ height = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_f28eq"]
 radius = 9.055386
-
-[sub_resource type="LabelSettings" id="LabelSettings_hjg4g"]
-line_spacing = -3.0
-font = ExtResource("5_f28eq")
-font_size = 10
-font_color = Color(1, 1, 1, 0.6745098)
 
 [sub_resource type="Animation" id="Animation_6pidl"]
 length = 0.001
@@ -317,17 +310,6 @@ script = ExtResource("3_twkr4")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SoundListener" unique_id=352430859]
 position = Vector2(0, -7)
 shape = SubResource("CircleShape2D_f28eq")
-
-[node name="InfoLabel" type="Label" parent="." unique_id=599982133]
-z_index = 30
-offset_left = -56.0
-offset_top = -56.0
-offset_right = 56.0
-offset_bottom = -16.0
-text = "000"
-label_settings = SubResource("LabelSettings_hjg4g")
-horizontal_alignment = 1
-vertical_alignment = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=555894582]
 position = Vector2(0, -7)
