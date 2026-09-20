@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://cywnne1ujrdwl" path="res://assets/user_interface/shield.png" id="12_isk4c"]
 [ext_resource type="Script" uid="uid://b8i822xvvtavt" path="res://stages/ammo_bar_control.gd" id="13_rs1wp"]
 [ext_resource type="Texture2D" uid="uid://bhidsasykoi81" path="res://assets/user_interface/ammo.png" id="14_vl856"]
+[ext_resource type="PackedScene" uid="uid://1gqabooyk6ly" path="res://entities/lights/smart_light.tscn" id="15_tvqi4"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pkphe"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -519,6 +520,72 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = SubResource("AtlasTexture_wryix")
 stretch_mode = 2
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=953574406]
+color = Color(0.103743516, 0.10374353, 0.103743516, 1)
+
+[node name="SmartLight" parent="CanvasModulate" unique_id=1184284140 instance=ExtResource("15_tvqi4")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(59.000008, 25.999996)
+scale = Vector2(1.7421875, 1.5625)
+always_on = true
+
+[node name="SmartLight2" parent="CanvasModulate" unique_id=1594373026 instance=ExtResource("15_tvqi4")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(279, 26)
+scale = Vector2(1.7421875, 1.5625)
+always_on = true
+
+[node name="SmartLight3" parent="CanvasModulate" unique_id=868463272 instance=ExtResource("15_tvqi4")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(285.00003, 137.00002)
+scale = Vector2(1.7421875, 1.5625)
+always_on = true
+
+[node name="SmartLight4" parent="CanvasModulate" unique_id=76849600 instance=ExtResource("15_tvqi4")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(60, 138)
+scale = Vector2(1.7421875, 1.5625)
+always_on = true
+
+[node name="SmartLight5" parent="CanvasModulate" unique_id=267992893 instance=ExtResource("15_tvqi4")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(162, -27.000015)
+scale = Vector2(1.7421875, 1.5625)
+always_on = true
+
+[node name="SmartLight6" parent="CanvasModulate" unique_id=160627269 instance=ExtResource("15_tvqi4")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(168, 81.000015)
+scale = Vector2(1.7421875, 1.5625)
+always_on = true
+
+[node name="SmartLight7" parent="CanvasModulate" unique_id=1481320811 instance=ExtResource("15_tvqi4")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(172, 202)
+scale = Vector2(1.7421875, 1.5625)
+always_on = true
+
+[node name="SmartLight7" parent="CanvasModulate/SmartLight7" unique_id=1714805948 instance=ExtResource("15_tvqi4")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-10.331848, 177.92)
+scale = Vector2(1.7421875, 1.5625)
+always_on = true
+
+[node name="SmartLight8" parent="CanvasModulate/SmartLight7" unique_id=1423426002 instance=ExtResource("15_tvqi4")]
+z_index = 5
+y_sort_enabled = true
+position = Vector2(-10.33184, 76.15997)
+scale = Vector2(1.7421875, 1.5625)
+always_on = true
 
 [connection signal="shield_state_changed" from="Player" to="Door12" method="_on_player_shield_state_changed"]
 [connection signal="shield_state_changed" from="Player" to="GUI" method="_on_player_shield_state_changed"]

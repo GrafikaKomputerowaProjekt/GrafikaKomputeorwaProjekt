@@ -485,7 +485,8 @@ _data = {
 }
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_03gm1"]
-height = 34.0
+radius = 8.0
+height = 18.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1533610499]
 z_index = 1
@@ -503,6 +504,7 @@ hframes = 4
 libraries/ = SubResource("AnimationLibrary_d3xbm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1408052434]
+position = Vector2(0, 2)
 shape = SubResource("CapsuleShape2D_03gm1")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=717580735]

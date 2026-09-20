@@ -8,11 +8,12 @@ extends PointLight2D
 
 @export var min_energy: float = 1
 @export var max_energy: float = 1.1
+@export var always_on: bool = false
 
 var time_passed: float = 0.0
 
 func _process(delta: float) -> void:
-	if not GameManager.is_power_on:
+	if not GameManager.is_power_on and not always_on:
 		energy = 0.0
 		return
 		
