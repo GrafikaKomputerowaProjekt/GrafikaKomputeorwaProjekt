@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dk1usrqk2u66p" path="res://entities/boss1/boss_1.gd" id="1_03gm1"]
 [ext_resource type="Texture2D" uid="uid://cp6eebme38e7i" path="res://assets/boss1/standing.png" id="2_4dx7l"]
+[ext_resource type="PackedScene" uid="uid://dur6spkwldnnj" path="res://entities/boss1/blood_splatter.tscn" id="2_fwwun"]
 [ext_resource type="Texture2D" uid="uid://db2kntfda1hyn" path="res://assets/boss1/walk_back.png" id="3_fwwun"]
 [ext_resource type="Texture2D" uid="uid://1c3x6e1gj344" path="res://assets/boss1/walk_front.png" id="4_ncwfm"]
 [ext_resource type="Texture2D" uid="uid://cksew2455pjul" path="res://assets/boss1/walk_left.png" id="5_yyf0r"]
@@ -487,7 +488,11 @@ _data = {
 height = 34.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=1533610499]
+y_sort_enabled = true
+collision_layer = 255
+collision_mask = 255
 script = ExtResource("1_03gm1")
+blood_scene = ExtResource("2_fwwun")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1589052184]
 texture = ExtResource("2_4dx7l")
@@ -498,3 +503,11 @@ libraries/ = SubResource("AnimationLibrary_d3xbm")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1408052434]
 shape = SubResource("CapsuleShape2D_03gm1")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=717580735]
+z_index = 5
+emitting = false
+amount = 30
+emission_shape = 1
+emission_sphere_radius = 10.0
+gravity = Vector2(0, 0.1)

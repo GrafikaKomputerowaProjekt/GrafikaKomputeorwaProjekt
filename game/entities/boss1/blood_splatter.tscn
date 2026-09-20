@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://dur6spkwldnnj"]
+
+[ext_resource type="Texture2D" uid="uid://dtir51g50j1o2" path="res://assets/boss1/blood_splatter.png" id="1_toah7"]
+
+[node name="Sprite2D" type="Sprite2D" unique_id=957429461]
+y_sort_enabled = true
+position = Vector2(6, -42)
+texture = ExtResource("1_toah7")

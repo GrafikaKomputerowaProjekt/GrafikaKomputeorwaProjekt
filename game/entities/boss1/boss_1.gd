@@ -2,26 +2,53 @@ extends CharacterBody2D
 
 @export var max_health = 4
 @export var charge_speed: float = 150.0
+@export var walk_speed: float = 40.0
+@export var activation_distance: float = 200.0
+@export var charge_distance: float = 120.0
+@export var blood_scene: PackedScene
+
 @onready var anim_player = $AnimationPlayer
-@onready var player = get_tree().get_first_node_in_group("Player")
+@onready var player = get_tree().get_first_node_in_group("player")
+@onready var charge_particles = $CPUParticles2D
 
 var current_health = max_health
-var state = "idle"
+var state = "inactive"
 var charge_dir = Vector2.ZERO
 var last_direction = "front"
-var state_timer = 3.0
+var state_timer = 0.0
 
 func _physics_process(delta):
 	state_timer -= delta
 	
-	if state == "idle":
+	if not player:
+		return
+		
+	var dist_to_player = global_position.distance_to(player.global_position)
+	
+	if state == "inactive":
 		velocity = Vector2.ZERO
 		update_animation(false)
-		if state_timer <= 0:
+		if dist_to_player <= activation_distance:
+			state = "chase"
+			state_timer = 1.0
+			
+	elif state == "chase":
+		var dir = global_position.direction_to(player.global_position).normalized()
+		velocity = dir * walk_speed
+		update_facing_direction(dir)
+		update_animation(true)
+		move_and_slide()
+		
+		if dist_to_player <= charge_distance and state_timer <= 0:
 			start_telegraph()
 			
 	elif state == "telegraph":
 		modulate = Color(1, 0, 0) if int(state_timer * 10) % 2 == 0 else Color(1, 1, 1)
+		
+		charge_dir = global_position.direction_to(player.global_position).normalized()
+		update_facing_direction(charge_dir)
+		update_animation(false)
+		
 		if state_timer <= 0:
 			start_charge()
 			
@@ -33,30 +60,35 @@ func _physics_process(delta):
 		if collision:
 			handle_impact(collision.get_collider())
 		elif state_timer <= 0:
-			state = "idle"
-			state_timer = 2.0
+			state = "chase"
+			state_timer = 1.0
 			anim_player.speed_scale = 1.0
+			charge_particles.emitting = false
 			
-			
-			
+	elif state == "stun":
+		velocity = Vector2.ZERO
+		update_animation(false)
+		if state_timer <= 0:
+			state = "chase"
+			state_timer = 1.0
+
 func start_telegraph():
 	state = "telegraph"
 	state_timer = 1.5
 	velocity = Vector2.ZERO
-	if player:
-		charge_dir = global_position.direction_to(player.global_position).normalized()
-		update_facing_direction(charge_dir)
 
 func start_charge():
 	state = "charge"
 	state_timer = 2.0
 	modulate = Color(1, 1, 1)
 	anim_player.speed_scale = 3.0
+	charge_particles.emitting = true
 
 func handle_impact(collider):
-	state = "idle"
+	state = "stun"
 	state_timer = 2.0
 	anim_player.speed_scale = 1.0
+	charge_particles.emitting = false
 	
 	if collider.has_method("break_pillar"):
 		if collider.break_pillar():
@@ -70,6 +102,18 @@ func take_damage():
 		health_bar.value = current_health
 		
 	if current_health <= 0:
+		var doors = get_tree().get_nodes_in_group("Doors")
+		for door in doors:
+			if door.has_method("open_door"):
+				door.open_door()
+				
+		GameManager.is_power_on = true
+		
+		if blood_scene:
+			var blood = blood_scene.instantiate()
+			get_parent().add_child(blood)
+			blood.global_position = global_position
+			
 		queue_free()
 
 func update_facing_direction(dir):

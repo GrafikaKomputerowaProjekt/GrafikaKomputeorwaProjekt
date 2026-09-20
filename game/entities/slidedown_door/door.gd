@@ -19,6 +19,10 @@ func toggle_door():
 	else:
 		door_closed_sprites.visible = true
 		solid_collision.set_deferred("disabled", false)
+
+func open_door():
+	if not is_open:
+		toggle_door()
 		
 func _on_area_2d_body_entered(body):
 	if body.is_in_group("Player"):
