@@ -7,7 +7,6 @@ extends CharacterBody2D
 @export var movement_speed: float = 40.0
 @export var step_interval: float = 15.0 # Distance between "jumps" or sounds
 
-@onready var info_label : Label = $InfoLabel
 @onready var sound_listener: Area2D = $SoundListener
 @onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
@@ -249,7 +248,6 @@ func _on_sound_listener_sound_heard(ray: SoundRay) -> void:
 	if event_history.size() > MAX_EVENTS:
 		event_history.pop_back()
 	
-	info_label.text = "\n".join(event_history)
 
 
 func can_see_player() -> bool:
