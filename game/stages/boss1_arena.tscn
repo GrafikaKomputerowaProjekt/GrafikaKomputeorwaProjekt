@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://0josv1jdq0r3" path="res://entities/boss1/boss1.tscn" id="4_jjbxw"]
 [ext_resource type="Script" uid="uid://cos0oyxfh6vvf" path="res://raytracing_sandbox/sound_ray_manager.gd" id="5_dgwor"]
 [ext_resource type="PackedScene" uid="uid://cj8nokj2hovw0" path="res://in_game/text_zone.tscn" id="8_lhprt"]
-[ext_resource type="Script" uid="uid://dfodple70yr2i" path="res://stages/gui.gd" id="9_3w3ej"]
+[ext_resource type="Script" uid="uid://b8f0lhbqphth6" path="res://stages/gui.gd" id="9_3w3ej"]
 [ext_resource type="Script" uid="uid://c60vtafgva7wc" path="res://in_game/minimap_control.gd" id="10_tvqi4"]
 [ext_resource type="Script" uid="uid://n7srcbuwnvev" path="res://stages/shield_control.gd" id="11_k64yq"]
 [ext_resource type="Texture2D" uid="uid://cywnne1ujrdwl" path="res://assets/user_interface/shield.png" id="12_isk4c"]
@@ -471,8 +471,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="MinimapTexture" type="TextureRect" parent="GUI/MinimapControl" unique_id=1219394762]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = -7.0
+offset_top = 2.0
+offset_right = 33.0
+offset_bottom = 42.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayerIndicator" type="ColorRect" parent="GUI/MinimapControl" unique_id=2068179050]

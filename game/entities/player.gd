@@ -83,9 +83,9 @@ func _ready():
 	# Rejestracja gracza w grupie do łatwej identyfikacji dla przeciwników
 	add_to_group("Player")
 	print("[PLAYER SYSTEM] Player initialized and registered in 'Player' group.")
-	
+	attack_hitbox.monitoring = false
 	_setup_emergency_ui()
-
+	attack_hitbox.monitoring = false
 	if sound_manager:
 		sounds_source.sound_manager = get_node(sound_manager)
 		print("[PLAYER AUDIO] Sound manager connected via NodePath: ", sound_manager)
@@ -158,7 +158,10 @@ func start_attack() -> void:
 		WeaponType.HAMMER:
 			await perform_melee_attack()
 		WeaponType.GUN:
-			await perform_ranged_attack()
+			if ammo > 0:
+				await perform_ranged_attack()
+			else:
+				await perform_melee_attack()
 
 	var cooldown := hammer_cooldown if current_weapon == WeaponType.HAMMER else gun_cooldown
 	await get_tree().create_timer(cooldown).timeout
@@ -208,20 +211,22 @@ func perform_ranged_attack() -> void:
 	already_hit.clear()
 	state = PlayerState.ATTACKING
 
+	attack_hitbox.monitoring = false
 	if projectile_scene == null:
 		print("[PLAYER RANGED] CRITICAL ERROR: projectile_scene is not assigned!")
 		state = PlayerState.MOVE
 		return
+	if ammo > 0:
+		ammo = ammo - 1
+		ammo_bar_state_changed.emit(ammo)
+		play_gun()
+		sounds_source.generate_sound(gun_loudness)
+		var projectile = projectile_scene.instantiate()
+		projectile.global_position = projectile_spawn.global_position
+		projectile.direction = facing_direction
 
-	ammo = ammo - 1
-	ammo_bar_state_changed.emit(ammo)
-	play_gun()
-	var projectile = projectile_scene.instantiate()
-	projectile.global_position = projectile_spawn.global_position
-	projectile.direction = facing_direction
-
-	get_tree().current_scene.add_child(projectile)
-	print("[PLAYER RANGED] Gun fired. Projectile spawned at: ", projectile.global_position, " | Dir: ", facing_direction)
+		get_tree().current_scene.add_child(projectile)
+		print("[PLAYER RANGED] Gun fired. Projectile spawned at: ", projectile.global_position, " | Dir: ", facing_direction)
 
 	state = PlayerState.MOVE
 
