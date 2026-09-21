@@ -37,6 +37,8 @@ func trigger_doors():
 	
 	var all_text_zones = get_tree().get_nodes_in_group("TextZones")
 	for zone in all_text_zones:
+		if not "zone_id" in zone or not zone.has_method("disable_zone"):
+			continue
 		if zone.zone_id == target_id:
 			zone.disable_zone()
 	

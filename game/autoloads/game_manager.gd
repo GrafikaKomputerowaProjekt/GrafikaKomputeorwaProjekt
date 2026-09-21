@@ -2,6 +2,7 @@ extends Node
 
 var is_alarm_active: bool = false
 var is_power_on: bool = false
+var alarm_disabled: bool = false
 
 var alarm_time_left: float = 10.0
 var canvas_layer: CanvasLayer
@@ -20,6 +21,9 @@ func _ready():
 	canvas_layer.add_child(countdown_label)
 
 func start_alarm():
+	if alarm_disabled:
+		return
+		
 	if is_alarm_active: 
 		return 
 		
@@ -42,6 +46,7 @@ func _process(delta: float):
 func reset_state():
 	is_alarm_active = false
 	is_power_on = false
+	alarm_disabled = false
 	alarm_time_left = 10.0
 	
 	if countdown_label:

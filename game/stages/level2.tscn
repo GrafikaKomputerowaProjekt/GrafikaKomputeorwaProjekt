@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://br21cavvk7m6i" path="res://raytracing_sandbox/sound_reflector.gd" id="2_0oug2"]
 [ext_resource type="PackedScene" uid="uid://bok4wh78q8jxs" path="res://entities/slidedown_door/doubledoor_south.tscn" id="4_kajg3"]
 [ext_resource type="PackedScene" uid="uid://bcrfev5u0sgvh" path="res://entities/slidedown_door/doubledoor_right.tscn" id="5_a0vpv"]
+[ext_resource type="Script" uid="uid://dcgjv1bed6ypr" path="res://stages/level2.gd" id="6_7oibo"]
 [ext_resource type="PackedScene" uid="uid://cgvqb31t1nd3r" path="res://entities/slidedown_door/doubledoor_left.tscn" id="6_h5wuj"]
 [ext_resource type="PackedScene" uid="uid://c4camr4jb8i1n" path="res://in_game/elevator.tscn" id="7_mulxh"]
 [ext_resource type="PackedScene" uid="uid://cj8nokj2hovw0" path="res://in_game/text_zone.tscn" id="8_ob44o"]
@@ -434,20 +435,10 @@ z_index = 4
 position = Vector2(466, 36)
 custom_message = "Press E to escape"
 
-[node name="TextZone5" parent="." unique_id=1810363978 instance=ExtResource("8_ob44o")]
-z_index = 4
-position = Vector2(223, -327)
-custom_message = "Press E to escape"
-
-[node name="TextZone6" parent="." unique_id=1009324763 instance=ExtResource("8_ob44o")]
-z_index = 4
-position = Vector2(706, -325)
-custom_message = "Press E to escape"
-
 [node name="TextZone7" parent="." unique_id=401578955 instance=ExtResource("8_ob44o")]
 z_index = 4
 position = Vector2(587, -468)
-custom_message = "Press E to escape"
+script = ExtResource("6_7oibo")
 
 [node name="TextZone8" parent="." unique_id=201254098 instance=ExtResource("8_ob44o")]
 z_index = 4
@@ -628,7 +619,6 @@ player = NodePath("../Player")
 patrol_points = [NodePath("../PP5/PP6/PP7"), NodePath("../PP5/PP6/PP7/PP8"), NodePath("../PP5"), NodePath("../PP5/PP6")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=648786885]
-visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="SmartLight" parent="." unique_id=1184284140 instance=ExtResource("19_0nitr")]

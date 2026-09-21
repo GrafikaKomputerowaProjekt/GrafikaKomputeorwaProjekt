@@ -302,6 +302,12 @@ theme_override_fonts/font = SubResource("FontFile_rivkh")
 theme_override_font_sizes/font_size = 16
 text = "LEVEL 1"
 
+[node name="level2Button" type="Button" parent="LevelsContainer" unique_id=63009527]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontFile_rivkh")
+theme_override_font_sizes/font_size = 16
+text = "LEVEL 2"
+
 [node name="bossButton" type="Button" parent="LevelsContainer" unique_id=84277331]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontFile_rivkh")
@@ -340,6 +346,7 @@ theme_override_font_sizes/font_size = 16
 text = "EXIT"
 
 [connection signal="pressed" from="LevelsContainer/level1Button" to="." method="_on_level_1_button_pressed"]
+[connection signal="pressed" from="LevelsContainer/level2Button" to="." method="_on_level_2_button_pressed"]
 [connection signal="pressed" from="LevelsContainer/bossButton" to="." method="_on_boss_button_pressed"]
 [connection signal="pressed" from="LevelsContainer/backButton" to="." method="_on_back_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

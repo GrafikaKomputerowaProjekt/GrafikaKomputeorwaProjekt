@@ -23,3 +23,8 @@ func _on_level_1_button_pressed() -> void:
 func _on_boss_button_pressed() -> void:
 	GameManager.reset_state()
 	get_tree().change_scene_to_file("res://stages/boss1_arena.tscn")
+
+
+func _on_level_2_button_pressed() -> void:
+	GameManager.reset_state()
+	get_tree().change_scene_to_file("res://stages/level2.tscn")
