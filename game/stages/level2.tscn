@@ -811,7 +811,6 @@ player = NodePath("../Player")
 patrol_points = [NodePath("../C1"), NodePath("../C1/C2"), NodePath("../C1/C3"), NodePath("../C1/C4"), NodePath("../C1/C5"), NodePath("../C1/C6"), NodePath("../C1/C7"), NodePath("../C1/C8")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=648786885]
-visible = false
 color = Color(0, 0, 0, 1)
 
 [node name="Slime" parent="." unique_id=444727684 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("18_pmpx5")]
