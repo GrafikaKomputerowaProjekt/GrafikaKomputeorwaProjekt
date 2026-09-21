@@ -85,7 +85,7 @@ func _ready():
 	print("[PLAYER SYSTEM] Player initialized and registered in 'Player' group.")
 	
 	_setup_emergency_ui()
-
+	attack_hitbox.monitoring = false
 	if sound_manager:
 		sounds_source.sound_manager = get_node(sound_manager)
 		print("[PLAYER AUDIO] Sound manager connected via NodePath: ", sound_manager)
@@ -212,16 +212,17 @@ func perform_ranged_attack() -> void:
 		print("[PLAYER RANGED] CRITICAL ERROR: projectile_scene is not assigned!")
 		state = PlayerState.MOVE
 		return
+	if ammo > 0:
+		ammo = ammo - 1
+		ammo_bar_state_changed.emit(ammo)
+		play_gun()
+		sounds_source.generate_sound(gun_loudness)
+		var projectile = projectile_scene.instantiate()
+		projectile.global_position = projectile_spawn.global_position
+		projectile.direction = facing_direction
 
-	ammo = ammo - 1
-	ammo_bar_state_changed.emit(ammo)
-	play_gun()
-	var projectile = projectile_scene.instantiate()
-	projectile.global_position = projectile_spawn.global_position
-	projectile.direction = facing_direction
-
-	get_tree().current_scene.add_child(projectile)
-	print("[PLAYER RANGED] Gun fired. Projectile spawned at: ", projectile.global_position, " | Dir: ", facing_direction)
+		get_tree().current_scene.add_child(projectile)
+		print("[PLAYER RANGED] Gun fired. Projectile spawned at: ", projectile.global_position, " | Dir: ", facing_direction)
 
 	state = PlayerState.MOVE
 
