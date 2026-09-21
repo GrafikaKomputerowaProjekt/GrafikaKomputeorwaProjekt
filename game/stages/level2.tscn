@@ -652,7 +652,7 @@ position = Vector2(344, -465)
 custom_message = "Press E to escape"
 
 [node name="Player" parent="." unique_id=1799342814 instance=ExtResource("9_k2c0x")]
-position = Vector2(449, 203)
+position = Vector2(39, 86)
 collision_mask = 3
 sound_manager = NodePath("../SoundRayManager")
 
