@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bp3x3tnrgc0gd" path="res://entities/reactor/reactor.tscn" id="17_xa65j"]
 [ext_resource type="PackedScene" uid="uid://blgnwcow6kaji" path="res://entities/slime.tscn" id="18_pmpx5"]
 [ext_resource type="PackedScene" uid="uid://1gqabooyk6ly" path="res://entities/lights/smart_light.tscn" id="19_0nitr"]
+[ext_resource type="PackedScene" uid="uid://wp6ma8h37ftr" path="res://entities/pillar/pillar.tscn" id="20_0oug2"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_pkphe"]
 vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
@@ -657,7 +658,7 @@ collision_mask = 3
 sound_manager = NodePath("../SoundRayManager")
 
 [node name="Switch" parent="." unique_id=1510201761 instance=ExtResource("10_3scfh")]
-position = Vector2(536, -296)
+position = Vector2(504, -295)
 target_id = "1"
 
 [node name="GUI" type="CanvasLayer" parent="." unique_id=1485906254]
@@ -879,6 +880,18 @@ position = Vector2(152, -157)
 
 [node name="E4" type="Marker2D" parent="E1" unique_id=925563015]
 position = Vector2(154, 4)
+
+[node name="StaticBody2D2" parent="." unique_id=1184449016 instance=ExtResource("20_0oug2")]
+position = Vector2(379, -99)
+
+[node name="StaticBody2D3" parent="." unique_id=1224807109 instance=ExtResource("20_0oug2")]
+position = Vector2(516, -99)
+
+[node name="StaticBody2D4" parent="." unique_id=1072761246 instance=ExtResource("20_0oug2")]
+position = Vector2(383, -224)
+
+[node name="StaticBody2D5" parent="." unique_id=31193537 instance=ExtResource("20_0oug2")]
+position = Vector2(516, -225)
 
 [connection signal="ammo_bar_state_changed" from="Player" to="GUI" method="_on_player_ammo_bar_state_changed"]
 [connection signal="shield_state_changed" from="Player" to="GUI" method="_on_player_shield_state_changed"]
