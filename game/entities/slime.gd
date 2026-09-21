@@ -36,7 +36,7 @@ var attack_cooldown_timer: float = 0.0
 const ATTACK_COOLDOWN: float = 1.2 # Czas ochrony gracza przed seryjnymi hitami (w sekundach)
 
 # Nowe zmienne opóźnienia ataku (Wind-up)
-@export var attack_delay_time: float = 1 # Czas na reakcję gracza po zbliżeniu się Slime'a
+@export var attack_delay_time: float = 0.5 # Czas na reakcję gracza po zbliżeniu się Slime'a
 var is_charging_attack: bool = false
 var charge_timer: float = 0.0
 
