@@ -7,6 +7,8 @@ const TILE_SIZE := Vector2(8, 9)
 const REGION_SHIELD_ACTIVE := Rect2(Vector2(0, 0), TILE_SIZE)
 const REGION_SHIELD_INACTIVE := Rect2(Vector2(8, 0), TILE_SIZE)
 
+func _ready() -> void:
+		shield_texture_rect.texture.region = REGION_SHIELD_ACTIVE
 
 func set_shield_state(is_active: bool) -> void:
 	if is_active:
