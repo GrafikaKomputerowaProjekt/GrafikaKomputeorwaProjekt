@@ -678,8 +678,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="MinimapTexture" type="TextureRect" parent="GUI/MinimapControl" unique_id=752891313]
 layout_mode = 0
+offset_top = 2.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = 42.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PlayerIndicator" type="ColorRect" parent="GUI/MinimapControl" unique_id=978624405]
