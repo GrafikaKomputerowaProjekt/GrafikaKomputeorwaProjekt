@@ -306,7 +306,6 @@ func handle_patrol(delta: float) -> void:
 
 			set_movement_target(patrol_points[patrol_index].global_position)
 
-## Uniwersalna funkcja obsługująca obrażenia o zmiennej sile (duck-typing friendly)
 func hit_by_projectile(damage_amount: int = 2) -> void:
 	if current_hp <= 0:
 		return

@@ -83,7 +83,7 @@ func _ready():
 	# Rejestracja gracza w grupie do łatwej identyfikacji dla przeciwników
 	add_to_group("Player")
 	print("[PLAYER SYSTEM] Player initialized and registered in 'Player' group.")
-	
+	attack_hitbox.monitoring = false
 	_setup_emergency_ui()
 	attack_hitbox.monitoring = false
 	if sound_manager:
@@ -158,7 +158,10 @@ func start_attack() -> void:
 		WeaponType.HAMMER:
 			await perform_melee_attack()
 		WeaponType.GUN:
-			await perform_ranged_attack()
+			if ammo > 0:
+				await perform_ranged_attack()
+			else:
+				await perform_melee_attack()
 
 	var cooldown := hammer_cooldown if current_weapon == WeaponType.HAMMER else gun_cooldown
 	await get_tree().create_timer(cooldown).timeout
@@ -208,6 +211,7 @@ func perform_ranged_attack() -> void:
 	already_hit.clear()
 	state = PlayerState.ATTACKING
 
+	attack_hitbox.monitoring = false
 	if projectile_scene == null:
 		print("[PLAYER RANGED] CRITICAL ERROR: projectile_scene is not assigned!")
 		state = PlayerState.MOVE
