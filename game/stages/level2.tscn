@@ -819,8 +819,10 @@ sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
 patrol_points = [NodePath("../C1/C8"), NodePath("../C1"), NodePath("../C1/C2"), NodePath("../C1/C3"), NodePath("../C1/C4"), NodePath("../C1/C5"), NodePath("../C1/C6"), NodePath("../C1/C7")]
 
-[node name="Slime4" parent="." unique_id=100656686 instance=ExtResource("18_pmpx5")]
+[node name="Slime4" parent="." unique_id=100656686 node_paths=PackedStringArray("player") instance=ExtResource("18_pmpx5")]
 position = Vector2(483, -24)
+sound_manager = NodePath("../SoundRayManager")
+player = NodePath("../Player")
 
 [node name="Door4" parent="." unique_id=1347602314 instance=ExtResource("4_kajg3")]
 position = Vector2(224, -64)
