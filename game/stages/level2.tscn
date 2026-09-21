@@ -396,9 +396,203 @@ region = Rect2(0, 0, 8, 9)
 atlas = ExtResource("16_v141d")
 region = Rect2(0, 0, 10, 17)
 
-[node name="Node2D" type="Node2D" unique_id=1658377574]
+[node name="level2" type="Node2D" unique_id=1658377574]
 y_sort_enabled = true
 position = Vector2(-5, 0)
+
+[node name="SmartLight" parent="." unique_id=1184284140 instance=ExtResource("19_0nitr")]
+position = Vector2(44, 96)
+always_on = true
+
+[node name="SmartLight9" parent="SmartLight" unique_id=781403449 instance=ExtResource("19_0nitr")]
+position = Vector2(486, 21)
+always_on = true
+
+[node name="SmartLight10" parent="SmartLight" unique_id=11800758 instance=ExtResource("19_0nitr")]
+position = Vector2(495, -75)
+always_on = true
+
+[node name="SmartLight11" parent="SmartLight" unique_id=154776833 instance=ExtResource("19_0nitr")]
+position = Vector2(378, -89)
+always_on = true
+
+[node name="SmartLight12" parent="SmartLight" unique_id=317220626 instance=ExtResource("19_0nitr")]
+position = Vector2(270, -114)
+always_on = true
+
+[node name="SmartLight14" parent="SmartLight" unique_id=1616400231 instance=ExtResource("19_0nitr")]
+position = Vector2(699, -116)
+always_on = true
+
+[node name="SmartLight6" parent="SmartLight" unique_id=1650001989 instance=ExtResource("19_0nitr")]
+position = Vector2(371, 109)
+always_on = true
+
+[node name="SmartLight5" parent="SmartLight" unique_id=1100034857 instance=ExtResource("19_0nitr")]
+position = Vector2(282, 107)
+always_on = true
+
+[node name="SmartLight4" parent="SmartLight" unique_id=923444575 instance=ExtResource("19_0nitr")]
+position = Vector2(188, 111)
+always_on = true
+
+[node name="SmartLight3" parent="SmartLight" unique_id=1012629011 instance=ExtResource("19_0nitr")]
+position = Vector2(99, 111)
+always_on = true
+
+[node name="SmartLight2" parent="SmartLight" unique_id=1370115352 instance=ExtResource("19_0nitr")]
+position = Vector2(-7, 90)
+always_on = true
+
+[node name="SmartLight8" parent="SmartLight" unique_id=792951355 instance=ExtResource("19_0nitr")]
+position = Vector2(383, 28)
+always_on = true
+
+[node name="SmartLight7" parent="SmartLight" unique_id=816135851 instance=ExtResource("19_0nitr")]
+position = Vector2(452, 118)
+always_on = true
+
+[node name="SmartLight13" parent="SmartLight" unique_id=1864381549 instance=ExtResource("19_0nitr")]
+position = Vector2(589, -116)
+always_on = true
+
+[node name="SmartLight15" parent="SmartLight" unique_id=713914127 instance=ExtResource("19_0nitr")]
+position = Vector2(199, -162)
+always_on = true
+
+[node name="SmartLight16" parent="SmartLight" unique_id=1713484583 instance=ExtResource("19_0nitr")]
+position = Vector2(133, -270)
+always_on = true
+
+[node name="SmartLight17" parent="SmartLight" unique_id=1583091646 instance=ExtResource("19_0nitr")]
+position = Vector2(143, -339)
+always_on = true
+
+[node name="SmartLight18" parent="SmartLight" unique_id=620148185 instance=ExtResource("19_0nitr")]
+position = Vector2(248, -344)
+always_on = true
+
+[node name="SmartLight19" parent="SmartLight" unique_id=1334142725 instance=ExtResource("19_0nitr")]
+position = Vector2(239, -247)
+always_on = true
+
+[node name="SmartLight20" parent="SmartLight" unique_id=130842880 instance=ExtResource("19_0nitr")]
+position = Vector2(398, -339)
+always_on = true
+
+[node name="SmartLight21" parent="SmartLight" unique_id=205337083 instance=ExtResource("19_0nitr")]
+position = Vector2(494, -348)
+always_on = true
+
+[node name="SmartLight22" parent="SmartLight" unique_id=912697082 instance=ExtResource("19_0nitr")]
+position = Vector2(480, -249)
+always_on = true
+
+[node name="SmartLight23" parent="SmartLight" unique_id=719332601 instance=ExtResource("19_0nitr")]
+position = Vector2(388, -235)
+always_on = true
+
+[node name="SmartLight24" parent="SmartLight" unique_id=2069117267 instance=ExtResource("19_0nitr")]
+position = Vector2(152, -487)
+always_on = true
+
+[node name="SmartLight25" parent="SmartLight" unique_id=422087633 instance=ExtResource("19_0nitr")]
+position = Vector2(152, -583)
+always_on = true
+
+[node name="SmartLight26" parent="SmartLight" unique_id=1880742350 instance=ExtResource("19_0nitr")]
+position = Vector2(244, -581)
+always_on = true
+
+[node name="SmartLight27" parent="SmartLight" unique_id=724686910 instance=ExtResource("19_0nitr")]
+position = Vector2(247.99997, -470.99997)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight28" parent="SmartLight" unique_id=903146858 instance=ExtResource("19_0nitr")]
+position = Vector2(387.99997, -579)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight29" parent="SmartLight" unique_id=1907400392 instance=ExtResource("19_0nitr")]
+position = Vector2(487, -583)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight30" parent="SmartLight" unique_id=933067608 instance=ExtResource("19_0nitr")]
+position = Vector2(388, -480)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight31" parent="SmartLight" unique_id=937185099 instance=ExtResource("19_0nitr")]
+position = Vector2(485, -478)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight32" parent="SmartLight" unique_id=45284671 instance=ExtResource("19_0nitr")]
+position = Vector2(612.99994, -591)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight33" parent="SmartLight" unique_id=24371085 instance=ExtResource("19_0nitr")]
+position = Vector2(726, -585.99994)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight34" parent="SmartLight" unique_id=2125291059 instance=ExtResource("19_0nitr")]
+position = Vector2(636, -483)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight35" parent="SmartLight" unique_id=83960112 instance=ExtResource("19_0nitr")]
+position = Vector2(726, -476)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight36" parent="SmartLight" unique_id=312566968 instance=ExtResource("19_0nitr")]
+position = Vector2(637, -348)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight37" parent="SmartLight" unique_id=1799920923 instance=ExtResource("19_0nitr")]
+position = Vector2(733.99994, -351)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight38" parent="SmartLight" unique_id=1623976585 instance=ExtResource("19_0nitr")]
+position = Vector2(723, -240)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight39" parent="SmartLight" unique_id=287533225 instance=ExtResource("19_0nitr")]
+position = Vector2(630.99994, -242)
+rotation = -0.083513744
+always_on = true
+
+[node name="SmartLight40" parent="SmartLight" unique_id=1977440610 instance=ExtResource("19_0nitr")]
+position = Vector2(676.00006, -165)
+rotation = -0.1041348
+always_on = true
+
+[node name="SmartLight41" parent="SmartLight" unique_id=2120634413 instance=ExtResource("19_0nitr")]
+position = Vector2(40.000015, -122)
+rotation = -0.1041348
+always_on = true
+
+[node name="SmartLight42" parent="SmartLight" unique_id=286826377 instance=ExtResource("19_0nitr")]
+position = Vector2(199.00002, -403)
+rotation = -0.1041348
+always_on = true
+
+[node name="SmartLight43" parent="SmartLight" unique_id=9532190 instance=ExtResource("19_0nitr")]
+position = Vector2(635, -401.00003)
+rotation = -0.1041348
+always_on = true
+
+[node name="SmartLight44" parent="SmartLight" unique_id=432389745 instance=ExtResource("19_0nitr")]
+position = Vector2(435.00006, -415.00003)
+rotation = -0.1041348
+always_on = true
 
 [node name="SoundRayManager" type="Node2D" parent="." unique_id=583952063]
 z_index = 20
@@ -421,6 +615,18 @@ tile_map_data = PackedByteArray("AAAXAPD/AQADAAUAAAAXAO//AQADAAUAAAAXAO7/AQADAAU
 tile_set = SubResource("TileSet_8ebg0")
 script = ExtResource("2_0oug2")
 sound_manager_path = NodePath("../SoundRayManager")
+
+[node name="D1" type="Marker2D" parent="." unique_id=253707063]
+position = Vector2(164, -507)
+
+[node name="D2" type="Marker2D" parent="D1" unique_id=1790771380]
+position = Vector2(155, -6)
+
+[node name="D3" type="Marker2D" parent="D1" unique_id=1588130709]
+position = Vector2(154, 155)
+
+[node name="D4" type="Marker2D" parent="D1" unique_id=95287693]
+position = Vector2(-5, 152)
 
 [node name="Elevator" parent="." unique_id=1392859592 instance=ExtResource("7_mulxh")]
 position = Vector2(481, 67)
@@ -528,298 +734,90 @@ metadata/_edit_use_anchors_ = true
 position = Vector2(449, -160)
 reactor_id = "1"
 
-[node name="PP5" type="Marker2D" parent="." unique_id=817572146]
-position = Vector2(431, -502)
-
-[node name="PP6" type="Marker2D" parent="PP5" unique_id=918256121]
-position = Vector2(-24, 139)
-
-[node name="PP7" type="Marker2D" parent="PP5/PP6" unique_id=2007797879]
-position = Vector2(128, 0)
-
-[node name="PP8" type="Marker2D" parent="PP5/PP6/PP7" unique_id=1682871008]
-position = Vector2(17, -135)
-
-[node name="PP1" type="Marker2D" parent="." unique_id=1160355238]
-position = Vector2(656, -491)
-
-[node name="PP2" type="Marker2D" parent="PP1" unique_id=1696105886]
-position = Vector2(-1, 127)
-
-[node name="PP3" type="Marker2D" parent="PP1/PP2" unique_id=1201370543]
-position = Vector2(128, 0)
-
-[node name="PP4" type="Marker2D" parent="PP1/PP2/PP3" unique_id=909231725]
-position = Vector2(0, -128)
-
 [node name="Slime2" parent="." unique_id=433473960 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("18_pmpx5")]
-position = Vector2(713, -426)
+position = Vector2(713, -423)
 sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
-patrol_points = [NodePath("../PP5"), NodePath("../PP5/PP6"), NodePath("../PP5/PP6/PP7"), NodePath("../PP5/PP6/PP7/PP8")]
+patrol_points = [NodePath("B1"), NodePath("B2"), NodePath("B1"), NodePath("B3"), NodePath("B1"), NodePath("B4"), NodePath("B1"), NodePath("B5")]
 
-[node name="PP2" type="Marker2D" parent="." unique_id=1150185051]
-position = Vector2(663, -258)
+[node name="B1" type="Marker2D" parent="Slime2" unique_id=274882121]
+position = Vector2(-3, -2)
 
-[node name="PP2" type="Marker2D" parent="PP2" unique_id=600300382]
-position = Vector2(-1, 127)
+[node name="B3" type="Marker2D" parent="Slime2" unique_id=1042462795]
+position = Vector2(41, -41)
 
-[node name="PP3" type="Marker2D" parent="PP2/PP2" unique_id=553230711]
-position = Vector2(128, 0)
+[node name="B4" type="Marker2D" parent="Slime2" unique_id=1390219955]
+position = Vector2(36, 25)
 
-[node name="PP4" type="Marker2D" parent="PP2/PP2/PP3" unique_id=1236254877]
-position = Vector2(0, -128)
+[node name="B5" type="Marker2D" parent="Slime2" unique_id=1206417361]
+position = Vector2(-22, 21)
+
+[node name="B2" type="Marker2D" parent="Slime2" unique_id=305273362]
+position = Vector2(-23, -40)
 
 [node name="Slime5" parent="." unique_id=375529188 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("18_pmpx5")]
-position = Vector2(757, -241)
+position = Vector2(766, -242)
 sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
-patrol_points = [NodePath("../PP5"), NodePath("../PP5/PP6"), NodePath("../PP5/PP6/PP7"), NodePath("../PP5/PP6/PP7/PP8")]
+patrol_points = [NodePath("A1"), NodePath("A1/A2"), NodePath("A1/A2/A3"), NodePath("A1/A2/A4"), NodePath("A1/A2/A5"), NodePath("A1/A2/A6")]
 
-[node name="PP4" type="Marker2D" parent="." unique_id=2035747746]
-position = Vector2(183, -493)
+[node name="A1" type="Marker2D" parent="Slime5" unique_id=40391061]
+position = Vector2(15, -30)
 
-[node name="PP2" type="Marker2D" parent="PP4" unique_id=814882514]
-position = Vector2(-1, 127)
+[node name="A2" type="Marker2D" parent="Slime5/A1" unique_id=1648661420]
+position = Vector2(-112, 1)
 
-[node name="PP3" type="Marker2D" parent="PP4/PP2" unique_id=769415840]
-position = Vector2(128, 0)
+[node name="A3" type="Marker2D" parent="Slime5/A1/A2" unique_id=100961951]
+position = Vector2(27, 73)
 
-[node name="PP4" type="Marker2D" parent="PP4/PP2/PP3" unique_id=132491969]
-position = Vector2(0, -128)
+[node name="A4" type="Marker2D" parent="Slime5/A1/A2" unique_id=457642253]
+position = Vector2(11, 158)
+
+[node name="A5" type="Marker2D" parent="Slime5/A1/A2" unique_id=52066407]
+position = Vector2(88, 157)
+
+[node name="A6" type="Marker2D" parent="Slime5/A1/A2" unique_id=2020447818]
+position = Vector2(78, 72)
 
 [node name="Slime7" parent="." unique_id=280581005 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("18_pmpx5")]
-position = Vector2(205, -476)
+position = Vector2(192, -506)
 sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
-patrol_points = [NodePath("../PP5"), NodePath("../PP5/PP6"), NodePath("../PP5/PP6/PP7"), NodePath("../PP5/PP6/PP7/PP8")]
+patrol_points = [NodePath("../D1"), NodePath("../D1/D2"), NodePath("../D1/D3"), NodePath("../D1/D4")]
 
-[node name="PP3" type="Marker2D" parent="." unique_id=2044103625]
-position = Vector2(174, -264)
-
-[node name="PP2" type="Marker2D" parent="PP3" unique_id=926741769]
-position = Vector2(-12, 146)
-
-[node name="PP3" type="Marker2D" parent="PP3/PP2" unique_id=1918699584]
-position = Vector2(136, 18)
-
-[node name="PP4" type="Marker2D" parent="PP3/PP2/PP3" unique_id=1512968477]
-position = Vector2(14, -128)
+[node name="Slime9" parent="." unique_id=1267782063 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("18_pmpx5")]
+position = Vector2(313, -365)
+sound_manager = NodePath("../SoundRayManager")
+player = NodePath("../Player")
+patrol_points = [NodePath("../D1/D3"), NodePath("../D1/D4"), NodePath("../D1"), NodePath("../D1/D2")]
 
 [node name="Slime6" parent="." unique_id=1155824052 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("18_pmpx5")]
-position = Vector2(163, -220)
+position = Vector2(162, -128)
 sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
-patrol_points = [NodePath("../PP5"), NodePath("../PP5/PP6"), NodePath("../PP5/PP6/PP7"), NodePath("../PP5/PP6/PP7/PP8")]
+patrol_points = [NodePath("../E1"), NodePath("../E1/E2"), NodePath("../E1/E3"), NodePath("../E1/E4")]
+
+[node name="Slime10" parent="." unique_id=547007199 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("18_pmpx5")]
+position = Vector2(319, -241)
+sound_manager = NodePath("../SoundRayManager")
+player = NodePath("../Player")
+patrol_points = [NodePath("../E1/E3"), NodePath("../E1/E4"), NodePath("../E1"), NodePath("../E1/E2")]
 
 [node name="Slime3" parent="." unique_id=1184131660 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("18_pmpx5")]
 position = Vector2(541, -483)
 sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
-patrol_points = [NodePath("../PP5/PP6/PP7"), NodePath("../PP5/PP6/PP7/PP8"), NodePath("../PP5"), NodePath("../PP5/PP6")]
+patrol_points = [NodePath("../C1"), NodePath("../C1/C2"), NodePath("../C1/C3"), NodePath("../C1/C4"), NodePath("../C1/C5"), NodePath("../C1/C6"), NodePath("../C1/C7"), NodePath("../C1/C8")]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=648786885]
+visible = false
 color = Color(0, 0, 0, 1)
-
-[node name="SmartLight" parent="." unique_id=1184284140 instance=ExtResource("19_0nitr")]
-position = Vector2(44, 96)
-always_on = true
-
-[node name="SmartLight2" parent="." unique_id=1370115352 instance=ExtResource("19_0nitr")]
-position = Vector2(37, 186)
-always_on = true
-
-[node name="SmartLight3" parent="." unique_id=1012629011 instance=ExtResource("19_0nitr")]
-position = Vector2(143, 207)
-always_on = true
-
-[node name="SmartLight4" parent="." unique_id=923444575 instance=ExtResource("19_0nitr")]
-position = Vector2(232, 207)
-always_on = true
-
-[node name="SmartLight5" parent="." unique_id=1100034857 instance=ExtResource("19_0nitr")]
-position = Vector2(326, 203)
-always_on = true
-
-[node name="SmartLight6" parent="." unique_id=1650001989 instance=ExtResource("19_0nitr")]
-position = Vector2(415, 205)
-always_on = true
-
-[node name="SmartLight7" parent="." unique_id=816135851 instance=ExtResource("19_0nitr")]
-position = Vector2(496, 214)
-always_on = true
-
-[node name="SmartLight8" parent="." unique_id=792951355 instance=ExtResource("19_0nitr")]
-position = Vector2(427, 124)
-always_on = true
-
-[node name="SmartLight9" parent="." unique_id=781403449 instance=ExtResource("19_0nitr")]
-position = Vector2(530, 117)
-always_on = true
-
-[node name="SmartLight10" parent="." unique_id=11800758 instance=ExtResource("19_0nitr")]
-position = Vector2(539, 21)
-always_on = true
-
-[node name="SmartLight11" parent="." unique_id=154776833 instance=ExtResource("19_0nitr")]
-position = Vector2(422, 7)
-always_on = true
-
-[node name="SmartLight12" parent="." unique_id=317220626 instance=ExtResource("19_0nitr")]
-position = Vector2(314, -18)
-always_on = true
-
-[node name="SmartLight13" parent="." unique_id=1864381549 instance=ExtResource("19_0nitr")]
-position = Vector2(633, -20)
-always_on = true
-
-[node name="SmartLight14" parent="." unique_id=1616400231 instance=ExtResource("19_0nitr")]
-position = Vector2(743, -20)
-always_on = true
-
-[node name="SmartLight15" parent="." unique_id=713914127 instance=ExtResource("19_0nitr")]
-position = Vector2(243, -66)
-always_on = true
-
-[node name="SmartLight16" parent="." unique_id=1713484583 instance=ExtResource("19_0nitr")]
-position = Vector2(177, -174)
-always_on = true
-
-[node name="SmartLight17" parent="." unique_id=1583091646 instance=ExtResource("19_0nitr")]
-position = Vector2(187, -243)
-always_on = true
-
-[node name="SmartLight18" parent="." unique_id=620148185 instance=ExtResource("19_0nitr")]
-position = Vector2(292, -248)
-always_on = true
-
-[node name="SmartLight19" parent="." unique_id=1334142725 instance=ExtResource("19_0nitr")]
-position = Vector2(283, -151)
-always_on = true
-
-[node name="SmartLight20" parent="." unique_id=130842880 instance=ExtResource("19_0nitr")]
-position = Vector2(442, -243)
-always_on = true
-
-[node name="SmartLight21" parent="." unique_id=205337083 instance=ExtResource("19_0nitr")]
-position = Vector2(538, -252)
-always_on = true
-
-[node name="SmartLight22" parent="." unique_id=912697082 instance=ExtResource("19_0nitr")]
-position = Vector2(524, -153)
-always_on = true
-
-[node name="SmartLight23" parent="." unique_id=719332601 instance=ExtResource("19_0nitr")]
-position = Vector2(432, -139)
-always_on = true
-
-[node name="SmartLight24" parent="." unique_id=2069117267 instance=ExtResource("19_0nitr")]
-position = Vector2(196, -391)
-always_on = true
-
-[node name="SmartLight25" parent="." unique_id=422087633 instance=ExtResource("19_0nitr")]
-position = Vector2(196, -487)
-always_on = true
-
-[node name="SmartLight26" parent="." unique_id=1880742350 instance=ExtResource("19_0nitr")]
-position = Vector2(288, -485)
-always_on = true
-
-[node name="SmartLight27" parent="." unique_id=724686910 instance=ExtResource("19_0nitr")]
-position = Vector2(291.99997, -374.99997)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight28" parent="." unique_id=903146858 instance=ExtResource("19_0nitr")]
-position = Vector2(431.99997, -483)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight29" parent="." unique_id=1907400392 instance=ExtResource("19_0nitr")]
-position = Vector2(531, -487)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight30" parent="." unique_id=933067608 instance=ExtResource("19_0nitr")]
-position = Vector2(432, -384)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight31" parent="." unique_id=937185099 instance=ExtResource("19_0nitr")]
-position = Vector2(529, -382)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight32" parent="." unique_id=45284671 instance=ExtResource("19_0nitr")]
-position = Vector2(656.99994, -495)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight33" parent="." unique_id=24371085 instance=ExtResource("19_0nitr")]
-position = Vector2(770, -489.99994)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight34" parent="." unique_id=2125291059 instance=ExtResource("19_0nitr")]
-position = Vector2(680, -387)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight35" parent="." unique_id=83960112 instance=ExtResource("19_0nitr")]
-position = Vector2(770, -380)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight36" parent="." unique_id=312566968 instance=ExtResource("19_0nitr")]
-position = Vector2(681, -252)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight37" parent="." unique_id=1799920923 instance=ExtResource("19_0nitr")]
-position = Vector2(761.99994, -246.99998)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight38" parent="." unique_id=1623976585 instance=ExtResource("19_0nitr")]
-position = Vector2(767, -144)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight39" parent="." unique_id=287533225 instance=ExtResource("19_0nitr")]
-position = Vector2(674.99994, -146)
-rotation = -0.083513744
-always_on = true
-
-[node name="SmartLight40" parent="." unique_id=1977440610 instance=ExtResource("19_0nitr")]
-position = Vector2(720.00006, -69)
-rotation = -0.1041348
-always_on = true
-
-[node name="SmartLight41" parent="." unique_id=2120634413 instance=ExtResource("19_0nitr")]
-position = Vector2(84.000015, -26)
-rotation = -0.1041348
-always_on = true
-
-[node name="SmartLight42" parent="." unique_id=286826377 instance=ExtResource("19_0nitr")]
-position = Vector2(243.00002, -307)
-rotation = -0.1041348
-always_on = true
-
-[node name="SmartLight43" parent="." unique_id=9532190 instance=ExtResource("19_0nitr")]
-position = Vector2(720, -312)
-rotation = -0.1041348
-always_on = true
-
-[node name="SmartLight44" parent="." unique_id=432389745 instance=ExtResource("19_0nitr")]
-position = Vector2(479.00006, -319.00003)
-rotation = -0.1041348
-always_on = true
 
 [node name="Slime" parent="." unique_id=444727684 node_paths=PackedStringArray("player", "patrol_points") instance=ExtResource("18_pmpx5")]
 position = Vector2(426, -360)
 sound_manager = NodePath("../SoundRayManager")
 player = NodePath("../Player")
-patrol_points = [NodePath("../PP1"), NodePath("../PP1/PP2"), NodePath("../PP1/PP2/PP3"), NodePath("../PP1/PP2/PP3/PP4")]
+patrol_points = [NodePath("../C1/C8"), NodePath("../C1"), NodePath("../C1/C2"), NodePath("../C1/C3"), NodePath("../C1/C4"), NodePath("../C1/C5"), NodePath("../C1/C6"), NodePath("../C1/C7")]
 
 [node name="Slime4" parent="." unique_id=100656686 instance=ExtResource("18_pmpx5")]
 position = Vector2(483, -24)
@@ -841,6 +839,46 @@ position = Vector2(224, -304)
 
 [node name="Door16" parent="." unique_id=1497188320 instance=ExtResource("6_h5wuj")]
 position = Vector2(353, -417)
+
+[node name="Slime8" parent="." unique_id=1550722365 node_paths=PackedStringArray("patrol_points") instance=ExtResource("18_pmpx5")]
+position = Vector2(694, -108)
+patrol_points = [NodePath("../Slime5/A1/A2/A4"), NodePath("../Slime5/A1/A2/A5"), NodePath("../Slime5/A1/A2/A6"), NodePath("../Slime5/A1"), NodePath("../Slime5/A1/A2"), NodePath("../Slime5/A1/A2/A3")]
+
+[node name="C1" type="Marker2D" parent="." unique_id=1543429680]
+position = Vector2(558, -500)
+
+[node name="C2" type="Marker2D" parent="C1" unique_id=774083516]
+position = Vector2(-49, 8)
+
+[node name="C3" type="Marker2D" parent="C1" unique_id=881593397]
+position = Vector2(-48, 83)
+
+[node name="C4" type="Marker2D" parent="C1" unique_id=1229563474]
+position = Vector2(-107, 85)
+
+[node name="C5" type="Marker2D" parent="C1" unique_id=608364324]
+position = Vector2(-108, 0)
+
+[node name="C6" type="Marker2D" parent="C1" unique_id=478119030]
+position = Vector2(-153, 5)
+
+[node name="C7" type="Marker2D" parent="C1" unique_id=665479172]
+position = Vector2(-152, 140)
+
+[node name="C8" type="Marker2D" parent="C1" unique_id=185259218]
+position = Vector2(-3, 142)
+
+[node name="E1" type="Marker2D" parent="." unique_id=1688334341]
+position = Vector2(168, -113)
+
+[node name="E2" type="Marker2D" parent="E1" unique_id=375896579]
+position = Vector2(-3, -159)
+
+[node name="E3" type="Marker2D" parent="E1" unique_id=983381838]
+position = Vector2(152, -157)
+
+[node name="E4" type="Marker2D" parent="E1" unique_id=925563015]
+position = Vector2(154, 4)
 
 [connection signal="ammo_bar_state_changed" from="Player" to="GUI" method="_on_player_ammo_bar_state_changed"]
 [connection signal="shield_state_changed" from="Player" to="GUI" method="_on_player_shield_state_changed"]
